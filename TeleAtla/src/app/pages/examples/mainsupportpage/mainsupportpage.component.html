@@ -1,0 +1,556 @@
+<nav
+  class="navbar navbar-expand-lg fixed-top navbar-transparent"
+  color-on-scroll="100"
+  id="navbar-top"
+>
+  <div class="container">
+    <div class="navbar-translate">
+      <a
+        class="navbar-brand"
+        [routerLink]="['/home']"
+        placement="bottom"
+        tooltip="Designed and Coded by Creative Tim"
+      >
+        <span> T.A.• </span> Tele Atlántico
+      </a>
+      <button
+        aria-controls="navigation-index"
+        aria-label="Toggle navigation"
+        class="navbar-toggler navbar-toggler"
+        [attr.aria-expanded]="!isCollapsed"
+        (click)="isCollapsed = !isCollapsed"
+        id="navigation"
+        type="button"
+      >
+        <span class="navbar-toggler-bar bar1"> </span>
+        <span class="navbar-toggler-bar bar2"> </span>
+        <span class="navbar-toggler-bar bar3"> </span>
+      </button>
+    </div>
+    <div
+      class="navbar-collapse justify-content-end"
+      [collapse]="isCollapsed"
+      id="navigation"
+    >
+      <div class="navbar-collapse-header">
+        <div class="row">
+          <div class="col-6 collapse-brand"><a> T.A.• </a></div>
+          <div class="col-6 collapse-close text-right">
+            <button
+              aria-controls="navigation-index"
+              aria-label="Toggle navigation"
+              class="navbar-toggler"
+              [attr.aria-expanded]="!isCollapsed"
+              (click)="isCollapsed = !isCollapsed"
+              id="navigation"
+              type="button"
+            >
+              <i class="tim-icons icon-simple-remove"> </i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul class="navbar-nav">
+
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/registerUSO']"> Agregar USO </a>
+          <a class="nav-link" [routerLink]="['/profile']"> Perfil </a>
+          <a class="nav-link" [routerLink]="['/home']"> Cerrar sesión </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="wrapper">
+  <div class="page-header">
+    <div class="page-header-image"></div>
+    <div class="content">
+      <div class="container">
+        <div class="row">
+
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-center">solicitud</th>
+                        <th>USO Asignado</th>
+                        <th>Clasificación</th>
+                        <th>Estado</th>
+                        <th class="text-right">Fecha/Hora</th>
+                        <th class="text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td>Andrew Mike</td>
+                        <td>Develop</td>
+                        <td>2013</td>
+                        <td class="text-right">&euro; 99,225</td>
+                        <td class="td-actions text-right">
+                            <button type="button" rel="tooltip" class="btn btn-info btn-sm btn-icon">
+                                <i class="tim-icons icon-single-02"></i>
+                            </button>
+                            <button type="button" rel="tooltip" class="btn btn-success btn-sm btn-icon">
+                                <i class="tim-icons icon-settings-gear-63"></i>
+                            </button>
+                            <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-icon">
+                                <i class="tim-icons icon-simple-remove"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">2</td>
+                        <td>John Doe</td>
+                        <td>Design</td>
+                        <td>2012</td>
+                        <td class="text-right">&euro; 89,241</td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" class="btn btn-info btn-sm btn-round btn-icon">
+                              <i class="tim-icons icon-single-02"></i>
+                          </button>
+                          <button type="button" rel="tooltip" class="btn btn-success btn-sm btn-round btn-icon">
+                              <i class="tim-icons icon-settings-gear-63"></i>
+                          </button>
+                          <button type="button" rel="tooltip" class="btn btn-danger btn-sm btn-round btn-icon">
+                              <i class="tim-icons icon-simple-remove"></i>
+                          </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">3</td>
+                        <td>Alex Mike</td>
+                        <td>Design</td>
+                        <td>2010</td>
+                        <td class="text-right">&euro; 92,144</td>
+                        <td class="td-actions text-right">
+                            <button type="button" rel="tooltip" class="btn btn-info btn-simple btn-icon btn-sm">
+                                <i class="tim-icons icon-single-02"></i>
+                            </button>
+                            <button data-target="#landlineTelephony"
+                            (click)="myModal2.show()"type="button" rel="tooltip" class="btn btn-success btn-simple btn-icon btn-sm">
+                                <i class="tim-icons icon-zoom-split"></i>
+                            </button>
+                            <button type="button" rel="tooltip" class="btn btn-danger btn-simple btn-icon btn-sm">
+                                <i class="tim-icons icon-simple-remove"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div
+        bsModal
+        class="modal fade modal-black"
+        #myModal2="bs-modal"
+        id="myModal2"
+        role="dialog"
+        tabindex="-1"
+        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"
+      >
+        <div class="modal-dialog  modal-dialog-scrollable modal-lg">
+          <div class="modal-content">
+            <div class="modal-header justify-content-center">
+              <button
+                aria-hidden="true"
+                class="close"
+                data-dismiss="modal"
+                (click)="myModal2.hide()"
+                type="button"
+              >
+                <i class="tim-icons icon-simple-remove text-white"> </i>
+              </button>
+              <div class="text-muted text-center ml-auto mr-auto">
+                <h3 class="mb-0">Detalles de solicitud</h3>
+              </div>
+            </div>
+            <div class="modal-body">
+
+              <form role="form">
+                <div class="form-group  col-md-8">
+                  <div
+                    class="input-group input-group-alternative"
+                    [ngClass]="{ 'input-group-focus': focus1 === true }"
+                  >
+                  <label>Número de solicitud:</label>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="tim-icons icon-email-85"> </i>
+                      </span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="Número de solicitud"
+                      type="text"
+                      readonly=»readonly»
+                      (focus)="focus1 = true"
+                      (blur)="focus1 = false"
+                    />
+                  </div>
+                </div>
+                <div class="form-group  col-md-8">
+                  <div
+                    class="input-group input-group-alternative"
+                    [ngClass]="{ 'input-group-focus': focus2 === true }"
+                  >
+                  <label>Nombre y apellidos:</label>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="tim-icons icon-key-25"> </i>
+                      </span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="Nombre y apellidos"
+                      type="text"
+                      readonly=»readonly»
+                      (focus)="focus2 = true"
+                      (blur)="focus2 = false"
+                    />
+                  </div>
+                </div>
+
+                <!---->
+                
+
+                  <div class="form-group col-md-8">
+                    <div
+                      class="input-group input-group-alternative"
+                      [ngClass]="{ 'input-group-focus': focus2 === true }"
+                    >
+                    <label>Correo electróncio:</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="tim-icons icon-key-25"> </i>
+                        </span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="Correo electróncio"
+                        type="email"
+                        readonly=»readonly»
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-8">
+                    <div
+                      class="input-group input-group-alternative"
+                      [ngClass]="{ 'input-group-focus': focus2 === true }"
+                    >
+                    <label>Teléfono:</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="tim-icons icon-key-25"> </i>
+                        </span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="Teléfono"
+                        type="number"
+                        readonly=»readonly»
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                      />
+                    </div>
+                  </div>
+
+
+                  <div class="form-group col-md-8">
+                    <div
+                      class="input-group input-group-alternative"
+                      [ngClass]="{ 'input-group-focus': focus2 === true }"
+                    >
+                    <label>Dirección:</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="tim-icons icon-key-25"> </i>
+                        </span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="Dirección"
+                        type="text"
+                        readonly=»readonly»
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                      />
+                    </div>
+                  </div>
+
+
+                  <div class="form-group col-md-8">
+                    <div
+                      class="input-group input-group-alternative"
+                      [ngClass]="{ 'input-group-focus': focus2 === true }"
+                    >
+                    <label>Segundo contacto:</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="tim-icons icon-key-25"> </i>
+                        </span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="Segundo contacto"
+                        type="number"
+                        readonly=»readonly»
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                      />
+                    </div>
+                  </div>
+
+
+                  <div class="form-group col-md-8">
+                    <div
+                      class="input-group input-group-alternative"
+                      [ngClass]="{ 'input-group-focus': focus2 === true }"
+                    >
+                    <label>Estado:</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="tim-icons icon-key-25"> </i>
+                        </span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="Estado --> drop"
+                        type="password"
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                      />
+                    </div>
+                  </div>
+
+
+                  <div class="form-group col-md-8">
+                    <div
+                      class="input-group input-group-alternative"
+                      [ngClass]="{ 'input-group-focus': focus2 === true }"
+                    >
+                    <label>Estado:</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="tim-icons icon-key-25"> </i>
+                        </span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="otro correo ????"
+                        type="text"
+                        readonly=»readonly»
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div class="form-group col-md-8">
+                    <div
+                      class="input-group input-group-alternative"
+                      [ngClass]="{ 'input-group-focus': focus2 === true }"
+                    >
+                    <label>Estado:</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="tim-icons icon-key-25"> </i>
+                        </span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="otro telefono??????"
+                        type="text"
+                        readonly=»readonly»
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-8">
+                    <div
+                      class="input-group input-group-alternative"
+                      [ngClass]="{ 'input-group-focus': focus2 === true }"
+                    >
+                    <label>USO:</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="tim-icons icon-key-25"> </i>
+                        </span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="USO editable drop?? u otra forma?"
+                        type="text"
+                        readonly=»readonly»
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-8">
+                    <div
+                      class="input-group input-group-alternative"
+                      [ngClass]="{ 'input-group-focus': focus2 === true }"
+                    >
+                    <label>Comentarios:</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="tim-icons icon-key-25"> </i>
+                        </span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="Comentarios"
+                        type="text"
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-8">
+                    <div
+                      class="input-group input-group-alternative"
+                      [ngClass]="{ 'input-group-focus': focus2 === true }"
+                    >
+                    <label>Notas:</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="tim-icons icon-key-25"> </i>
+                        </span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="Notas"
+                        type="text"
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-8">
+                    <div
+                      class="input-group input-group-alternative"
+                      [ngClass]="{ 'input-group-focus': focus2 === true }"
+                    >
+                    <label>Notas:</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="tim-icons icon-key-25"> </i>
+                        </span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="otra vez lo del USO ????"
+                        type="password"
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                      />
+                    </div>
+                  </div>
+
+
+                  <div class="form-group col-md-8">
+                    <div
+                      class="input-group input-group-alternative"
+                      [ngClass]="{ 'input-group-focus': focus2 === true }"
+                    >
+                    <label>Estado:</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="tim-icons icon-key-25"> </i>
+                        </span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="drop  con los posibles estados"
+                        type="password"
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                      />
+                    </div>
+                  </div>
+
+                 
+                  <div class="form-group col-md-8">
+                    <div
+                      class="input-group input-group-alternative"
+                      [ngClass]="{ 'input-group-focus': focus2 === true }"
+                    >
+                      <label>Agregar Notas:</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="tim-icons icon-key-25"> </i>
+                        </span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="Agrega nota"
+                        type="text"
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                      />
+                    </div>
+                  </div>
+
+                  
+                  <div class="form-group col-md-6 ml-auto">
+                    <div
+                      class="input-group input-group-alternative"
+                      [ngClass]="{ 'input-group-focus': focus2 === true }"
+                    >
+                    <label>Agregar comentario:</label>
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="tim-icons icon-key-25"> </i>
+                        </span>
+                      </div>
+                      <input
+                        class="form-control"
+                        placeholder="Agrega comentario"
+                        type="text"
+                        (focus)="focus2 = true"
+                        (blur)="focus2 = false"
+                      />
+                    </div>
+                  </div>
+                  
+                <!---->
+
+
+
+              </form>
+            </div>
+
+            <div class="modal-footer ">
+
+              <button class="btn btn-primary my-4" type="button">
+                Aceptar
+              </button>
+
+          </div>
+
+          </div>
+        </div>
+      </div>
+
+        <div class="register-bg"></div>
+        <div class="square square-1" id="square1"></div>
+        <div class="square square-2" id="square2"></div>
+        <div class="square square-3" id="square3"></div>
+        <div class="square square-4" id="square4"></div>
+        <div class="square square-5" id="square5"></div>
+        <div class="square square-6" id="square6"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
