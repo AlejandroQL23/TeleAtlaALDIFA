@@ -55,7 +55,7 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/registerUSO']"> Agregar USO </a>
           <a class="nav-link" [routerLink]="['/profile']"> Perfil </a>
-          <a class="nav-link" [routerLink]="['/home']"> Cerrar sesión </a>
+          <button class="btn" (click)="logOut()">Log Out</button>
         </li>
       </ul>
     </div>
