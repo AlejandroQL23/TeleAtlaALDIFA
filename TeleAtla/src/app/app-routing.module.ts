@@ -2,6 +2,9 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
 import { Routes, RouterModule } from "@angular/router";
+import { AuthGuard } from './_helper/AuthGuard';
+
+
 
 import { IndexComponent } from "./pages/index/index.component";
 import { ProfilepageComponent } from "./pages/examples/profilepage/profilepage.component";
@@ -17,7 +20,8 @@ const routes: Routes = [
   { path: "register", component: RegisterpageComponent },
   { path: "registerUSO", component: RegisterusopageComponent },
   { path: "mainsupport", component: MainsupportpageComponent },
-  { path: "landing", component: LandingpageComponent }
+  { path: "landing", component: LandingpageComponent },
+  { path: '', redirectTo: 'supporter',pathMatch: 'full', canActivate: [AuthGuard] }
 ];
 
 @NgModule({

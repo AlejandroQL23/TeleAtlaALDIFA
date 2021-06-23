@@ -269,56 +269,42 @@
 
                 <h4 class="card-title">Iniciar</h4>
               </div>
-              <div class="card-body">
-                <form class="form">
-                  <div
-                    class="input-group"
-                    [ngClass]="{ 'input-group-focus': focus1 === true }"
-                  >
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-email-85"> </i>
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Email"
-                      type="text"
-                      (focus)="focus1 = true"
-                      (blur)="focus1 = false"
-                    />
+              
+                <!--[formGroup]="supporter" (ngSubmit)="onSubmit()" #formDir="ngForm"-->
+                <!--[formGroup]="supporter" (ngSubmit)="onSubmit(formDir)" #formDir="ngForm"-->
+                <!--ngModel required *ngIf="supporter" -->
+                <div class="card">
+                  <h4 class="card-header">Login</h4>
+                  <div class="card-body">
+                      <form [formGroup]="supporter" (ngSubmit)="onSubmit()" #formDir="ngForm">
+                          <div class="form-group">
+                              <label for="email">Email</label>
+                              <input type="text" formControlName="email" class="form-control" />
+            
+                          </div>
+                          <div class="form-group">
+                              <label for="password">Password</label>
+                              <input type="password" formControlName="password" class="form-control"  />
+            
+                          </div>
+                          <div class="form-group">
+                              <button [disabled]="loading" class="btn btn-primary">
+                                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                  Log In
+                              </button>
+                              <a [routerLink]="['../register']" class="btn btn-link">Sig In</a>
+                          </div>
+                      </form>
                   </div>
-                  <div
-                    class="input-group"
-                    [ngClass]="{ 'input-group-focus': focus2 === true }"
-                  >
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-lock-circle"> </i>
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Password"
-                      type="text"
-                      (focus)="focus2 = true"
-                      (blur)="focus2 = false"
-                    />
-                  </div>
-                      <span class="form-check-sign"> </span> ¿Aún no tienes cuenta?
-                      <a [routerLink]="['/register']">
-                         Crearla aquí
-                      </a>
-                </form>
               </div>
-              <div class="card-footer">
-                <a
-                  class="btn btn-danger btn-round btn-lg"
-                  href="javascript:void(0)"
-                >
-                  Iniciar sesión
-                </a>
-              </div>
+            
+              <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Log In
+                </button>
+                <a [routerLink]="['../register']" class="btn btn-link">Sig In</a>
+            </div>
             </div>
           </div>
         </div>
