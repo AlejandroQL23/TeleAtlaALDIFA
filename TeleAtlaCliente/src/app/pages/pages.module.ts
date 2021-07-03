@@ -23,6 +23,7 @@ import { RegisterpageComponent } from "./examples/registerpage/registerpage.comp
 import { RegisterrequestpageComponent } from "./examples/registerrequestpage/registerrequest.component";
 import { MainclientpageComponent } from "./examples/mainclientpage/mainclientpage.component";
 import { LandingpageComponent } from "./examples/landingpage/landingpage.component";
+import { MaterialModule } from "../material/material.module";
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import { LandingpageComponent } from "./examples/landingpage/landingpage.compone
     ProfilepageComponent,
     RegisterpageComponent,
     LandingpageComponent,
-    MainclientpageComponent
+    MainclientpageComponent,
+    MaterialModule
   ],
   providers: []
 })
