@@ -23,6 +23,7 @@ import { RegisterpageComponent } from "./examples/registerpage/registerpage.comp
 import { RegisterusopageComponent } from "./examples/registerusopage/registerusopage.component";
 import { MainsupportpageComponent } from "./examples/mainsupportpage/mainsupportpage.component";
 import { LandingpageComponent } from "./examples/landingpage/landingpage.component";
+import { MaterialModule } from "../material/material.module"; 
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { LandingpageComponent } from "./examples/landingpage/landingpage.compone
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    MaterialModule,
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
     TooltipModule.forRoot(),
