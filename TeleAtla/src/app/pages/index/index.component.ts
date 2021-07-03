@@ -34,6 +34,14 @@ export class IndexComponent implements OnInit, OnDestroy {
     private authentication: AuthenticationService
     ) { }
 
+    showSpinner = false;
+
+    loadData(){
+      this.showSpinner = true;
+      setTimeout( () => {
+        this.showSpinner = false;
+      }, 5000);
+    }
 
   isCollapsed = true;
   focus;
@@ -75,6 +83,8 @@ export class IndexComponent implements OnInit, OnDestroy {
 //------------------------------------
   onSubmit() {  
 
+    setTimeout (() => {
+
     this.submitted = true;
 
     if (this.supporter.invalid) {
@@ -97,6 +107,8 @@ export class IndexComponent implements OnInit, OnDestroy {
               console.log("HOLA, ME CAI");
                 this.loading = false;
             });
+
+          }, 2000);
 }
 
 
