@@ -287,10 +287,12 @@
             
                           </div>
                           <div class="form-group">
-                              <button [disabled]="loading" class="btn btn-primary">
+                            
+                              <button  [disabled]="loading" class="btn btn-primary"  (click)="loadData()">
                                   <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                                  Iniciar
+                                  Iniciar  
                               </button>
+                              <mat-spinner [diameter]="20" *ngIf="showSpinner" color="accent"></mat-spinner>
                               <span class="form-check-sign"> </span> ¿Aún no tienes cuenta?
                               <a [routerLink]="['/register']">
                                  Crearla aquí
@@ -507,31 +509,20 @@ tabindex="-1"
         <div class="col-md-3"><h1 class="title">T.A.•</h1></div>
 
 
-        <div class="col-md-3">
-          <h3 class="title">Contáctanos:</h3>
-          <div class="btn-wrapper profile">
-            <a
-              class="btn btn-icon btn-neutral btn-round btn-simple mr-1"
-              href="https://twitter.com/creativetim"
-              target="_blank"
-            >
-              <i class="fab fa-twitter"> </i>
-            </a>
-            <a
-              class="btn btn-icon btn-neutral btn-round btn-simple mr-1"
-              href="https://www.facebook.com/creativetim"
-              target="_blank"
-            >
-              <i class="fab fa-facebook-square"> </i>
-            </a>
-            <a
-              class="btn btn-icon btn-neutral btn-round btn-simple"
-              href="https://dribbble.com/creativetim"
-              target="_blank"
-            >
-              <i class="fab fa-dribbble"> </i>
-            </a>
-          </div>
+        <div class="col-md-8">
+          <mat-horizontal-stepper>
+            <mat-step label="Primer paso">
+                <p>Contrata alguno de nuestros servicos</p>
+            </mat-step>
+            <mat-step label="Segundo paso">
+                <p>Crea una cuenta, para tener acceso a soporte</p>
+            </mat-step>
+            <mat-step label="Tercer paso">
+                <p>Nuestros especialistas llegaran a tu hogar
+                  para instalar el servicio elegido
+                </p>
+            </mat-step>
+        </mat-horizontal-stepper>
         </div>
       </div>
     </div>

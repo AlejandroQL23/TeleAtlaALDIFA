@@ -17,6 +17,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 
+
+
 export class IndexComponent implements OnInit, OnDestroy {
 
 
@@ -31,9 +33,17 @@ export class IndexComponent implements OnInit, OnDestroy {
     public rest:RestService,
     private route: ActivatedRoute,
     private router: Router,
-    private authentication: AuthenticationService
+    private authentication: AuthenticationService,
     ) { }
 
+    showSpinner = false;
+
+    loadData(){
+      this.showSpinner = true;
+      setTimeout( () => {
+        this.showSpinner = false;
+      }, 5000);
+    }
 
   isCollapsed = true;
   focus;
@@ -89,6 +99,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 //------------------------------------
   onSubmit() {  
 
+    setTimeout (() => {
 
 
     this.submitted = true;
@@ -112,7 +123,12 @@ export class IndexComponent implements OnInit, OnDestroy {
               console.log("HOLA, ME CAI");
                 this.loading = false;
             });
+
+          }, 2000);
+
 }
+
+
 
 
 

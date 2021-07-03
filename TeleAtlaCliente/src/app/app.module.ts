@@ -25,9 +25,11 @@ import { ProfilepageComponent } from "./pages/examples/profilepage/profilepage.c
 import { RegisterpageComponent } from "./pages/examples/registerpage/registerpage.component";
 import { RegisterrequestpageComponent } from "./pages/examples/registerrequestpage/registerrequest.component";
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
+import { MaterialModule } from "./material/material.module";
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
     // IndexComponent,
     // ProfilepageComponent,
     // RegisterpageComponent,
@@ -42,6 +44,7 @@ import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.c
     RouterModule,
     AppRoutingModule,
     CommonModule,
+    MaterialModule,
     // BsDropdownModule.forRoot(),
     // ProgressbarModule.forRoot(),
     // TooltipModule.forRoot(),
