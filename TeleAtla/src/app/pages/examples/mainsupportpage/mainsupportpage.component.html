@@ -83,25 +83,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="text-center">3</td>
-                        <td>Alex Mike</td>
-                        <td>Design</td>
-                        <td>2010</td>
-                        <td class="text-right">&euro; 92,144</td>
-                        <td class="td-actions text-right">
-                            <button type="button" rel="tooltip" class="btn btn-info btn-simple btn-icon btn-sm">
-                                <i class="tim-icons icon-single-02"></i>
-                            </button>
-                            <button data-target="#landlineTelephony"
-                            (click)="myModal2.show()"type="button" rel="tooltip" class="btn btn-success btn-simple btn-icon btn-sm">
-                                <i class="tim-icons icon-zoom-split"></i>
-                            </button>
-                            <button type="button" rel="tooltip" class="btn btn-danger btn-simple btn-icon btn-sm">
-                                <i class="tim-icons icon-simple-remove"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    <tr *ngFor="let s of issues; let i=index;">
+  
+                      <td>{{ s.id  }}</td>
+                      <td>{{ s.reference  }}</td>
+                      <td>{{ s.classification }}</td>
+                      <td>{{ s.status }}</td>
+                      <td>{{ s.issueTimeStamp }}</td>
+                  
+                      <td>
+                      <button data-target="#landlineTelephony"
+                      (click)="myModal2.show()"type="button" rel="tooltip" class="btn btn-success btn-simple btn-icon btn-sm">
+                          <i class="tim-icons icon-zoom-split"></i>
+                      </button>
+                      <button type="button" rel="tooltip" class="btn btn-danger btn-simple btn-icon btn-sm"
+                      mwlConfirmationPopover
+                      [popoverTitle]="popoverTitle"
+                      placement="left"
+                      (confirm)="delete(s.id)"
+                      (cancel)="canceledClicked = true"
+                      >
+                          <i class="tim-icons icon-simple-remove"></i>
+                      </button> 
+                    
+                      </td>
+                      </tr>
                 </tbody>
             </table>
         </div>
