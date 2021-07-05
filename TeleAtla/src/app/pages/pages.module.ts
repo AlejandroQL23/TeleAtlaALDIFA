@@ -16,6 +16,7 @@ import { CarouselModule } from "ngx-bootstrap/carousel";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { JwBootstrapSwitchNg2Module } from "jw-bootstrap-switch-ng2";
 import { PopoverModule } from "ngx-bootstrap/popover";
+import { ConfirmationPopoverModule } from "angular-confirmation-popover"; 
 
 import { IndexComponent } from "./index/index.component";
 import { ProfilepageComponent } from "./examples/profilepage/profilepage.component";
@@ -27,6 +28,9 @@ import { MaterialModule } from "../material/material.module";
 
 @NgModule({
   imports: [
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger' 
+    }),
     CommonModule,
     BrowserModule,
     FormsModule,

@@ -181,7 +181,7 @@ export class RestService {
   //------------------------------------------------------------------------------------------------------------------
   getIssues(): Observable<any> {
     return this.http
-      .get(endpoint + "Issues/GetIssues")
+      .get(endpoint + "Issues")
       .pipe(
         map(this.extractData),
         catchError(this.handleError<any>("getIssues"))
@@ -197,19 +197,9 @@ export class RestService {
       );
   }
 
-  addIssue(issue): Observable<any> {
-    console.log(issue);
-    return this.http
-      .post<any>(endpoint + "Issues/", JSON.stringify(issue), httpOptions)
-      .pipe(
-        tap((issue) => console.log("added issues")),
-        catchError(this.handleError<any>("addIssue"))
-      );
-  }
-
   deleteIssue(id): Observable<any> {
     return this.http
-      .delete<any>(endpoint + "Issues/DeleteIssue/" + id, httpOptions)
+      .delete<any>(endpoint + "Issues/" + id, httpOptions)
       .pipe(
         tap((_) => console.log(`deleted issue id=${id}`)),
         catchError(this.handleError<any>("deleteIssue"))
