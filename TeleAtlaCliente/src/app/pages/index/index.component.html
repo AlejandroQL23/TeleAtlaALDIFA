@@ -1,50 +1,24 @@
-<nav
-  class="navbar navbar-expand-lg fixed-top navbar-transparent"
-  color-on-scroll="100"
-  id="navbar-top"
->
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent" color-on-scroll="100" id="navbar-top">
   <div class="container">
     <div class="navbar-translate">
-      <a
-        class="navbar-brand"
-        placement="bottom"
-        [routerLink]="['/home']"
-      >
+      <a class="navbar-brand" placement="bottom" [routerLink]="['/home']">
         <span> T.A.• </span> Clientes Tele Atlántico
 
       </a>
-      <button
-        aria-controls="navigation-index"
-        aria-label="Toggle navigation"
-        class="navbar-toggler navbar-toggler"
-        [attr.aria-expanded]="!isCollapsed"
-        (click)="isCollapsed = !isCollapsed"
-        id="navigation"
-        type="button"
-      >
+      <button aria-controls="navigation-index" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler"
+        [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed" id="navigation" type="button">
         <span class="navbar-toggler-bar bar1"> </span>
         <span class="navbar-toggler-bar bar2"> </span>
         <span class="navbar-toggler-bar bar3"> </span>
       </button>
     </div>
-    <div
-      class="navbar-collapse justify-content-end"
-      [collapse]="isCollapsed"
-      id="navigation"
-    >
+    <div class="navbar-collapse justify-content-end" [collapse]="isCollapsed" id="navigation">
       <div class="navbar-collapse-header">
         <div class="row">
           <div class="col-6 collapse-brand"><a> T.A.• </a></div>
           <div class="col-6 collapse-close text-right">
-            <button
-              aria-controls="navigation-index"
-              aria-label="Toggle navigation"
-              class="navbar-toggler"
-              [attr.aria-expanded]="!isCollapsed"
-              (click)="isCollapsed = !isCollapsed"
-              id="navigation"
-              type="button"
-            >
+            <button aria-controls="navigation-index" aria-label="Toggle navigation" class="navbar-toggler"
+              [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed" id="navigation" type="button">
               <i class="tim-icons icon-simple-remove"> </i>
             </button>
           </div>
@@ -52,37 +26,22 @@
       </div>
       <ul class="navbar-nav">
         <li class="nav-item p-0">
-          <a
-            class="nav-link"
-            href="https://twitter.com/CreativeTim"
-            placement="bottom"
-            target="_blank"
-            tooltip="Follow us on Twitter"
-          >
+          <a class="nav-link" href="https://twitter.com/CreativeTim" placement="bottom" target="_blank"
+            tooltip="Follow us on Twitter">
             <i class="fab fa-twitter"> </i>
             <p class="d-lg-none d-xl-none">Twitter</p>
           </a>
         </li>
         <li class="nav-item p-0">
-          <a
-            class="nav-link"
-            href="https://www.facebook.com/CreativeTim"
-            placement="bottom"
-            target="_blank"
-            tooltip="Like us on Facebook"
-          >
+          <a class="nav-link" href="https://www.facebook.com/CreativeTim" placement="bottom" target="_blank"
+            tooltip="Like us on Facebook">
             <i class="fab fa-facebook-square"> </i>
             <p class="d-lg-none d-xl-none">Facebook</p>
           </a>
         </li>
         <li class="nav-item p-0">
-          <a
-            class="nav-link"
-            href="https://www.instagram.com/CreativeTimOfficial"
-            placement="bottom"
-            target="_blank"
-            tooltip="Follow us on Instagram"
-          >
+          <a class="nav-link" href="https://www.instagram.com/CreativeTimOfficial" placement="bottom" target="_blank"
+            tooltip="Follow us on Instagram">
             <i class="fab fa-instagram"> </i>
             <p class="d-lg-none d-xl-none">Instagram</p>
           </a>
@@ -144,43 +103,27 @@
         <h4 class="mb-5">Los mejores del país</h4>
         <div class="row" id="modals">
           <div class="col-md-3">
-            <button
-              class="btn btn-primary"
-              data-target="#mobileTelephony"
-              (click)="mobileTelephony.show()"
-            >
-            Telefonía móvil
+            <button class="btn btn-primary" data-target="#mobileTelephony" (click)="mobileTelephony.show()">
+              Telefonía móvil
             </button>
           </div>
 
           <div class="col-md-3">
-            <button
-              class="btn btn-primary"
-              data-target="#Cable"
-              (click)="Cable.show()"
-            >
-            Cable
+            <button class="btn btn-primary" data-target="#Cable" (click)="Cable.show()">
+              Cable
             </button>
           </div>
 
           <div class="col-md-3">
-            <button
-              class="btn btn-primary"
-              data-target="#Internet"
-              (click)="Internet.show()"
-            >
-            Internet
+            <button class="btn btn-primary" data-target="#Internet" (click)="Internet.show()">
+              Internet
             </button>
           </div>
 
 
           <div class="col-md-3">
-            <button
-              class="btn btn-primary"
-              data-target="#landlineTelephony"
-              (click)="landlineTelephony.show()"
-            >
-            Telefonía fija
+            <button class="btn btn-primary" data-target="#landlineTelephony" (click)="landlineTelephony.show()">
+              Telefonía fija
             </button>
           </div>
 
@@ -191,7 +134,7 @@
         <br />
 
 
- 
+
       </div>
       <div class="section">
         <div class="container">
@@ -199,8 +142,8 @@
             <div class="col-lg-5 mb-5 mb-lg-0">
               <h1 class="text-white font-weight-light">Tele Atlántico</h1>
               <p class="text-white mt-4">
-                Tele Atlántico es una empresa 100% costarricense, y sabemos 
-                cuales son las necesidades de los ticos, por ello contamos con 
+                Tele Atlántico es una empresa 100% costarricense, y sabemos
+                cuales son las necesidades de los ticos, por ello contamos con
                 los mejores servicios y con la mejor cobertura a nivel nacional e internacional.
                 ¡No lo pienses más y contrata nuestros servicios!
               </p>
@@ -210,32 +153,16 @@
             <div class="col-lg-6">
               <carousel [showIndicators]="false">
                 <slide>
-                  <img
-                    alt="First slide"
-                    class="d-block w-100"
-                    src="assets/img/luis.jpeg"
-                  />
+                  <img alt="First slide" class="d-block w-100" src="assets/img/luis.jpeg" />
                 </slide>
                 <slide>
-                  <img
-                    alt="Second slide"
-                    class="d-block w-100"
-                    src="assets/img/familia.png"
-                  />
+                  <img alt="Second slide" class="d-block w-100" src="assets/img/familia.png" />
                 </slide>
                 <slide>
-                  <img
-                    alt="Third slide"
-                    class="d-block w-100"
-                    src="assets/img/inter.jpg"
-                  />
+                  <img alt="Third slide" class="d-block w-100" src="assets/img/inter.jpg" />
                 </slide>
                 <slide>
-                  <img
-                    alt="Third slide"
-                    class="d-block w-100"
-                    src="assets/img/telfijo.jpg"
-                  />
+                  <img alt="Third slide" class="d-block w-100" src="assets/img/telfijo.jpg" />
                 </slide>
               </carousel>
             </div>
@@ -257,9 +184,9 @@
             </h3>
             <p class="text-white mb-3">
               Al contratar cualquier servicio de nuestra empresa
-              tienes grandes beneficios como en la rifa anual de 
-              un carro del año, ofertas, promosiones, descuentos 
-              y otros beneficios por los cuales podras optar al 
+              tienes grandes beneficios como en la rifa anual de
+              un carro del año, ofertas, promosiones, descuentos
+              y otros beneficios por los cuales podras optar al
               crear tu cuenta.
             </p>
 
@@ -267,47 +194,43 @@
           <div class="col-lg-6 mb-lg-auto">
             <div class="card card-register">
               <div class="card-header">
-                <img
-                  alt="Card image"
-                  class="card-img"
-                  src="assets/img/square1-red.png"
-                />
+                <img alt="Card image" class="card-img" src="assets/img/square1-red.png" />
 
                 <h4 class="card-title">Iniciar</h4>
               </div>
-              
-                <!--[formGroup]="supporter" (ngSubmit)="onSubmit()" #formDir="ngForm"-->
-                <!--[formGroup]="supporter" (ngSubmit)="onSubmit(formDir)" #formDir="ngForm"-->
-                <!--ngModel required *ngIf="supporter" -->
-                <div class="card">
-                  <div class="card-body">
-                      <form [formGroup]="supporter" (ngSubmit)="onSubmit()" #formDir="ngForm">
-                          <div class="form-group">
-                              <label for="email">Email</label>
-                              <input type="text" formControlName="email" class="form-control" />
-            
-                          </div>
-                          <div class="form-group">
-                              <label for="password">Password</label>
-                              <input type="password" formControlName="password" class="form-control"  />
-            
-                          </div>
-                          <div class="form-group">
-                            
-                              <button  [disabled]="loading" class="btn btn-primary"  (click)="loadData()">
-                                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                                  Iniciar  
-                              </button>
-                              <mat-spinner [diameter]="20" *ngIf="showSpinner" color="accent"></mat-spinner>
-                              <span class="form-check-sign"> </span> ¿Aún no tienes cuenta?
-                              <a [routerLink]="['/register']">
-                                 Crearla aquí
-                              </a>
-                          </div>
-                      </form>
-                  </div>
+
+              <!--[formGroup]="supporter" (ngSubmit)="onSubmit()" #formDir="ngForm"-->
+              <!--[formGroup]="supporter" (ngSubmit)="onSubmit(formDir)" #formDir="ngForm"-->
+              <!--ngModel required *ngIf="supporter" -->
+              <div class="card">
+                <div class="card-body">
+                  <form [formGroup]="supporter" (ngSubmit)="onSubmit()" #formDir="ngForm">
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="text" formControlName="email" class="form-control" />
+
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" formControlName="password" class="form-control" />
+
+                    </div>
+                    <div class="form-group">
+
+                      <button [disabled]="loading" class="btn btn-primary" (click)="loadData()">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Iniciar
+                      </button>
+                      <mat-spinner [diameter]="20" *ngIf="showSpinner" color="accent"></mat-spinner>
+                      <span class="form-check-sign"> </span> ¿Aún no tienes cuenta?
+                      <a [routerLink]="['/register']">
+                        Crearla aquí
+                      </a>
+                    </div>
+                  </form>
+                </div>
               </div>
-            
+
             </div>
           </div>
         </div>
@@ -317,26 +240,13 @@
 
 
 
-    <div
-      aria-hidden="true"
-      aria-labelledby="myModalLabel"
-      bsModal
-      class="modal fade"
-      #mobileTelephony="bs-modal"
-      id="myModal"
-      role="dialog"
-      tabindex="-1"
-    >
+    <div aria-hidden="true" aria-labelledby="myModalLabel" bsModal class="modal fade" #mobileTelephony="bs-modal"
+      id="myModal" role="dialog" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header justify-content-center">
-            <button
-              aria-hidden="true"
-              class="close"
-              data-dismiss="modal"
-              type="button"
-              (click)="mobileTelephony.hide()"
-            >
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button"
+              (click)="mobileTelephony.hide()">
               <i class="tim-icons icon-simple-remove"> </i>
             </button>
             <h4 class="title title-up">Telefonía móvil</h4>
@@ -345,17 +255,12 @@
             <p>
               Nuestra servicio de telefonía móvil ofrece la mejor cobertura a nivel nacional
               e internacional. Además de eso ofrecemos planes pre-pago y post-pago, los cuales
-              van desde ₡100 hasta los ₡1000 con velocidades de internet de 20Gb hasta 300Gb 
+              van desde ₡100 hasta los ₡1000 con velocidades de internet de 20Gb hasta 300Gb
               respectivamente.
             </p>
           </div>
           <div class="modal-footer">
-            <button
-              class="btn btn-danger"
-              data-dismiss="modal"
-              type="button"
-              (click)="mobileTelephony.hide()"
-            >
+            <button class="btn btn-danger" data-dismiss="modal" type="button" (click)="mobileTelephony.hide()">
               Cerrar
             </button>
           </div>
@@ -366,144 +271,88 @@
 
     <!---->
 
-    <div
-    aria-hidden="true"
-    aria-labelledby="myModalLabel"
-    bsModal
-    class="modal fade"
-    #Cable="bs-modal"
-    id="myModal"
-    role="dialog"
-    tabindex="-1"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header justify-content-center">
-          <button
-            aria-hidden="true"
-            class="close"
-            data-dismiss="modal"
-            type="button"
-            (click)="Cable.hide()"
-          >
-            <i class="tim-icons icon-simple-remove"> </i>
-          </button>
-          <h4 class="title title-up">Cable</h4>
-        </div>
-        <div class="modal-body">
-          <p>
-            Nuestro servicio de cable es el mejor ya que contamos con más de 
-            1 000 000 de canales de todos los rincones del mundo, para que 
-            pueda disfrutar junto a su familia. Nuestras tarifas van desde los 
-            ₡500 hasta los ₡2000 (incluye instalación).
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button
-            class="btn btn-danger"
-            data-dismiss="modal"
-            type="button"
-            (click)="Cable.hide()"
-          >
-            Cerrar
-          </button>
+    <div aria-hidden="true" aria-labelledby="myModalLabel" bsModal class="modal fade" #Cable="bs-modal" id="myModal"
+      role="dialog" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header justify-content-center">
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button" (click)="Cable.hide()">
+              <i class="tim-icons icon-simple-remove"> </i>
+            </button>
+            <h4 class="title title-up">Cable</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+              Nuestro servicio de cable es el mejor ya que contamos con más de
+              1 000 000 de canales de todos los rincones del mundo, para que
+              pueda disfrutar junto a su familia. Nuestras tarifas van desde los
+              ₡500 hasta los ₡2000 (incluye instalación).
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" data-dismiss="modal" type="button" (click)="Cable.hide()">
+              Cerrar
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
 
-  <div
-  aria-hidden="true"
-  aria-labelledby="myModalLabel"
-  bsModal
-  class="modal fade"
-  #Internet="bs-modal"
-  id="myModal"
-  role="dialog"
-  tabindex="-1"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header justify-content-center">
-        <button
-          aria-hidden="true"
-          class="close"
-          data-dismiss="modal"
-          type="button"
-          (click)="Internet.hide()"
-        >
-          <i class="tim-icons icon-simple-remove"> </i>
-        </button>
-        <h4 class="title title-up">Internet</h4>
-      </div>
-      <div class="modal-body">
-        <p>
-          Nuestro servicio de internet es el mejor del país contamos con gran
-          cantidad de planes que van desde los ₡1000 hastata los ₡5000 con 
-          velocidades que van desde los 300Gb hasta los 700Gb. También contamos 
-          con planes familiares y para su empresa (incluye instalación).
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button
-          class="btn btn-danger"
-          data-dismiss="modal"
-          type="button"
-          (click)="Internet.hide()"
-        >
-          Cerrar
-        </button>
+    <div aria-hidden="true" aria-labelledby="myModalLabel" bsModal class="modal fade" #Internet="bs-modal" id="myModal"
+      role="dialog" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header justify-content-center">
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button" (click)="Internet.hide()">
+              <i class="tim-icons icon-simple-remove"> </i>
+            </button>
+            <h4 class="title title-up">Internet</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+              Nuestro servicio de internet es el mejor del país contamos con gran
+              cantidad de planes que van desde los ₡1000 hastata los ₡5000 con
+              velocidades que van desde los 300Gb hasta los 700Gb. También contamos
+              con planes familiares y para su empresa (incluye instalación).
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" data-dismiss="modal" type="button" (click)="Internet.hide()">
+              Cerrar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
 
-<div
-aria-hidden="true"
-aria-labelledby="myModalLabel"
-bsModal
-class="modal fade"
-#landlineTelephony="bs-modal"
-id="myModal"
-role="dialog"
-tabindex="-1"
->
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header justify-content-center">
-      <button
-        aria-hidden="true"
-        class="close"
-        data-dismiss="modal"
-        type="button"
-        (click)="landlineTelephony.hide()"
-      >
-        <i class="tim-icons icon-simple-remove"> </i>
-      </button>
-      <h4 class="title title-up">Telefonía fija</h4>
+    <div aria-hidden="true" aria-labelledby="myModalLabel" bsModal class="modal fade" #landlineTelephony="bs-modal"
+      id="myModal" role="dialog" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header justify-content-center">
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button"
+              (click)="landlineTelephony.hide()">
+              <i class="tim-icons icon-simple-remove"> </i>
+            </button>
+            <h4 class="title title-up">Telefonía fija</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+              Nuestra servicio de telefonía fija tiene grandes beneficios como
+              que luego de dos meses de tener el servicio contratado se le regalarán
+              dos meses y luego de un año se le cobrará la mitad de la factura (incluye instalación).
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" data-dismiss="modal" type="button" (click)="landlineTelephony.hide()">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="modal-body">
-      <p>
-        Nuestra servicio de telefonía fija tiene grandes beneficios como 
-        que luego de dos meses de tener el servicio contratado se le regalarán
-        dos meses y luego de un año se le cobrará la mitad de la factura (incluye instalación).
-      </p>
-    </div>
-    <div class="modal-footer">
-      <button
-        class="btn btn-danger"
-        data-dismiss="modal"
-        type="button"
-        (click)="landlineTelephony.hide()"
-      >
-        Cerrar
-      </button>
-    </div>
-  </div>
-</div>
-</div>
 
 
     <!---->
@@ -512,23 +361,25 @@ tabindex="-1"
   <footer class="footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-3"><h1 class="title">T.A.•</h1></div>
+        <div class="col-md-3">
+          <h1 class="title">T.A.•</h1>
+        </div>
 
 
         <div class="col-md-8">
           <mat-horizontal-stepper>
             <mat-step label="Primer paso">
-                <p>Contrata alguno de nuestros servicos</p>
+              <p>Contrata alguno de nuestros servicos</p>
             </mat-step>
             <mat-step label="Segundo paso">
-                <p>Crea una cuenta, para tener acceso a soporte</p>
+              <p>Crea una cuenta, para tener acceso a soporte</p>
             </mat-step>
             <mat-step label="Tercer paso">
-                <p>Nuestros especialistas llegaran a tu hogar
-                  para instalar el servicio elegido
-                </p>
+              <p>Nuestros especialistas llegaran a tu hogar
+                para instalar el servicio elegido
+              </p>
             </mat-step>
-        </mat-horizontal-stepper>
+          </mat-horizontal-stepper>
         </div>
       </div>
     </div>
