@@ -4,7 +4,7 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-import { Supporter } from 'src/app/models/Supporter';
+import { Client } from 'src/app/models/Client';
 
 const endpoint = 'http://localhost:8080/api/';
 const httpOptions = {
@@ -17,18 +17,43 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class RestService {
-  private SupporterSubject: BehaviorSubject<any>;
-  public Supporter: Observable<any>;
-
+  private ClientSubject: BehaviorSubject<any>;
+  public Client: Observable<any>;
+  public ID;
   constructor(
     private router: Router,
     private http: HttpClient
     ) { 
-      this.SupporterSubject = new BehaviorSubject<Supporter>(JSON.parse(localStorage.getItem('Supporter')));
-      this.Supporter = this.SupporterSubject.asObservable();
+      this.ClientSubject = new BehaviorSubject<Client>(JSON.parse(localStorage.getItem('Client')));
+      this.Client = this.ClientSubject.asObservable();
     
   }
 
+  login(client) {
+    return this.http
+      .post<any>( endpoint+`client/auth`,
+        JSON.stringify(client),
+        httpOptions
+      )
+      .pipe(
+        map((userData) => {
+          sessionStorage.setItem("email", client.email);
+          let tokenStr = "Bearer " + userData.token;
+          sessionStorage.setItem("token", tokenStr);
+          sessionStorage.setItem("Id", userData.id);
+          this.ClientSubject.next(sessionStorage.getItem(client.email));
+          console.log(userData.name + " ANDO BISCANDO NOMBRE");
+          this.ID = userData.id; 
+          console.log(this.ID);
+          return userData;
+        })
+      );
+  }
+
+  logOut() {
+    sessionStorage.removeItem("email");
+    this.Client = null;
+  }
 
 
 
@@ -37,23 +62,7 @@ export class RestService {
     return body || { };
   }
 
-  login(supportere) {
-    return this.http.post<any>(`https://localhost:44382/api/Supporter/PostAuthenticate/`, JSON.stringify(supportere), httpOptions)
-    .pipe(
-      map(userData => {
-        sessionStorage.setItem("email", supportere.email);
-        let tokenStr = "Bearer " + userData.token;
-        sessionStorage.setItem("token", tokenStr);
-        sessionStorage.setItem("Id", userData.id);
-        this.SupporterSubject.next(sessionStorage.getItem(supportere.email));
-        console.log(userData.name+"ANDO BISCANDO NOMBRE");
-        return userData;
-        }));
-}
-logOut() {
-  sessionStorage.removeItem("email");
-  this.Supporter=null;
-}
+
 //------------------------------------------------------------------------------------------------------------------
   //------------------------------------------------------------------------------------------------------------------
 

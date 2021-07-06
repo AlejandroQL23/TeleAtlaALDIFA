@@ -16,7 +16,7 @@ import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.c
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "home", component: IndexComponent },
-  { path: "profile", component: ProfilepageComponent },
+  { path: 'profile/:Id', component: ProfilepageComponent },
   { path: "register", component: RegisterpageComponent },
   { path: "registerrequest", component: RegisterrequestpageComponent },
   { path: "mainclient", component: MainclientpageComponent },

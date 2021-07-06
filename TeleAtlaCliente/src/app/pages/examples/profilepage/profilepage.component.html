@@ -34,7 +34,7 @@
     >
       <div class="navbar-collapse-header">
         <div class="row">
-          <div class="col-6 collapse-brand"><a> BLK• </a></div>
+          <div class="col-6 collapse-brand"><a> T.A.• </a></div>
           <div class="col-6 collapse-close text-right">
             <button
               aria-controls="navigation-index"
@@ -103,17 +103,16 @@
         <div class="col-md-6">
           <div class="card card-plain">
             <div class="card-header">
-              <h1 class="profile-title text-left">Datos</h1>
               <h5 class="text-on-back">Perfil</h5>
             </div>
             <div class="card-body">
-              <form>
+
                 <fieldset disabled>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label> Nombre </label>
-                      <input class="form-control" type="text"  />
+                      <input class="form-control" type="text" [(ngModel)]="clientData.name" />
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -121,7 +120,7 @@
                       <label> Correo </label>
                       <input
                         class="form-control"
-
+                        [(ngModel)]="clientData.email"
                         type="email"
                       />
                     </div>
@@ -133,6 +132,7 @@
                       <label> Teléfono </label>
                       <input
                         class="form-control"
+                        [(ngModel)]="clientData.phone"
                         type="number"
                       />
                     </div>
@@ -142,6 +142,7 @@
                       <label> Segundo contacto </label>
                       <input
                         class="form-control"
+                        [(ngModel)]="clientData.secondcontact"
                         type="number"
                       />
                     </div>
@@ -153,7 +154,7 @@
                       <label> Dirección </label>
                       <input
                         class="form-control"
-                        placeholder="Hello there!"
+                        [(ngModel)]="clientData.address"
                         type="text"
                       />
                     </div>
@@ -168,7 +169,7 @@
                   Editar
                 </button>
 
-              </form>
+
             </div>
           </div>
         </div>

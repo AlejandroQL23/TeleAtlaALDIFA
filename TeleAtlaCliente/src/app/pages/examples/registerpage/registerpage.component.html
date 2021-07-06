@@ -114,7 +114,8 @@
                 <h4 class="card-title">Crear</h4>
               </div>
               <div class="card-body">
-                <form class="form">
+
+                <form class="form" id="client-form" role="form" action="" method="post">
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <div class="input-group-text">
@@ -125,6 +126,8 @@
                       class="form-control"
                       placeholder="Nombre"
                       type="text"
+                      name="name"
+                      [(ngModel)]="clientData.name"
                     />
                   </div>
                   <!---->
@@ -139,6 +142,8 @@
                       class="form-control"
                       placeholder="Primer apellido"
                       type="text"
+                      name="firstsurname"
+                      [(ngModel)]="clientData.firstsurname"
                     />
                   </div>
 
@@ -152,6 +157,8 @@
                       class="form-control"
                       placeholder="Segundo apellido"
                       type="text"
+                      name="secondsurname"
+                      [(ngModel)]="clientData.secondsurname"
                     />
                   </div>
 
@@ -166,6 +173,8 @@
                       class="form-control"
                       placeholder="Dirección"
                       type="text"
+                      name="address"
+                      [(ngModel)]="clientData.address"
                     />
                   </div>
 
@@ -180,6 +189,8 @@
                       class="form-control"
                       placeholder="Teléfono"
                       type="text"
+                      name="phone"
+                      [(ngModel)]="clientData.phone"
                     />
                   </div>
 
@@ -193,13 +204,10 @@
                       class="form-control"
                       placeholder="Segundo contácto"
                       type="text"
+                      name="secondcontac"
+                      [(ngModel)]="clientData.secondcontact"
                     />
                   </div>
-
-
-                  
-
-
                   <!---->
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -211,6 +219,8 @@
                       class="form-control"
                       placeholder="Email"
                       type="text"
+                      name="email"
+                      [(ngModel)]="clientData.email"
                     />
                   </div>
                   <div class="input-group">
@@ -223,6 +233,8 @@
                       class="form-control"
                       placeholder="Password"
                       type="text"
+                      name="password"
+                      [(ngModel)]="clientData.password"
                     />
                   </div>
                 </form>
@@ -231,6 +243,8 @@
                 <a
                   class="btn btn-danger btn-round btn-lg"
                   href="javascript:void(0)"
+                  type="submit"
+                  (click)="addClient()"
                 >
                   Registrarse
                 </a>
@@ -253,7 +267,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-3"><h1 class="title">T.A.•</h1></div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <img src="../../../../assets/img/logNice.png" />
         </div>
 

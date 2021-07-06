@@ -1,14 +1,31 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { RestService } from 'src/app/rest.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: "app-profilepage",
   templateUrl: "profilepage.component.html"
 })
 export class ProfilepageComponent implements OnInit, OnDestroy {
+
+  @Input() clientData:any = {name:'', email:'', phone:'', secondcontact:'', address:''};
+
   isCollapsed = true;
-  constructor() {}
+  constructor(
+    private fb: FormBuilder,
+    public rest:RestService,
+    private route: ActivatedRoute,
+    private router: Router
+ ) { }
 
   ngOnInit() {
+
+    this.rest.getClient(this.route.snapshot.params['Id']).subscribe((data: {}) => {
+      console.log(data);
+      this.clientData = data;
+    });
+
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("profile-page");
   }

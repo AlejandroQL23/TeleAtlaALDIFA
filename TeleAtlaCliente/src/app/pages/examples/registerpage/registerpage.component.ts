@@ -1,15 +1,36 @@
-import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
+import { Component, OnInit, OnDestroy, HostListener, Input } from "@angular/core";
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RestService } from "src/app/rest.service";
 
 @Component({
   selector: "app-registerpage",
   templateUrl: "registerpage.component.html"
 })
 export class RegisterpageComponent implements OnInit, OnDestroy {
+
+  @Input() clientData = { Id: 0, name:'', firstsurname: '', secondsurname: '', address: '',
+   phone: '' , secondcontact: '' , email: '', password:''};
+
   isCollapsed = true;
   focus;
   focus1;
   focus2;
-  constructor() {}
+
+
+  constructor( private route: ActivatedRoute,
+    private rest:RestService, private router: Router) {}
+
+
+    addClient() {
+      this.rest.addClient(this.clientData).subscribe((result) => {
+        console.log('Estoy tratandode hacer algo al menos');
+      }, (err) => {
+        console.log(err);
+      });
+    }
+
+
   @HostListener("document:mousemove", ["$event"])
   onMouseMove(e) {
     var squares1 = document.getElementById("square1");
