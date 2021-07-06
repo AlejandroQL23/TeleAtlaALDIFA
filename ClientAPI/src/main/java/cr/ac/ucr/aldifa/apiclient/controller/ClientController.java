@@ -64,4 +64,19 @@ public class ClientController {
     }
 
 
+    @PostMapping("/auth")
+    public Client auth(@RequestBody Client client) {
+        Client returnclient = null;
+        for (int i=0; i<service.listAll().size(); i++) {
+            if(service.listAll().get(i).getEmail().equals(client.getEmail())) {
+                if(service.listAll().get(i).getPassword().equals(client.getPassword())){
+                    returnclient=service.listAll().get(i);
+                    return returnclient;
+                }
+            }
+        }
+        return returnclient;
+    }
+
+
 }

@@ -47,7 +47,7 @@
           </a>
         </li>
         <li class="dropdown nav-item" dropdown>
-          <a class="dropdown-item" [routerLink]="['/register']">
+          <a class="dropdown-item" [routerLink]="['/registerrequest']">
             <i class="tim-icons icon-check-2"> </i> Crear cuenta
           </a>
         </li>
@@ -204,7 +204,7 @@
               <!--ngModel required *ngIf="supporter" -->
               <div class="card">
                 <div class="card-body">
-                  <form [formGroup]="supporter" (ngSubmit)="onSubmit()" #formDir="ngForm">
+                  <form [formGroup]="client" (ngSubmit)="onSubmit()" #formDir="ngForm">
                     <div class="form-group">
                       <label for="email">Email</label>
                       <input type="text" formControlName="email" class="form-control" />

@@ -22,7 +22,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class IndexComponent implements OnInit, OnDestroy {
 
 
-  supporter: FormGroup;
+  client: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
@@ -61,7 +61,7 @@ export class IndexComponent implements OnInit, OnDestroy {
       if (sessionStorage.getItem("email")) {
         this.router.navigate(['']);
       }
-      this.supporter = this.formBuilder.group({
+      this.client = this.formBuilder.group({
         email: ['', Validators.required],
         password: ['', Validators.required]
       });
@@ -88,13 +88,13 @@ export class IndexComponent implements OnInit, OnDestroy {
 
     this.submitted = true;
 
-    if (this.supporter.invalid) {
+    if (this.client.invalid) {
         return;
     }
 
     this.loading = true;
     
-    this.rest.login(this.supporter.value)
+    this.rest.login(this.client.value)
         .pipe(first())
         .subscribe(
             data => {

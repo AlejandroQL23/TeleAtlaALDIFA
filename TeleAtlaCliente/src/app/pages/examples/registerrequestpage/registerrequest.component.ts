@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
+import { Component, OnInit, OnDestroy, HostListener, Input}  from "@angular/core";
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RestService } from "src/app/rest.service";
 
 // falta hacer el import de rest, como daba error lo quite, pero hay que ponerlo
 
@@ -11,47 +12,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class RegisterrequestpageComponent implements OnInit, OnDestroy {
 
-    USOForm: FormGroup;
-    constructor(private fb: FormBuilder, private route: ActivatedRoute,
-         private router: Router) {
-        
+  @Input() issueData = { Id: 0, description:'', address: '', contactphone: '', contactemail: ''};
+  // preguntar por el campo de especificar servicio, en BD no hay espacio para eso
 
-          this.USOForm = this.fb.group({
-            name: ['', [Validators.required]],
-            surnameone: ['', [Validators.required]],
-            surnametwo: ['', [Validators.required]],
-            email: ['', [Validators.required]],
-            password: new FormControl('', [
-              Validators.required,
-              Validators.pattern('^[0-9]{5,8}$')
-            ])
-        })
+  constructor( private route: ActivatedRoute,
+    private rest:RestService, private router: Router) {}
 
+
+    addIssue() {
+      this.rest.addIssue(this.issueData).subscribe((result) => {
+        console.log('Estoy tratandode hacer algo al menos');
+      }, (err) => {
+        console.log(err);
+      });
     }
+  
 
-    addUSO() {
-
-        if (!this.USOForm.valid) {
-          return;
-        }
-        console.log("HOLA, estas intentando dar click");
-        /*this.rest.addStudent(this.studentForm.value).subscribe((result) => {
-          this.router.navigate(['/students']);
-        }, (err) => {
-          console.log(err);
-        }); */
-      }
     
-    
-    
-      get name() { return this.USOForm.get('name'); }
-      get surnameone() { return this.USOForm.get('surnameone'); }
-      get surnametwo() { return this.USOForm.get('surnametwo'); }
-      get email() { return this.USOForm.get('email'); }
-      get password() { return this.USOForm.get('password'); }
-
-
-
   isCollapsed = true;
   focus;
   focus1;

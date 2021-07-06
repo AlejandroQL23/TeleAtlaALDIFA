@@ -116,24 +116,34 @@
               <div class="card-body">
                 <!--[formGroup]="USOForm"    Uncaught (in promise): Error: NG0301: Export of name 'ngForm' not found!-->
                  <!--formControlName="name"  Error: NG0201: No provider for NgControl found in NodeInjector-->
-                 <form>
+                 <form id="issue-form" role="form" action="" method="post">
+
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputEmail4">Email</label>
-                      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                      <input type="email" class="form-control" id="inputEmail4" placeholder="Email"
+                      name="contactemail"
+                      [(ngModel)]="issueData.contactemail" > 
+
                     </div>
                     <div class="form-group col-md-6">
                       <label for="inputPhone4">Teléfono</label>
-                      <input type="number" class="form-control" id="inputPhone4" placeholder="Teléfono">
+                      <input type="number" class="form-control" id="inputPhone4" placeholder="Teléfono"
+                      name="contactphone"
+                      [(ngModel)]="issueData.contactphone">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputAddress">Dirección</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="Avenida 10C">
+                    <input type="text" class="form-control" id="inputAddress" placeholder="Avenida 10C"
+                    name="address"
+                    [(ngModel)]="issueData.address">
                   </div>
                   <div class="form-group">
                     <label for="TextareaDescri">Descripción</label>
-                    <textarea class="form-control" id="TextareaDescri" rows="3" placeholder="Lo que pasa es ..."></textarea>
+                    <textarea class="form-control" id="TextareaDescri" rows="3" placeholder="Lo que pasa es ..."
+                    name="description"
+                    [(ngModel)]="issueData.description"></textarea>
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
@@ -141,6 +151,7 @@
                       <select id="inputService" class="form-control">
                         <option selected>Elija el servicio</option>
                         <option>...</option>
+                        <!-- AUN NO SE LLENA, YA QYE NO HAY TABLA SERVICIOS Y NO HAY CAMPO EN LA TABLA ISSUE -->
                       </select>
                     </div>
                   </div>
@@ -152,7 +163,8 @@
                 <a
                   class="btn btn-danger btn-round btn-lg"
                   href="javascript:void(0)"
-                  (click)="addUSO()"
+                  type="submit"
+                  (click)="addIssue()"
                 >
                   Enviar solicitud
                 </a>
