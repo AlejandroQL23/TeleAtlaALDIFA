@@ -88,6 +88,17 @@ Created using IcoMoon - icomoon.io
 /*------------------------
   list icons
 -------------------------*/
+table {
+  width: 100%;
+  display:block;
+}
+
+tbody {
+  height: 300px;
+  display: inline-block;
+  width: 500%;
+  overflow: auto;
+}
 
 /*------------------------
   spinning icons
