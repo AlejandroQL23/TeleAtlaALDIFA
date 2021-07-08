@@ -106,10 +106,10 @@ export class RestService {
       );
   }
 
-  updateSupporter(supporter): Observable<any> {
+  updateSupporter(supporter, id): Observable<any> {
     return this.http
       .put(
-        endpoint + "Supporter/PutSupporter",
+        endpoint + "Supporter/" + id,
         JSON.stringify(supporter),
         httpOptions
       )
@@ -118,7 +118,6 @@ export class RestService {
         catchError(this.handleError<any>("updateSupporter"))
       );
   }
-
   //------------------------------------------------------------------------------------------------------------------
 
   //------------------------------------------------------------------------------------------------------------------

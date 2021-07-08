@@ -29,16 +29,16 @@ export class UpdateSupporterComponent implements OnInit {
   }
 
 
-  updateSupporter() {
-    if (!this.supporterFormUpdate.valid) {
-      return;
-    }
-    this.rest.updateSupporter(this.supporterData).subscribe((result) => {
-      this.router.navigate(['/students']);
-    }, (err) => {
-      console.log(err);
-    });
-  }
+  // updateSupporter() {
+  //   if (!this.supporterFormUpdate.valid) {
+  //     return;
+  //   }
+  //   this.rest.updateSupporter(this.supporterData).subscribe((result) => {
+  //     this.router.navigate(['/students']);
+  //   }, (err) => {
+  //     console.log(err);
+  //   });
+  // }
 
   get Id() { return this.supporterFormUpdate.get('Id'); }
   get name() { return this.supporterFormUpdate.get('name'); }
