@@ -116,35 +116,46 @@
               <div class="card-body">
                 <!--[formGroup]="USOForm"    Uncaught (in promise): Error: NG0301: Export of name 'ngForm' not found!-->
                  <!--formControlName="name"  Error: NG0201: No provider for NgControl found in NodeInjector-->
-                 <form id="issue-form" role="form" action="" method="post">
+                 <form [formGroup]="issueReport" (ngSubmit)="addIssue()" #formDir="ngForm">
 
                   <div class="form-row">
                     <div class="form-group col-md-6">
-                      <label for="inputEmail4">Email</label>
-                      <input type="email" class="form-control" id="inputEmail4" placeholder="Email"
-                      name="contactemail"
-                      [(ngModel)]="issueData.contactemail" > 
-
+                      <label for="email">Correo</label>
+                      <input type="text" formControlName="email" class="form-control" />
                     </div>
+                    <span class="text-danger" *ngIf="issueReport.hasError('required', 'email') && formDir.submitted">
+                      Debe ingresar un correo.
+                    </span>
+
+
                     <div class="form-group col-md-6">
                       <label for="inputPhone4">Teléfono</label>
-                      <input type="number" class="form-control" id="inputPhone4" placeholder="Teléfono"
-                      name="contactphone"
-                      [(ngModel)]="issueData.contactphone">
+                      <input type="text" formControlName="contactphone" class="form-control" />
                     </div>
+                    <span class="text-danger" *ngIf="issueReport.hasError('required', 'contactphone') && formDir.submitted">
+                      Debe ingresar un telefono.
+                    </span>
+                    
                   </div>
+
                   <div class="form-group">
                     <label for="inputAddress">Dirección</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="Avenida 10C"
-                    name="address"
-                    [(ngModel)]="issueData.address">
+                    <input type="text" formControlName="address" class="form-control" />
                   </div>
+                  <span class="text-danger" *ngIf="issueReport.hasError('required', 'address') && formDir.submitted">
+                    Debe ingresar una dirección.
+                  </span>
+
+
                   <div class="form-group">
                     <label for="TextareaDescri">Descripción</label>
-                    <textarea class="form-control" id="TextareaDescri" rows="3" placeholder="Lo que pasa es ..."
-                    name="description"
-                    [(ngModel)]="issueData.description"></textarea>
+                    <textarea class="form-control"  rows="3" placeholder="Lo que pasa es ..." formControlName="description"></textarea>
                   </div>
+                  <span class="text-danger" *ngIf="issueReport.hasError('required', 'description') && formDir.submitted">
+                    Debe ingresar la descripción.
+                  </span>
+
+
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputService">Servicio</label>
@@ -156,18 +167,15 @@
                     </div>
                   </div>
 
+                  <div class="form-group">
+
+                    <button class="btn btn-primary" >
+                      <span class="spinner-border spinner-border-sm mr-1"></span>
+                      Enviar reporte
+                    </button>
+                  </div>
 
                 </form>
-              </div>
-              <div class="card-footer">
-                <a
-                  class="btn btn-danger btn-round btn-lg"
-                  href="javascript:void(0)"
-                  type="submit"
-                  (click)="addIssue()"
-                >
-                  Enviar solicitud
-                </a>
               </div>
             </div>
           </div>

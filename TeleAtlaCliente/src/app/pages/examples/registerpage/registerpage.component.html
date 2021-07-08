@@ -115,140 +115,79 @@
               </div>
               <div class="card-body">
 
-                <form class="form" id="client-form" role="form" action="" method="post">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-single-02"> </i>
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Nombre"
-                      type="text"
-                      name="name"
-                      [(ngModel)]="clientData.name"
-                    />
-                  </div>
+                <form [formGroup]="registerClient" (ngSubmit)="addClient()" #formDir="ngForm">
+                  <div class="form-group" >
+                    
+                    <input  type="text" placeholder="Nombre" formControlName="name" class="form-control" />
+                </div>
+                <span class="text-danger" *ngIf="registerClient.hasError('required', 'name') && formDir.submitted">
+                  Se requiere un nombre.
+                </span>
                   <!---->
 
 
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Primer apellido"
-                      type="text"
-                      name="firstsurname"
-                      [(ngModel)]="clientData.firstsurname"
-                    />
-                  </div>
+                  <div class="form-group">
+                    <input type="text" placeholder="Primer apellido" formControlName="firstsurname" class="form-control" />
+                </div>
+                <span class="text-danger" *ngIf="registerClient.hasError('required', 'firstsurname') && formDir.submitted">
+                  Se requiere el primer apellido.
+                </span>
 
 
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Segundo apellido"
-                      type="text"
-                      name="secondsurname"
-                      [(ngModel)]="clientData.secondsurname"
-                    />
-                  </div>
+                <div class="form-group">
+                  <input type="text" placeholder="Segundo apellido" formControlName="secondsurname" class="form-control" />
+              </div>
+              <span class="text-danger" *ngIf="registerClient.hasError('required', 'secondsurname') && formDir.submitted">
+                Se requiere el segundo apellido.
+              </span>
+
+              <div class="form-group">
+                <input type="text" placeholder="Dirección" formControlName="address" class="form-control" />
+            </div>
+            <span class="text-danger" *ngIf="registerClient.hasError('required', 'address') && formDir.submitted">
+              Se requiere una dirección.
+            </span>
 
 
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-square-pin"> </i>
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Dirección"
-                      type="text"
-                      name="address"
-                      [(ngModel)]="clientData.address"
-                    />
-                  </div>
+            <div class="form-group">
+              <input type="text" placeholder="Teléfono" formControlName="phone" class="form-control" />
+          </div>
+          <span class="text-danger" *ngIf="registerClient.hasError('required', 'phone') && formDir.submitted">
+            Se requiere un teléfono.
+          </span>
 
+          <div class="form-group">
+            <input type="text" placeholder="Segundo teléfono" formControlName="secondcontact" class="form-control" />
+        </div>
+        <span class="text-danger" *ngIf="registerClient.hasError('required', 'secondcontact') && formDir.submitted">
+          Se requiere un segundo teléfono.
+        </span>
 
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-badge"> </i>
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Teléfono"
-                      type="text"
-                      name="phone"
-                      [(ngModel)]="clientData.phone"
-                    />
-                  </div>
-
-
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Segundo contácto"
-                      type="text"
-                      name="secondcontac"
-                      [(ngModel)]="clientData.secondcontact"
-                    />
-                  </div>
                   <!---->
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-email-85"> </i>
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Email"
-                      type="text"
-                      name="email"
-                      [(ngModel)]="clientData.email"
-                    />
-                  </div>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-lock-circle"> </i>
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Password"
-                      type="text"
-                      name="password"
-                      [(ngModel)]="clientData.password"
-                    />
-                  </div>
+                  <div class="form-group">
+                    <input type="text" placeholder="Correo" formControlName="email" class="form-control" />
+                </div>
+                <span class="text-danger" *ngIf="registerClient.hasError('required', 'email') && formDir.submitted">
+                  Se requiere un correo.
+                </span>
+
+                <div class="form-group">
+                  <input type="text" placeholder="Contraseña"  formControlName="password" class="form-control" />
+              </div>
+              <span class="text-danger" *ngIf="registerClient.hasError('required', 'password') && formDir.submitted">
+                Se requiere una contraseña.
+              </span>
+
+              <div class="form-group">
+                <button  class="btn btn-primary" >
+                    <span  class="spinner-border spinner-border-sm mr-1"></span>
+                    Registrarme
+                </button>
+            </div>
+
                 </form>
               </div>
-              <div class="card-footer">
-                <a
-                  class="btn btn-danger btn-round btn-lg"
-                  href="javascript:void(0)"
-                  type="submit"
-                  (click)="addClient()"
-                >
-                  Registrarse
-                </a>
-              </div>
+
             </div>
           </div>
         </div>

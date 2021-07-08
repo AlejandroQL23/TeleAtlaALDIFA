@@ -13,15 +13,37 @@ import Swal from 'sweetalert2';
 })
 export class RegisterrequestpageComponent implements OnInit, OnDestroy {
 
-  @Input() issueData = { Id: 0, description:'', address: '', contactphone: '', contactemail: ''};
-  // preguntar por el campo de especificar servicio, en BD no hay espacio para eso
+  issueReport: FormGroup;
 
-  constructor( private route: ActivatedRoute,
-    private rest:RestService, private router: Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    public rest:RestService,
+    private route: ActivatedRoute,
+    private router: Router
+    )  { 
+
+      this.issueReport = this.formBuilder.group({
+        email: ['', [Validators.required]],
+        contactphone: ['', [Validators.required]],
+        address: ['', [Validators.required]],
+        description: ['', [Validators.required]]
+    })
+
+     }
+
+     get email() { return this.issueReport.get('email'); }
+     get contactphone() { return this.issueReport.get('contactphone'); }
+     get address() { return this.issueReport.get('address'); }
+     get description() { return this.issueReport.get('description'); }
 
 
     addIssue() {
-      this.rest.addIssue(this.issueData).subscribe((result) => {
+
+      if (!this.issueReport.valid) {
+        return;
+      }
+
+      this.rest.addIssue(this.issueReport.value).subscribe((result) => {
         console.log('Estoy tratandode hacer algo al menos');
         this.loading();
       }, (err) => {
@@ -34,7 +56,7 @@ export class RegisterrequestpageComponent implements OnInit, OnDestroy {
       let timerInterval
       Swal.fire({
         title: 'Registro',
-        html: 'Problema registrado y eviado correctamente',
+        html: 'Reporte registrado y eviado correctamente',
         timer: 3000,
         timerProgressBar: true,
         didOpen: () => {
@@ -43,9 +65,7 @@ export class RegisterrequestpageComponent implements OnInit, OnDestroy {
             const content = Swal.getHtmlContainer()
             if (content) {
               const b = content.querySelector('b')
-              // if (b) {
-              //   b.textContent = Swal.getTimerLeft()
-              // }
+
             }
           }, 100)
         },

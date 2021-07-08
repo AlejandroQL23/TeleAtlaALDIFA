@@ -107,23 +107,29 @@
             </div>
             <div class="card-body">
 
-                <fieldset disabled>
+              <form [formGroup]="clientFormUpdate" (ngSubmit)="updateClient()" #formDir="ngForm">
+
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label> Nombre </label>
-                      <input class="form-control" type="text" [(ngModel)]="clientData.name" />
+                      <input class="form-control" disabled type="text" [(ngModel)]="clientData.name" formControlName="name"/>
                     </div>
                   </div>
+
                   <div class="col-md-6">
                     <div class="form-group">
                       <label> Correo </label>
                       <input
                         class="form-control"
                         [(ngModel)]="clientData.email"
+                        formControlName="email"
                         type="email"
                       />
                     </div>
+                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'email') && formDir.submitted">
+                      Correo requerido.
+                    </span>
                   </div>
                 </div>
                 <div class="row">
@@ -133,9 +139,13 @@
                       <input
                         class="form-control"
                         [(ngModel)]="clientData.phone"
+                        formControlName="phone"
                         type="number"
                       />
                     </div>
+                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'phone') && formDir.submitted">
+                      Telefóno es requerido.
+                    </span>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
@@ -143,9 +153,13 @@
                       <input
                         class="form-control"
                         [(ngModel)]="clientData.secondcontact"
+                        formControlName="secondcontact"
                         type="number"
                       />
                     </div>
+                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'secondcontact') && formDir.submitted">
+                      Segundo telefóno es requerido.
+                    </span>
                   </div>
                 </div>
                 <div class="row">
@@ -155,12 +169,69 @@
                       <input
                         class="form-control"
                         [(ngModel)]="clientData.address"
+                        formControlName="address"
                         type="text"
                       />
                     </div>
+                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'address') && formDir.submitted">
+                      Dirección es requerida.
+                    </span>
+                    <!---->
+                    <div class="form-group" hidden>
+                      <label> Dirección </label>
+                      <input
+                        class="form-control"
+                        [(ngModel)]="clientData.id"
+                        formControlName="id"
+                        type="text"
+                      />
+                    </div>
+                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'id') && formDir.submitted">
+                      Dirección es requerida.
+                    </span>
+
+                    <div class="form-group" hidden>
+                      <label> Dirección </label>
+                      <input
+                        class="form-control"
+                        [(ngModel)]="clientData.firstsurname"
+                        formControlName="firstsurname"
+                        type="text"
+                      />
+                    </div>
+                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'firstsurname') && formDir.submitted">
+                      Dirección es requerida.
+                    </span>
+                    
+                    <div class="form-group" hidden>
+                      <label> Dirección </label>
+                      <input
+                        class="form-control"
+                        [(ngModel)]="clientData.secondsurname"
+                        formControlName="secondsurname"
+                        type="text"
+                      />
+                    </div>
+                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'secondsurname') && formDir.submitted">
+                      Dirección es requerida.
+                    </span>
+
+                    <div class="form-group" hidden>
+                      <label> Dirección </label>
+                      <input
+                        class="form-control"
+                        [(ngModel)]="clientData.password"
+                        formControlName="password"
+                        type="text"
+                      />
+                    </div>
+                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'password') && formDir.submitted">
+                      Dirección es requerida.
+                    </span>
+                    <!---->
                   </div>
                 </div>
-              </fieldset>
+
                 <button
                   class="btn btn-danger btn-round float-right"
                   placement="right"
@@ -169,7 +240,7 @@
                   Editar
                 </button>
 
-
+              </form>
             </div>
           </div>
         </div>

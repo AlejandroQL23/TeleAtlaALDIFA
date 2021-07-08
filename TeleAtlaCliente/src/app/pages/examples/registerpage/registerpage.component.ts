@@ -10,8 +10,8 @@ import Swal from 'sweetalert2';
 })
 export class RegisterpageComponent implements OnInit, OnDestroy {
 
-  @Input() clientData = { Id: 0, name:'', firstsurname: '', secondsurname: '', address: '',
-   phone: '' , secondcontact: '' , email: '', password:''};
+  registerClient: FormGroup;
+
 
   isCollapsed = true;
   focus;
@@ -19,12 +19,43 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
   focus2;
 
 
-  constructor( private route: ActivatedRoute,
-    private rest:RestService, private router: Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    public rest:RestService,
+    private route: ActivatedRoute,
+    private router: Router,
 
+    )  { 
+
+      this.registerClient = this.formBuilder.group({
+        name: ['', [Validators.required]],
+        firstsurname: ['', [Validators.required]],
+        secondsurname: ['', [Validators.required]],
+        address: ['', [Validators.required]],
+        phone: ['', [Validators.required]],
+        secondcontact: ['', [Validators.required]],
+        email: ['', [Validators.required]],
+        password: ['', [Validators.required]]
+    })
+
+     }
+
+     get name() { return this.registerClient.get('name'); }
+     get firstsurname() { return this.registerClient.get('firstsurname'); }
+     get secondsurname() { return this.registerClient.get('secondsurname'); }
+     get address() { return this.registerClient.get('address'); }
+     get phone() { return this.registerClient.get('phone'); }
+     get secondcontact() { return this.registerClient.get('secondcontact'); }
+     get email() { return this.registerClient.get('email'); }
+     get password() { return this.registerClient.get('password'); }
 
     addClient() {
-      this.rest.addClient(this.clientData).subscribe((result) => {
+
+      if (!this.registerClient.valid) {
+        return;
+      }
+
+      this.rest.addClient(this.registerClient.value).subscribe((result) => {
         this.loading();
         console.log('Estoy tratandode hacer algo al menos');
       }, (err) => {

@@ -10,15 +10,51 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 })
 export class ProfilepageComponent implements OnInit, OnDestroy {
 
-  @Input() clientData:any = {name:'', email:'', phone:'', secondcontact:'', address:''};
+  @Input()
+  ID = this.rest.ID;
+
+  @Input() clientData:any = {id: 0, name:'',firstsurname:'',secondsurname:'', email:'', phone:'', secondcontact:'',
+   address:'', password:''};
+  clientFormUpdate: FormGroup;
 
   isCollapsed = true;
-  constructor(
-    private fb: FormBuilder,
-    public rest:RestService,
-    private route: ActivatedRoute,
-    private router: Router
- ) { }
+  constructor(private fb: FormBuilder, public rest:RestService, private route: ActivatedRoute, private router: Router) {
+
+    this.clientFormUpdate = this.fb.group({
+      id: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      firstsurname: ['', [Validators.required]],
+      secondsurname: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
+      secondcontact: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+  })
+   }
+
+   get id() { return this.clientFormUpdate.get('id'); }
+   get name() { return this.clientFormUpdate.get('name'); }
+   get firstsurname() { return this.clientFormUpdate.get('firstsurname'); }
+   get secondsurname() { return this.clientFormUpdate.get('secondsurname'); }
+   get email() { return this.clientFormUpdate.get('email'); }
+   get phone() { return this.clientFormUpdate.get('phone'); }
+   get secondcontact() { return this.clientFormUpdate.get('secondcontact'); }
+   get address() { return this.clientFormUpdate.get('address'); }
+   get password() { return this.clientFormUpdate.get('password'); }
+ 
+
+
+ updateClient() {
+  if (!this.clientFormUpdate.valid) {
+    return;
+  }
+  this.rest.updateClient( this.clientFormUpdate.value, this.clientData.id ).subscribe((result) => {
+
+  }, (err) => {
+    console.log(err);
+  });
+}
 
   ngOnInit() {
 
