@@ -49,6 +49,13 @@ export class RegisterrequestpageComponent implements OnInit, OnDestroy {
       }, (err) => {
         console.log(err);
       });
+      setTimeout (() => {
+        this.back();
+        }, 3000);
+    }
+
+    back() {
+      this.router.navigate(['/mainclient']);
     }
 
 

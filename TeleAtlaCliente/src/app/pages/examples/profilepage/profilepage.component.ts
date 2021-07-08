@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { RestService } from 'src/app/rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -50,10 +51,46 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
     return;
   }
   this.rest.updateClient( this.clientFormUpdate.value, this.clientData.id ).subscribe((result) => {
-
+    this.loading();
   }, (err) => {
     console.log(err);
   });
+  setTimeout (() => {
+    this.back();
+    }, 3000);
+}
+
+back() {
+  this.router.navigate(['/mainclient']);
+}
+
+loading() {
+  let timerInterval
+  Swal.fire({
+    title: 'Actualización',
+    html: 'Perfil actualizado de manera correcta',
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: () => {
+      Swal.showLoading()
+      timerInterval = setInterval(() => {
+        const content = Swal.getHtmlContainer()
+        if (content) {
+          const b = content.querySelector('b')
+
+        }
+      }, 100)
+    },
+    willClose: () => {
+      clearInterval(timerInterval)
+
+    }
+  }).then((result) => {
+    /* Read more about handling dismissals below */
+    if (result.dismiss === Swal.DismissReason.timer) {
+      console.log('I was closed by the timer')
+    }
+  })
 }
 
   ngOnInit() {
