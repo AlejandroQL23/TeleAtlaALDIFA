@@ -61,7 +61,29 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
       }, (err) => {
         console.log(err);
       });
+      this.clearForm();
+      setTimeout (() => {
+      this.back();
+      }, 3000);
     }
+
+    clearForm() {
+
+      this.registerClient.reset({
+            'name': '',
+            'firstsurname': '',
+            'secondsurname': '',
+            'address': '',
+            'phone': '',
+            'secondcontact': '',
+            'email': '',
+             'password': ''
+           });
+      }
+
+      back() {
+        this.router.navigate(['/home']);
+      }
 
     loading() {
       let timerInterval
