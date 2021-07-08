@@ -1,0 +1,15 @@
+<div *ngIf="issue" class="issueDetails">
+
+    <div><span># Solicitud: </span>{{issue.id}}</div>
+    <div><span>Descripción : </span>{{issue.description}}</div>
+    <div><span>Fecha/Hora: </span>{{issue.registertimestamp}}</div>
+    <div><span>Estado: </span>{{issue.status}}</div>
+    <div><span>Comentarios: </span>{{issue.address}}</div> <!--es por rrellenar-->
+
+    <div>
+      <button routerLink="/student-update/{{student.id}}">
+        Edit
+      </button>
+      <button class="btn" (click)="cancel()"> Go Back </button>
+    </div>
+  </div>

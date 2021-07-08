@@ -76,12 +76,28 @@
                         <th>Servicio</th>
                         <th>Fecha/Hora</th>
                         <th>Estado</th>
-                        <th class="text-right">Actions</th>
+                        <th class="text-right">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    <tr>
+
+                  <tr *ngFor="let s of issues; let i=index;">
+  
+                    <td>{{ s.id  }}</td>
+                    <td>{{ s.address  }}</td> <!--POR EL MOMENTO AUN NO PUEDO ASOCIAR SERVICIO-->
+                    <td>{{ s.registertimestamp }}</td>
+                    <td>{{ s.status }}</td>
+                
+                    <td>
+                    <button data-target="#landlineTelephony"
+                    [routerLink]="['/detail/', s.id]" type="button" rel="tooltip" class="btn btn-success btn-simple btn-icon btn-sm">
+                        <i class="tim-icons icon-zoom-split"></i>
+                    </button>                  
+                    </td>
+                    </tr>
+
+                    <!-- <tr>
                         <td class="text-center">3</td>
                         <td>Alex Mike</td>
                         <td>Design</td>
@@ -95,110 +111,12 @@
                                 <i class="tim-icons icon-attach-87"></i>
                             </button>
                         </td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
 
         </div>
 
-      <div
-        bsModal
-        class="modal fade modal-black"
-        #myModal2="bs-modal"
-        id="myModal2"
-        role="dialog"
-        tabindex="-1"
-        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"
-      >
-        <div class="modal-dialog  modal-dialog-scrollable modal-lg">
-          <div class="modal-content">
-            <div class="modal-header justify-content-center">
-              <button
-                aria-hidden="true"
-                class="close"
-                data-dismiss="modal"
-                (click)="myModal2.hide()"
-                type="button"
-              >
-                <i class="tim-icons icon-simple-remove text-white"> </i>
-              </button>
-              <div class="text-muted text-center ml-auto mr-auto">
-                <h3 class="mb-0">Detalles de solicitud</h3>
-              </div>
-            </div>
-            <div class="modal-body">
-
-              <table class="table">
-                <thead>
-                    <tr>
-                        <th class="text-center"># solicitud</th>
-                        <th>Descripción</th>
-                        <th>Fecha/Hora</th>
-                        <th>Estado</th>
-                        <th class="text-right">Comentarios</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-
-      <!---->
-
-      <div
-      bsModal
-      class="modal fade modal-black"
-      #myModal3="bs-modal"
-      id="myModal3"
-      role="dialog"
-      tabindex="-1"
-      aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"
-    >
-      <div class="modal-dialog  modal-dialog-scrollable modal-lg">
-        <div class="modal-content">
-          <div class="modal-header justify-content-center">
-            <button
-              aria-hidden="true"
-              class="close"
-              data-dismiss="modal"
-              (click)="myModal3.hide()"
-              type="button"
-            >
-              <i class="tim-icons icon-simple-remove text-white"> </i>
-            </button>
-            <div class="text-muted text-center ml-auto mr-auto">
-              <h3 class="mb-0">Detalles de solicitud</h3>
-            </div>
-          </div>
-          <div class="modal-body">
-
-            <form>
-              <div class="form-group">
-                <label for="TextareaDescri">Descripción</label>
-                <textarea class="form-control" id="TextareaDescri" rows="3" placeholder="Lo que pasa es ..."></textarea>
-              </div>
-            </form>
-
-          </div>
-
-          <div class="modal-footer ">
-
-            <button class="btn btn-primary my-4" type="button">
-              Enviar
-            </button>
-
-        </div>
-
-        </div>
-      </div>
-    </div>
 
       <!---->
 

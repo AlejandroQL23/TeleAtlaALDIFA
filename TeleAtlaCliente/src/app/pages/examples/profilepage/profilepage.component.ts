@@ -3,6 +3,7 @@ import { RestService } from 'src/app/rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
+
 @Component({
   selector: "app-profilepage",
   templateUrl: "profilepage.component.html"
@@ -29,6 +30,8 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("profile-page");
   }
+
+
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.remove("profile-page");

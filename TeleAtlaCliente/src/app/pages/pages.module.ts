@@ -22,6 +22,7 @@ import { ProfilepageComponent } from "./examples/profilepage/profilepage.compone
 import { RegisterpageComponent } from "./examples/registerpage/registerpage.component";
 import { RegisterrequestpageComponent } from "./examples/registerrequestpage/registerrequest.component";
 import { MainclientpageComponent } from "./examples/mainclientpage/mainclientpage.component";
+import { DetailpageComponent } from "./examples/detailpage/detailpage.component";
 import { LandingpageComponent } from "./examples/landingpage/landingpage.component";
 import { MaterialModule } from "../material/material.module";
 
@@ -51,7 +52,8 @@ import { MaterialModule } from "../material/material.module";
     RegisterpageComponent,
     RegisterrequestpageComponent,
     LandingpageComponent,
-    MainclientpageComponent
+    MainclientpageComponent,
+    DetailpageComponent
   ],
   exports: [
     IndexComponent,
@@ -59,7 +61,8 @@ import { MaterialModule } from "../material/material.module";
     RegisterpageComponent,
     LandingpageComponent,
     MainclientpageComponent,
-    MaterialModule
+    MaterialModule,
+    DetailpageComponent
   ],
   providers: []
 })

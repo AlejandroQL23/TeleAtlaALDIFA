@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, HostListener, Input } from "@angular/core
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestService } from "src/app/rest.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: "app-registerpage",
@@ -24,12 +25,44 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
 
     addClient() {
       this.rest.addClient(this.clientData).subscribe((result) => {
+        this.loading();
         console.log('Estoy tratandode hacer algo al menos');
       }, (err) => {
         console.log(err);
       });
     }
 
+    loading() {
+      let timerInterval
+      Swal.fire({
+        title: 'Registro',
+        html: 'Has sido registrado exitosamente',
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+          timerInterval = setInterval(() => {
+            const content = Swal.getHtmlContainer()
+            if (content) {
+              const b = content.querySelector('b')
+              // if (b) {
+              //   b.textContent = Swal.getTimerLeft()
+              // }
+            }
+          }, 100)
+        },
+        willClose: () => {
+          clearInterval(timerInterval)
+  
+        }
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log('I was closed by the timer')
+        }
+      })
+    }
+    
 
   @HostListener("document:mousemove", ["$event"])
   onMouseMove(e) {

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, HostListener, Input}  from "@angular/core
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestService } from "src/app/rest.service";
+import Swal from 'sweetalert2';
 
 // falta hacer el import de rest, como daba error lo quite, pero hay que ponerlo
 
@@ -12,24 +13,79 @@ import { RestService } from "src/app/rest.service";
 })
 export class RegisterusopageComponent implements OnInit, OnDestroy {
 
-  @Input() usoData = { Id: 0, name:'', firstsurname: '', secondsurname: '', email: '', password:''};
+  addUso: FormGroup;
 
 
-    constructor( private route: ActivatedRoute,
-      private rest:RestService, private router: Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    public rest:RestService,
+    private route: ActivatedRoute,
+    private router: Router
+    ) { 
 
+      this.addUso = this.formBuilder.group({
+        name: ['', [Validators.required]],
+        firstsurname: ['', [Validators.required]],
+        secondsurname: ['', [Validators.required]],
+        email: ['', [Validators.required]],
+        password: ['', [Validators.required]]
 
+        // password: new FormControl('', [
+        //   Validators.required,
+        //   Validators.pattern('^[0-9]{5,8}$')
+        // ])
+    })
+
+     }
+
+     get name() { return this.addUso.get('name'); }
+     get firstsurname() { return this.addUso.get('firstsurname'); }
+     get secondsurname() { return this.addUso.get('secondsurname'); }
+     get email() { return this.addUso.get('email'); }
+     get password() { return this.addUso.get('password'); }
 
 
       addUSO() {
-        this.rest.addSupporter(this.usoData).subscribe((result) => {
+
+        if (!this.addUso.valid) {
+          return;
+        }
+
+        this.rest.addSupporter(this.addUso.value).subscribe((result) => {
           console.log('Estoy tratandode hacer algo al menos');
+          this.loading();
         }, (err) => {
           console.log(err);
         });
       }
     
-    
+      loading() {
+        let timerInterval
+        Swal.fire({
+          title: 'Registro',
+          html: 'El colaborador se ha registrado de manera correcta',
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            timerInterval = setInterval(() => {
+              const content = Swal.getHtmlContainer()
+              if (content) {
+                const b = content.querySelector('b')
+              }
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+          }
+        })
+      }
     
 
 
