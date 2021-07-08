@@ -5,7 +5,7 @@ import { RestService } from "src/app/rest.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from "src/app/service/Auth/authentication.service";
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl,  FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -32,7 +32,20 @@ export class IndexComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private authentication: AuthenticationService
-    ) { }
+    ) { 
+
+      this.supporter = this.formBuilder.group({
+        email: ['', [Validators.required]],
+        password: new FormControl('', [
+          Validators.required,
+          Validators.pattern('^[0-9]{5,8}$')
+        ])
+    })
+
+     }
+
+     get email() { return this.supporter.get('email'); }
+     get password() { return this.supporter.get('password'); }
 
     showSpinner = false;
 
@@ -83,6 +96,10 @@ export class IndexComponent implements OnInit, OnDestroy {
 //------------------------------------
   onSubmit() {  
 
+    if (!this.supporter.valid) {
+      return;
+    }
+
     setTimeout (() => {
 
     this.submitted = true;
@@ -109,6 +126,7 @@ export class IndexComponent implements OnInit, OnDestroy {
             });
 
           }, 2000);
+  
 }
 
 

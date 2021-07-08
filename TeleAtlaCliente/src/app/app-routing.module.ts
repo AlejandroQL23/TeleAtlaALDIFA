@@ -12,6 +12,8 @@ import { RegisterpageComponent } from "./pages/examples/registerpage/registerpag
 import { RegisterrequestpageComponent } from "./pages/examples/registerrequestpage/registerrequest.component";
 import { MainclientpageComponent } from "./pages/examples/mainclientpage/mainclientpage.component";
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
+import { DetailpageComponent } from "./pages/examples/detailpage/detailpage.component";
+
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -20,6 +22,7 @@ const routes: Routes = [
   { path: "register", component: RegisterpageComponent },
   { path: "registerrequest", component: RegisterrequestpageComponent },
   { path: "mainclient", component: MainclientpageComponent },
+  { path: 'detail/:Id', component: DetailpageComponent},
   { path: "landing", component: LandingpageComponent },
   { path: '', redirectTo: 'supporter',pathMatch: 'full', canActivate: [AuthGuard] }
 ];
