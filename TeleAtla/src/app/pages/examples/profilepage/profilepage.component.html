@@ -34,7 +34,7 @@
     >
       <div class="navbar-collapse-header">
         <div class="row">
-          <div class="col-6 collapse-brand"><a> BLK• </a></div>
+          <div class="col-6 collapse-brand"><a> T.A.• </a></div>
           <div class="col-6 collapse-close text-right">
             <button
               aria-controls="navigation-index"
@@ -103,28 +103,86 @@
         <div class="col-md-6">
           <div class="card card-plain">
             <div class="card-header">
-              <h1 class="profile-title text-left">Datos</h1>
               <h5 class="text-on-back">Perfil</h5>
             </div>
             <div class="card-body">
 
-                <fieldset disabled>
+              <form [formGroup]="usoFormUpdate" (ngSubmit)="updateUSO()" #formDir="ngForm">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label> Nombre </label>
-                      <input class="form-control" type="text" [(ngModel)]="supporterData.name" />
+                      <input class="form-control" disabled type="text" [(ngModel)]="supporterData.name" formControlName="name"/>
                     </div>
+                    <span class="text-danger" *ngIf="usoFormUpdate.hasError('required', 'name') && formDir.submitted">
+                      Nombre es requerido.
+                    </span>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label> Correo </label>
-                      <input class="form-control" type="email" [(ngModel)]="supporterData.email"/>
+                      <input class="form-control" type="email" [(ngModel)]="supporterData.email" formControlName="email"/>
                     </div>
+                    <span class="text-danger" *ngIf="usoFormUpdate.hasError('required', 'email') && formDir.submitted">
+                      Correo es requerido.
+                    </span>
                   </div>
                 </div>
 
-              </fieldset>
+                <!---->
+                <div class="form-group" hidden>
+                  <label> Dirección </label>
+                  <input
+                    class="form-control"
+                    [(ngModel)]="supporterData.id"
+                    formControlName="id"
+                    type="text"
+                  />
+                </div>
+                <span class="text-danger" *ngIf="usoFormUpdate.hasError('required', 'id') && formDir.submitted">
+                  d.
+                </span>
+
+                <div class="form-group" hidden>
+                  <label> Dirección </label>
+                  <input
+                    class="form-control"
+                    [(ngModel)]="supporterData.firstSurName"
+                    formControlName="firstSurName"
+                    type="text"
+                  />
+                </div>
+                <span class="text-danger" *ngIf="usoFormUpdate.hasError('required', 'firstSurName') && formDir.submitted">
+                  c.
+                </span>
+
+                <div class="form-group" hidden>
+                  <label> Dirección </label>
+                  <input
+                    class="form-control"
+                    [(ngModel)]="supporterData.secondSurName"
+                    formControlName="secondSurName"
+                    type="text"
+                  />
+                </div>
+                <span class="text-danger" *ngIf="usoFormUpdate.hasError('required', 'secondSurName') && formDir.submitted">
+                  b.
+                </span>
+
+                <div class="form-group" hidden>
+                  <label> Dirección </label>
+                  <input
+                    class="form-control"
+                    [(ngModel)]="supporterData.password"
+                    formControlName="password"
+                    type="text"
+                  />
+                </div>
+                <span class="text-danger" *ngIf="usoFormUpdate.hasError('required', 'password') && formDir.submitted">
+                  a.
+                </span>
+                <!---->
+
                 <button
                   class="btn btn-danger btn-round float-right"
                   placement="right"
@@ -133,7 +191,7 @@
                   Editar
                 </button>
 
-
+              </form>
             </div>
           </div>
         </div>
