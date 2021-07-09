@@ -19,10 +19,10 @@ import { PopoverModule } from "ngx-bootstrap/popover";
 import { ConfirmationPopoverModule } from "angular-confirmation-popover"; 
 
 import { IndexComponent } from "./index/index.component";
-import { ProfilepageComponent } from "./examples/profilepage/profilepage.component";
+import { ProfilesuppageComponent } from "./examples/profilesuppage/profilesuppage.component";
 import { RegisterpageComponent } from "./examples/registerpage/registerpage.component";
 import { RegisterusopageComponent } from "./examples/registerusopage/registerusopage.component";
-import { MainsupportpageComponent } from "./examples/mainsupportpage/mainsupportpage.component";
+import { MainsuppageComponent } from "./examples/mainsuppage/mainsuppage.component";
 import { LandingpageComponent } from "./examples/landingpage/landingpage.component";
 import { MaterialModule } from "../material/material.module"; 
 
@@ -52,18 +52,18 @@ import { MaterialModule } from "../material/material.module";
   ],
   declarations: [
     IndexComponent,
-    ProfilepageComponent,
+    ProfilesuppageComponent,
     RegisterpageComponent,
     RegisterusopageComponent,
     LandingpageComponent,
-    MainsupportpageComponent
+    MainsuppageComponent
   ],
   exports: [
     IndexComponent,
-    ProfilepageComponent,
+    ProfilesuppageComponent,
     RegisterpageComponent,
     LandingpageComponent,
-    MainsupportpageComponent
+    MainsuppageComponent
   ],
   providers: []
 })

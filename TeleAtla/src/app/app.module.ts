@@ -21,7 +21,7 @@ import { ModalModule } from "ngx-bootstrap/modal";
 import { PagesModule } from "./pages/pages.module";
 
 import { IndexComponent } from "./pages/index/index.component";
-import { ProfilepageComponent } from "./pages/examples/profilepage/profilepage.component";
+import { ProfilesuppageComponent } from "./pages/examples/profilesuppage/profilesuppage.component";
 import { RegisterpageComponent } from "./pages/examples/registerpage/registerpage.component";
 import { RegisterusopageComponent } from "./pages/examples/registerusopage/registerusopage.component";
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
