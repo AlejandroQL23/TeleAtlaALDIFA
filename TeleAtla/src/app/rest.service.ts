@@ -64,6 +64,33 @@ export class RestService {
     sessionStorage.removeItem("email");
     this.Supporter = null;
   }
+
+  loginS(supervisor) {
+    return this.http
+      .post<any>(
+        `https://localhost:44382/api/Supervisor/PostAuthenticate/`,
+        JSON.stringify(supervisor),
+        httpOptions
+      )
+      .pipe(
+        map((userData) => {
+          sessionStorage.setItem("email", supervisor.email);
+          let tokenStr = "Bearer " + userData.token;
+          sessionStorage.setItem("token", tokenStr);
+          sessionStorage.setItem("Id", userData.id);
+          this.SupporterSubject.next(sessionStorage.getItem(supervisor.email));
+          console.log(userData.name + " ANDO BISCANDO NOMBRE");
+          this.ID = userData.id;
+          console.log(this.ID);
+          return userData;
+        })
+      );
+  }
+
+  logOutS() {
+    sessionStorage.removeItem("email");
+    this.Supporter = null;
+  }
   //------------------------------------------------------------------------------------------------------------------
   getSupporters(): Observable<any> {
     return this.http
@@ -162,10 +189,10 @@ export class RestService {
       );
   }
 
-  updateSupervisor(supervisor): Observable<any> {
+  updateSupervisor(supervisor, id): Observable<any> {
     return this.http
       .put(
-        endpoint + "Supervisor/PutSupervisor",
+        endpoint + "Supervisor/" +id,
         JSON.stringify(supervisor),
         httpOptions
       )

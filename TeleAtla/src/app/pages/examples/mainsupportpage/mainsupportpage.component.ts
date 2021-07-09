@@ -40,7 +40,7 @@ export class MainsupportpageComponent implements OnInit {
       );
   }
 
-  logOut(){
+  logOutS(){
     this.rest.logOut();
     this.router.navigateByUrl('', { skipLocationChange: true }).then(() => {
       this.router.navigate(['']);
