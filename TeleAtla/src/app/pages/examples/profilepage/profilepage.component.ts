@@ -39,7 +39,7 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
   if (!this.usoFormUpdate.valid) {
     return;
   }
-  this.rest.updateSupporter( this.usoFormUpdate.value, this.supporterData.id).subscribe((result) => {
+  this.rest.updateSupervisor( this.usoFormUpdate.value, this.supporterData.id).subscribe((result) => {
     this.loading();
   }, (err) => {
     console.log(err);
@@ -85,7 +85,7 @@ loading() {
  
   ngOnInit() {
 
-    this.rest.getSupporter(this.route.snapshot.params['Id']).subscribe((data: {}) => {
+    this.rest.getSupervisor(this.route.snapshot.params['Id']).subscribe((data: {}) => {
       console.log(data);
       this.supporterData = data;
     });

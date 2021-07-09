@@ -90,10 +90,30 @@ export class IndexComponent implements OnInit, OnDestroy {
     body.classList.remove("index-page");
   }
 
+
+  errorSession() {
+    let timerInterval
+    Swal.fire({
+      title: 'Algo salió mal',
+      html: 'Confirma que los campos estan llenos y la información sea correcta',
+      timer: 3000,
+      willClose: () => {
+        clearInterval(timerInterval)
+
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
+  }
+
 //------------------------------------
   onSubmit() {  
 
     if (!this.client.valid) {
+	this.errorSession();
       return;
     }
 
@@ -118,8 +138,8 @@ export class IndexComponent implements OnInit, OnDestroy {
             }); 
             },
             error => {
-              console.log("HOLA, ME CAI");
-                this.loading = false;
+              this.errorSession();
+              this.loading = false;
             });
 
           }, 2000);

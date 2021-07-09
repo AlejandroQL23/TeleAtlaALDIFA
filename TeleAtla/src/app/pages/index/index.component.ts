@@ -20,7 +20,7 @@ import { FormGroup, FormControl,  FormBuilder, Validators } from '@angular/forms
 export class IndexComponent implements OnInit, OnDestroy {
 
 
-  supporter: FormGroup;
+  supervisor: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
@@ -34,7 +34,7 @@ export class IndexComponent implements OnInit, OnDestroy {
     private authentication: AuthenticationService
     ) { 
 
-      this.supporter = this.formBuilder.group({
+      this.supervisor = this.formBuilder.group({
         email: ['', [Validators.required]],
         password: new FormControl('', [
           Validators.required,
@@ -44,8 +44,8 @@ export class IndexComponent implements OnInit, OnDestroy {
 
      }
 
-     get email() { return this.supporter.get('email'); }
-     get password() { return this.supporter.get('password'); }
+     get email() { return this.supervisor.get('email'); }
+     get password() { return this.supervisor.get('password'); }
 
     showSpinner = false;
 
@@ -72,7 +72,7 @@ export class IndexComponent implements OnInit, OnDestroy {
       if (sessionStorage.getItem("email")) {
         this.router.navigate(['']);
       }
-      this.supporter = this.formBuilder.group({
+      this.supervisor = this.formBuilder.group({
         email: ['', Validators.required],
         password: ['', Validators.required]
       });
@@ -96,7 +96,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 //------------------------------------
   onSubmit() {  
 
-    if (!this.supporter.valid) {
+    if (!this.supervisor.valid) {
       return;
     }
 
@@ -104,13 +104,13 @@ export class IndexComponent implements OnInit, OnDestroy {
 
     this.submitted = true;
 
-    if (this.supporter.invalid) {
+    if (this.supervisor.invalid) {
         return;
     }
 
     this.loading = true;
     
-    this.rest.login(this.supporter.value)
+    this.rest.loginS(this.supervisor.value)
         .pipe(first())
         .subscribe(
             data => {

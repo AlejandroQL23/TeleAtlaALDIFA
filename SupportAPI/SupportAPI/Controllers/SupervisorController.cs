@@ -109,5 +109,26 @@ namespace SupportAPI.Controllers
         {
             return _context.Supervisor.Any(e => e.Id == id);
         }
+
+        [EnableCors("GetAllPolicy")]
+        [Route("[action]")]
+        [HttpPost]
+        public IActionResult PostAuthenticate(Supervisor supervisor)
+        {
+            ObjectResult result;
+            var supervisorVar = _context.Supervisor.Any(e => e.Email == supervisor.Email && e.Password == supervisor.Password);
+            var supervisorVarSelect = (from s in _context.Supervisor where s.Email == supervisor.Email && s.Password == supervisor.Password select s);
+            var supervisorFoD = supervisorVarSelect.FirstOrDefault();
+            if (supervisorVar == false)
+            {
+                result = NotFound(supervisorFoD);
+            }
+            else
+            {
+                result = Ok(supervisorFoD);
+            }
+
+            return result;
+        }
     }
 }

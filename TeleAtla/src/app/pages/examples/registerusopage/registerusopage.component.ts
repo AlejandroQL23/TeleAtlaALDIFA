@@ -57,7 +57,26 @@ export class RegisterusopageComponent implements OnInit, OnDestroy {
         }, (err) => {
           console.log(err);
         });
+        this.clearForm();
+        setTimeout (() => {
+        this.back();
+        }, 3000);
       }
+
+      clearForm() {
+
+        this.addUso.reset({
+              'name': '',
+              'firstsurname': '',
+              'secondsurname': '',
+              'email': '',
+               'password': ''
+             });
+        }
+  
+        back() {
+          this.router.navigate(['/mainsupport']);
+        }
     
       loading() {
         let timerInterval
