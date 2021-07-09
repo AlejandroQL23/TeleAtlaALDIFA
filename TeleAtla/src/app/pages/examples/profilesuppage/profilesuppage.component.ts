@@ -5,10 +5,10 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: "app-profilepage",
-  templateUrl: "profilepage.component.html"
+  selector: "app-profilesuppage",
+  templateUrl: "profilesuppage.component.html"
 })
-export class ProfilepageComponent implements OnInit, OnDestroy {
+export class ProfilesuppageComponent implements OnInit, OnDestroy {
 
   @Input() supporterData:any = {id:0, name:'',firstSurName:'',secondSurName:'', email:'', password:''};
   usoFormUpdate: FormGroup;

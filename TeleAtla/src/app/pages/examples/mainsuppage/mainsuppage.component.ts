@@ -1,14 +1,13 @@
 import { Component, OnInit, Input} from "@angular/core";
-
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestService } from "src/app/rest.service";
 
 @Component({
-  selector: "app-mainsupportpage",
-  templateUrl: "mainsupportpage.component.html"
+  selector: "app-mainsuppage",
+  templateUrl: "mainsuppage.component.html"
 })
-export class MainsupportpageComponent implements OnInit {
+export class MainsuppageComponent implements OnInit {
   @Input()
     ID = this.rest.ID;
 
@@ -40,8 +39,8 @@ export class MainsupportpageComponent implements OnInit {
       );
   }
 
-  logOutS(){
-    this.rest.logOut();
+  logOut(){
+    this.rest.logOutS();
     this.router.navigateByUrl('', { skipLocationChange: true }).then(() => {
       this.router.navigate(['']);
     });
