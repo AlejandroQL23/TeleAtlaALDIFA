@@ -8,4 +8,5 @@ export class Client {
     secondcontact: string;
     emai : string;
     password : string;
+    idclient : number;
 }
