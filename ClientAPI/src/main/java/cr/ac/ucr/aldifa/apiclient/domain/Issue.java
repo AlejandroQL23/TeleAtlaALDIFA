@@ -19,13 +19,11 @@ public class Issue {
     private String contactemail;
     private String status;
     private String supportuserassigned;
+    private int Idclient;
 
+    public Issue(){}
 
-
-    public Issue(){
-
-    }
-    public Issue(int id, String description, String registertimestamp, String address, String contactphone, String contactemail, String status, String supportuserassigned) {
+    public Issue(int id, String description, String registertimestamp, String address, String contactphone, String contactemail, String status, String supportuserassigned, int idclient) {
         this.setId(id);
         this.setDescription(description);
         this.setRegistertimestamp(registertimestamp);
@@ -34,6 +32,9 @@ public class Issue {
         this.setContactemail(contactemail);
         this.setStatus(status);
         this.setSupportuserassigned(supportuserassigned);
+
+
+        setIdclient(idclient);
     }
 
     public int getId() {
@@ -98,5 +99,13 @@ public class Issue {
 
     public void setSupportuserassigned(String supportuserassigned) {
         this.supportuserassigned = supportuserassigned;
+    }
+
+    public int getIdclient() {
+        return Idclient;
+    }
+
+    public void setIdclient(int idclient) {
+        Idclient = idclient;
     }
 }
