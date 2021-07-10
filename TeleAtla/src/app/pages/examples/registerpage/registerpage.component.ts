@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
+import { Component, OnInit, OnDestroy, HostListener} from "@angular/core";
+import { RestService } from "src/app/rest.service";
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { AuthenticationService } from "src/app/service/Auth/authentication.service";
+import { FormGroup, FormControl,  FormBuilder, Validators } from '@angular/forms';
+
 
 @Component({
   selector: "app-registerpage",
@@ -9,7 +15,7 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
   focus;
   focus1;
   focus2;
-  constructor() {}
+
   @HostListener("document:mousemove", ["$event"])
   onMouseMove(e) {
     var squares1 = document.getElementById("square1");
@@ -74,14 +80,102 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
       "deg)";
   }
 
-  ngOnInit() {
-    var body = document.getElementsByTagName("body")[0];
-    body.classList.add("register-page");
+  //------
 
-    this.onMouseMove(event);
+  supporter: FormGroup;
+  loadingSupporter = false;
+  submittedSupporter = false;
+  returnUrlSupporter: string;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    public rest:RestService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authentication: AuthenticationService
+    ) { 
+
+      this.supporter = this.formBuilder.group({
+        email: ['', [Validators.required]],
+        password:  new FormControl('', [
+          Validators.required,
+          Validators.pattern('^[0-9]{5,8}$')
+        ])
+    })
+
+     }
+
+     get email() { return this.supporter.get('email'); }
+     get password() { return this.supporter.get('password'); }
+
+
+     showSpinnerSupporter = false;
+
+     loadDataSupporter(){
+       this.showSpinnerSupporter = true;
+       setTimeout( () => {
+         this.showSpinnerSupporter = false;
+       }, 5000);
+     }
+
+     ngOnInit() {
+
+      if (sessionStorage.getItem("email")) {
+        this.router.navigate(['']);
+      }
+      this.supporter = this.formBuilder.group({
+        email: ['', Validators.required],
+        password: ['', Validators.required]
+      });
+  
+      var body = document.getElementsByTagName("body")[0];
+      body.classList.add("register-page");
+  
+      this.onMouseMove(event);
+    }
+    ngOnDestroy() {
+      var body = document.getElementsByTagName("body")[0];
+      body.classList.remove("register-page");
+    }
+
+     onSubmitSupporter() {  
+      console.log("1");
+      if (!this.supporter.valid) {
+        return;
+      }
+      console.log("2");
+      setTimeout (() => {
+  
+      this.submittedSupporter = true;
+      console.log("3");
+      if (this.supporter.invalid) {
+          return;
+      }
+      console.log("4");
+      this.loadingSupporter = true;
+      console.log("5");
+      console.log(this.supporter.value);
+      this.rest.login(this.supporter.value)
+          .pipe(first())
+          .subscribe(
+              data => {
+                  this.router.navigateByUrl('/mainsupporter', { skipLocationChange: true }).then(() => {
+                      this.router.navigate(['/mainsupporter']);
+                      
+                      console.log("6");  
+              }); 
+              },
+              error => {
+                console.log("HOLA, ME CAI");
+                  this.loadingSupporter = false;
+              });
+  
+            }, 2000);
+    
   }
-  ngOnDestroy() {
-    var body = document.getElementsByTagName("body")[0];
-    body.classList.remove("register-page");
-  }
+ 
+
+  //-----
+
+
 }

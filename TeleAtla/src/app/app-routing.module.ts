@@ -12,6 +12,8 @@ import { RegisterpageComponent } from "./pages/examples/registerpage/registerpag
 import { RegisterusopageComponent } from "./pages/examples/registerusopage/registerusopage.component";
 import { MainsuppageComponent } from "./pages/examples/mainsuppage/mainsuppage.component";
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
+import { SupporterpageComponent } from "./pages/examples/supporterpage/supporterpage.component";
+import { SupporterprofileComponent } from "./pages/examples/supporterprofile/supporterprofile.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -19,9 +21,12 @@ const routes: Routes = [
   { path: 'profile/:Id', component: ProfilesuppageComponent },
   { path: "register", component: RegisterpageComponent },
   { path: "registerUSO", component: RegisterusopageComponent },
-  { path: "mainsupport", component: MainsuppageComponent },
+  { path: "mainsup", component: MainsuppageComponent },
   { path: "landing", component: LandingpageComponent },
-  { path: '', redirectTo: 'supporter',pathMatch: 'full', canActivate: [AuthGuard] }
+  { path: "mainsupporter", component: SupporterpageComponent },
+  { path: 'profileSupporter/:Id', component: SupporterprofileComponent },
+  { path: '', redirectTo: 'supporter',pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: '', redirectTo: 'supervisor',pathMatch: 'full', canActivate: [AuthGuard] }
 ];
 
 @NgModule({

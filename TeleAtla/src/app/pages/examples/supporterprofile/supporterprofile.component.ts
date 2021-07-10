@@ -5,10 +5,10 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: "app-profilesuppage",
-  templateUrl: "profilesuppage.component.html"
+  selector: "app-supporterprofile",
+  templateUrl: "supporterprofile.component.html"
 })
-export class ProfilesuppageComponent implements OnInit, OnDestroy {
+export class SupporterprofileComponent implements OnInit, OnDestroy {
 
   @Input() supporterData:any = {id:0, name:'',firstSurName:'',secondSurName:'', email:'', password:''};
   usoFormUpdate: FormGroup;
@@ -39,7 +39,7 @@ export class ProfilesuppageComponent implements OnInit, OnDestroy {
   if (!this.usoFormUpdate.valid) {
     return;
   }
-  this.rest.updateSupervisor( this.usoFormUpdate.value, this.supporterData.id).subscribe((result) => {
+  this.rest.updateSupporter( this.usoFormUpdate.value, this.supporterData.id).subscribe((result) => {
     this.loading();
   }, (err) => {
     console.log(err);
@@ -50,8 +50,9 @@ export class ProfilesuppageComponent implements OnInit, OnDestroy {
 }
 
 
+
  back() {
-  this.router.navigate(['/mainsup']);
+  this.router.navigate(['/mainsupporter']); 
 }
 
 loading() {
@@ -85,7 +86,7 @@ loading() {
  
   ngOnInit() {
 
-    this.rest.getSupervisor(this.route.snapshot.params['Id']).subscribe((data: {}) => {
+    this.rest.getSupporter(this.route.snapshot.params['Id']).subscribe((data: {}) => {
       console.log(data);
       this.supporterData = data;
     });

@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RestService } from "src/app/rest.service";
 
 @Component({
-  selector: "app-mainsuppage",
-  templateUrl: "mainsuppage.component.html"
+  selector: "app-supporterpage",
+  templateUrl: "supporterpage.component.html"
 })
-export class MainsuppageComponent implements OnInit {
+export class SupporterpageComponent implements OnInit {
   @Input()
-    ID = this.rest.IDsuper;
+    ID = this.rest.ID;
 
 
     issues:any = [];
@@ -40,7 +40,7 @@ export class MainsuppageComponent implements OnInit {
   }
 
   logOut(){
-    this.rest.logOutS();
+    this.rest.logOut();
     this.router.navigateByUrl('', { skipLocationChange: true }).then(() => {
       this.router.navigate(['']);
     });

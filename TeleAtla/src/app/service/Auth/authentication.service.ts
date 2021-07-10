@@ -27,7 +27,7 @@ export class AuthenticationService {
       .post<any>(`https://localhost:44382/api/Supporter/PostAuthenticate`, { email, password })
       .pipe(
         map(userData => {
-          sessionStorage.setItem("email", email);
+          sessionStorage.setItem("a", email);
           let tokenStr = "Bearer " + userData.token;
           sessionStorage.setItem("token", tokenStr);
           sessionStorage.setItem("Id", userData.id);

@@ -46,7 +46,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/mainsupport']"> Regresar</a>
+          <a class="nav-link" [routerLink]="['/mainsup']"> Regresar</a>
         </li>
       </ul>
     </div>
@@ -128,11 +128,21 @@
               <div class="form-group">
                 <button  class="btn btn-primary" >
                     <span  class="spinner-border spinner-border-sm mr-1"></span>
-                    Ingresar colaborador
+                    Añadir colaborador
                 </button>
             </div>
 
+            <div class="form-group">
+              <button  class="btn btn-primary" (click)="addUSUandUSO()">
+                  <span  class="spinner-border spinner-border-sm mr-1"></span>
+                  Añadir colaborador/supervisor
+              </button>
+          </div>
+
                 </form>
+
+
+
               </div>
 
             </div>
