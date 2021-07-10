@@ -1,50 +1,23 @@
-<nav
-  class="navbar navbar-expand-lg fixed-top navbar-transparent"
-  color-on-scroll="100"
-  id="navbar-top"
->
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent" color-on-scroll="100" id="navbar-top">
   <div class="container">
     <div class="navbar-translate">
-      <a
-        class="navbar-brand"
-        [routerLink]="['/home']"
-        placement="bottom"
-        tooltip="Designed and Coded by Creative Tim"
-      >
+      <a class="navbar-brand" [routerLink]="['/home']" placement="bottom" tooltip="Designed and Coded by Creative Tim">
         <span> T.A.• </span> Tele Atlántico
       </a>
-      <button
-        aria-controls="navigation-index"
-        aria-label="Toggle navigation"
-        class="navbar-toggler navbar-toggler"
-        [attr.aria-expanded]="!isCollapsed"
-        (click)="isCollapsed = !isCollapsed"
-        id="navigation"
-        type="button"
-      >
+      <button aria-controls="navigation-index" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler"
+        [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed" id="navigation" type="button">
         <span class="navbar-toggler-bar bar1"> </span>
         <span class="navbar-toggler-bar bar2"> </span>
         <span class="navbar-toggler-bar bar3"> </span>
       </button>
     </div>
-    <div
-      class="navbar-collapse justify-content-end"
-      [collapse]="isCollapsed"
-      id="navigation"
-    >
+    <div class="navbar-collapse justify-content-end" [collapse]="isCollapsed" id="navigation">
       <div class="navbar-collapse-header">
         <div class="row">
           <div class="col-6 collapse-brand"><a> T.A.• </a></div>
           <div class="col-6 collapse-close text-right">
-            <button
-              aria-controls="navigation-index"
-              aria-label="Toggle navigation"
-              class="navbar-toggler"
-              [attr.aria-expanded]="!isCollapsed"
-              (click)="isCollapsed = !isCollapsed"
-              id="navigation"
-              type="button"
-            >
+            <button aria-controls="navigation-index" aria-label="Toggle navigation" class="navbar-toggler"
+              [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed" id="navigation" type="button">
               <i class="tim-icons icon-simple-remove"> </i>
             </button>
           </div>
@@ -52,37 +25,22 @@
       </div>
       <ul class="navbar-nav">
         <li class="nav-item p-0">
-          <a
-            class="nav-link"
-            href="https://twitter.com/CreativeTim"
-            placement="bottom"
-            target="_blank"
-            tooltip="Follow us on Twitter"
-          >
+          <a class="nav-link" href="https://twitter.com/CreativeTim" placement="bottom" target="_blank"
+            tooltip="Follow us on Twitter">
             <i class="fab fa-twitter"> </i>
             <p class="d-lg-none d-xl-none">Twitter</p>
           </a>
         </li>
         <li class="nav-item p-0">
-          <a
-            class="nav-link"
-            href="https://www.facebook.com/CreativeTim"
-            placement="bottom"
-            target="_blank"
-            tooltip="Like us on Facebook"
-          >
+          <a class="nav-link" href="https://www.facebook.com/CreativeTim" placement="bottom" target="_blank"
+            tooltip="Like us on Facebook">
             <i class="fab fa-facebook-square"> </i>
             <p class="d-lg-none d-xl-none">Facebook</p>
           </a>
         </li>
         <li class="nav-item p-0">
-          <a
-            class="nav-link"
-            href="https://www.instagram.com/CreativeTimOfficial"
-            placement="bottom"
-            target="_blank"
-            tooltip="Follow us on Instagram"
-          >
+          <a class="nav-link" href="https://www.instagram.com/CreativeTimOfficial" placement="bottom" target="_blank"
+            tooltip="Follow us on Instagram">
             <i class="fab fa-instagram"> </i>
             <p class="d-lg-none d-xl-none">Instagram</p>
           </a>
@@ -105,140 +63,47 @@
             <div class="square square-8" id="square8"></div>
             <div class="card card-register">
               <div class="card-header">
-                <img
-                  alt="Card image"
-                  class="card-img"
-                  src="assets/img/square1-red.png"
-                />
+                <img alt="Card image" class="card-img" src="assets/img/square1-red.png" />
 
-                <h4 class="card-title">Crear</h4>
+                <h4 class="card-title">Inicio</h4>
               </div>
               <div class="card-body">
-                <form class="form">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-single-02"> </i>
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Nombre"
-                      type="text"
-                    />
+                <form [formGroup]="supporter" (ngSubmit)="onSubmitSupporter()" #fS="ngForm">
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" formControlName="email" class="form-control" />
                   </div>
-                  <!---->
+                  <span class="text-danger" *ngIf="supporter.hasError('required', 'email') && fS.submitted">
+                    Debe ingresar un correo.
+                  </span>
 
 
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Primer apellido"
-                      type="text"
-                    />
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" formControlName="password" class="form-control" />
                   </div>
+                  <span class="text-danger" *ngIf="supporter.hasError('required', 'password') && fS.submitted">
+                    Debe ingresar su contraseña.
+                  </span>
 
 
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Segundo apellido"
-                      type="text"
-                    />
+                  <div class="form-group">
+                    <button [disabled]="loadingSupporter" class="btn btn-primary" (click)="loadDataSupporter()">
+                      <span *ngIf="loadingSupporter" class="spinner-border spinner-border-sm mr-1"></span>
+                      Iniciar sesión
+                    </button>
+                    <mat-spinner [diameter]="20" *ngIf="showSpinnerSupporter" color="accent"></mat-spinner>
+
                   </div>
 
 
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-square-pin"> </i>
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Dirección"
-                      type="text"
-                    />
-                  </div>
-
-
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-badge"> </i>
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Teléfono"
-                      type="text"
-                    />
-                  </div>
-
-
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Segundo contácto"
-                      type="text"
-                    />
-                  </div>
-
-
-                  
-
-
-                  <!---->
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-email-85"> </i>
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Email"
-                      type="text"
-                    />
-                  </div>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="tim-icons icon-lock-circle"> </i>
-                      </div>
-                    </div>
-                    <input
-                      class="form-control"
-                      placeholder="Password"
-                      type="text"
-                    />
-                  </div>
                 </form>
               </div>
-              <div class="card-footer">
-                <a
-                  class="btn btn-danger btn-round btn-lg"
-                  href="javascript:void(0)"
-                >
-                  Registrarse
-                </a>
-              </div>
+
             </div>
           </div>
         </div>
-        
+
         <div class="register-bg"></div>
         <div class="square square-1" id="square1"></div>
         <div class="square square-2" id="square2"></div>
@@ -252,7 +117,9 @@
   <footer class="footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-3"><h1 class="title">T.A.•</h1></div>
+        <div class="col-md-3">
+          <h1 class="title">T.A.•</h1>
+        </div>
         <div class="col-md-3">
           <ul class="nav">
             <li class="nav-item">

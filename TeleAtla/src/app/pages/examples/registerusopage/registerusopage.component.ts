@@ -24,6 +24,7 @@ export class RegisterusopageComponent implements OnInit, OnDestroy {
     ) { 
 
       this.addUso = this.formBuilder.group({
+
         name: ['', [Validators.required]],
         firstsurname: ['', [Validators.required]],
         secondsurname: ['', [Validators.required]],
@@ -44,9 +45,37 @@ export class RegisterusopageComponent implements OnInit, OnDestroy {
      get email() { return this.addUso.get('email'); }
      get password() { return this.addUso.get('password'); }
 
+     contentEditable = false;
 
-      addUSO() {
+     addUSUandUSO() { 
+      if (!this.addUso.valid) {
+        return;
+      }
 
+      this.rest.addSupporter(this.addUso.value).subscribe((result) => {
+        console.log('Estoy tratandode hacer algo al menos');
+        this.loading();
+      }, (err) => {
+        console.log(err);
+      });
+
+
+      this.rest.addSupervisor(this.addUso.value).subscribe((result) => {
+        console.log('Estoy tratandode hacer algo al menos');
+        this.loading();
+      }, (err) => {
+        console.log(err);
+      });
+
+
+
+      this.clearForm();
+      setTimeout (() => {
+      this.back();
+      }, 3000);
+    }
+
+      addUSO() { 
         if (!this.addUso.valid) {
           return;
         }
@@ -75,7 +104,7 @@ export class RegisterusopageComponent implements OnInit, OnDestroy {
         }
   
         back() {
-          this.router.navigate(['/mainsupport']);
+          this.router.navigate(['/mainsup']);
         }
     
       loading() {

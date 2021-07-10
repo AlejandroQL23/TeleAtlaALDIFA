@@ -25,6 +25,8 @@ import { RegisterusopageComponent } from "./examples/registerusopage/registeruso
 import { MainsuppageComponent } from "./examples/mainsuppage/mainsuppage.component";
 import { LandingpageComponent } from "./examples/landingpage/landingpage.component";
 import { MaterialModule } from "../material/material.module"; 
+import { SupporterpageComponent } from "./examples/supporterpage/supporterpage.component";
+import { SupporterprofileComponent } from "./examples/supporterprofile/supporterprofile.component";
 
 @NgModule({
   imports: [
@@ -56,14 +58,18 @@ import { MaterialModule } from "../material/material.module";
     RegisterpageComponent,
     RegisterusopageComponent,
     LandingpageComponent,
-    MainsuppageComponent
+    MainsuppageComponent,
+    SupporterpageComponent,
+    SupporterprofileComponent
   ],
   exports: [
     IndexComponent,
     ProfilesuppageComponent,
     RegisterpageComponent,
     LandingpageComponent,
-    MainsuppageComponent
+    MainsuppageComponent,
+    SupporterpageComponent,
+    SupporterprofileComponent
   ],
   providers: []
 })

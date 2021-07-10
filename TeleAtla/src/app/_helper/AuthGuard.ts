@@ -15,7 +15,16 @@ export class AuthGuard implements CanActivate {
         if (user) {
             return true;
         }
-        this.router.navigate(['/mainsupport'], { queryParams: { returnUrl: state.url }});
+        this.router.navigate(['/mainsupporter'], { queryParams: { returnUrl: state.url }});
+        return false;
+    }
+    
+    canActivateSup(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        const user = sessionStorage.getItem("email");
+        if (user) {
+            return true;
+        }
+        this.router.navigate(['/mainsup'], { queryParams: { returnUrl: state.url }});
         return false;
     }
 

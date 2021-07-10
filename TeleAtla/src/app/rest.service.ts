@@ -9,6 +9,7 @@ import { map, catchError, tap } from "rxjs/operators";
 import { Router } from "@angular/router";
 
 import { Supporter } from "src/app/models/Supporter";
+import { Supervisor } from "./models/Supervisor";
 
 const endpoint = "https://localhost:44382/api/";
 
@@ -26,11 +27,22 @@ export class RestService {
   public Supporter: Observable<any>;
   public ID;
 
+  private SuperSubject: BehaviorSubject<any>;
+  public Super: Observable<any>;
+  public IDsuper;
+
   constructor(private router: Router, private http: HttpClient) {
     this.SupporterSubject = new BehaviorSubject<Supporter>(
       JSON.parse(localStorage.getItem("Supporter"))
     );
     this.Supporter = this.SupporterSubject.asObservable();
+
+
+    /////////////////////////////////////////////////////////////////////
+    this.SuperSubject = new BehaviorSubject<Supporter>(
+      JSON.parse(localStorage.getItem("Supervisor"))
+    );
+    this.Super = this.SuperSubject.asObservable();
   }
 
   private extractData(res: Response) {
@@ -38,13 +50,17 @@ export class RestService {
     return body || {};
   }
 
+  
   login(supportere) {
+    console.log(JSON.stringify(supportere)+ " DESDE REST");
     return this.http
       .post<any>(
         `https://localhost:44382/api/Supporter/PostAuthenticate/`,
         JSON.stringify(supportere),
         httpOptions
+        
       )
+      
       .pipe(
         map((userData) => {
           sessionStorage.setItem("email", supportere.email);
@@ -66,6 +82,7 @@ export class RestService {
   }
 
   loginS(supervisor) {
+    console.log(JSON.stringify(supervisor)+ " DESDE REST");
     return this.http
       .post<any>(
         `https://localhost:44382/api/Supervisor/PostAuthenticate/`,
@@ -78,10 +95,10 @@ export class RestService {
           let tokenStr = "Bearer " + userData.token;
           sessionStorage.setItem("token", tokenStr);
           sessionStorage.setItem("Id", userData.id);
-          this.SupporterSubject.next(sessionStorage.getItem(supervisor.email));
+          this.SuperSubject.next(sessionStorage.getItem(supervisor.email));
           console.log(userData.name + " ANDO BISCANDO NOMBRE");
-          this.ID = userData.id;
-          console.log(this.ID);
+          this.IDsuper = userData.id;
+          console.log(this.IDsuper);
           return userData;
         })
       );
@@ -89,7 +106,7 @@ export class RestService {
 
   logOutS() {
     sessionStorage.removeItem("email");
-    this.Supporter = null;
+    this.Super = null;
   }
   //------------------------------------------------------------------------------------------------------------------
   getSupporters(): Observable<any> {

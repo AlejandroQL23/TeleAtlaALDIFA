@@ -25,17 +25,10 @@ import { ProfilesuppageComponent } from "./pages/examples/profilesuppage/profile
 import { RegisterpageComponent } from "./pages/examples/registerpage/registerpage.component";
 import { RegisterusopageComponent } from "./pages/examples/registerusopage/registerusopage.component";
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
-import { GetSupporterIdComponent } from './componets/get-supporter-id/get-supporter-id.component';
-import { GetSupportersListComponent } from './componets/get-supporters-list/get-supporters-list.component';
-import { UpdateSupporterComponent } from './componets/update-supporter/update-supporter.component';
-import { DeleteSupporterComponent } from './componets/delete-supporter/delete-supporter.component';
+
 @NgModule({
   declarations: [
-    AppComponent,
-    GetSupporterIdComponent,
-    GetSupportersListComponent,
-    UpdateSupporterComponent,
-    DeleteSupporterComponent
+    AppComponent
     // IndexComponent,
     // ProfilepageComponent,
     // RegisterpageComponent,

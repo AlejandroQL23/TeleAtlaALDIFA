@@ -1,6 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, NgModule} from "@angular/core";
-import noUiSlider from "nouislider";
-
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { RestService } from "src/app/rest.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
@@ -11,8 +9,6 @@ import { FormGroup, FormControl,  FormBuilder, Validators } from '@angular/forms
 @Component({
   selector: "app-index",
   templateUrl: "index.component.html"
-
-  
 })
 
 
@@ -24,7 +20,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   loading = false;
   submitted = false;
   returnUrl: string;
-  students:any = [];
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,9 +56,7 @@ export class IndexComponent implements OnInit, OnDestroy {
   focus;
   focus1;
   focus2;
-  date = new Date();
-  pagination = 3;
-  pagination1 = 1;
+
   scrollToDownload(element: any) {
     element.scrollIntoView({ behavior: "smooth" });
   }
@@ -114,8 +108,8 @@ export class IndexComponent implements OnInit, OnDestroy {
         .pipe(first())
         .subscribe(
             data => {
-                this.router.navigateByUrl('/mainsupport', { skipLocationChange: true }).then(() => {
-                    this.router.navigate(['/mainsupport']);
+                this.router.navigateByUrl('/mainsup', { skipLocationChange: true }).then(() => {
+                    this.router.navigate(['/mainsup']);
                     
                     
             }); 
