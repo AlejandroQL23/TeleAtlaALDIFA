@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IssueRepository  extends JpaRepository<Issue, Integer>{
 
-
+//aqui van los SP si hace falta
 
 
 
