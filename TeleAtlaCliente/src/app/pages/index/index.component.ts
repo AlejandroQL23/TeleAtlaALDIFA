@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from "src/app/service/Auth/authentication.service";
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 
 @Component({

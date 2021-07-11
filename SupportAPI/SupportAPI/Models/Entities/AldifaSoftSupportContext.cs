@@ -21,8 +21,10 @@ namespace SupportAPI.Models.Entities
 
         public virtual DbSet<Issue> Issue { get; set; }
         public virtual DbSet<Notes> Notes { get; set; }
+        public virtual DbSet<Service> Service { get; set; }
         public virtual DbSet<Supervisor> Supervisor { get; set; }
         public virtual DbSet<Supporter> Supporter { get; set; }
+        public virtual DbSet<SupporterService> SupporterService { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -69,6 +71,19 @@ namespace SupportAPI.Models.Entities
                 entity.Property(e => e.UpdateUser).HasMaxLength(20);
             });
 
+            modelBuilder.Entity<Service>(entity =>
+            {
+                entity.Property(e => e.CreationDate).HasColumnType("date");
+
+                entity.Property(e => e.CreationUser).HasMaxLength(20);
+
+                entity.Property(e => e.Name).HasMaxLength(20);
+
+                entity.Property(e => e.UpdateDate).HasColumnType("date");
+
+                entity.Property(e => e.UpdateUser).HasMaxLength(20);
+            });
+
             modelBuilder.Entity<Supervisor>(entity =>
             {
                 entity.Property(e => e.CreationDate).HasColumnType("datetime");
@@ -109,6 +124,19 @@ namespace SupportAPI.Models.Entities
                 entity.Property(e => e.UpdateDate).HasColumnType("date");
 
                 entity.Property(e => e.UpdateUser).HasMaxLength(20);
+            });
+
+            modelBuilder.Entity<SupporterService>(entity =>
+            {
+                entity.HasOne(d => d.IdServiceNavigation)
+                    .WithMany(p => p.SupporterService)
+                    .HasForeignKey(d => d.IdService)
+                    .HasConstraintName("FK_SupporterService_Service");
+
+                entity.HasOne(d => d.IdSupporterNavigation)
+                    .WithMany(p => p.SupporterService)
+                    .HasForeignKey(d => d.IdSupporter)
+                    .HasConstraintName("FK_SupporterService_Supporter");
             });
 
             OnModelCreatingPartial(modelBuilder);
