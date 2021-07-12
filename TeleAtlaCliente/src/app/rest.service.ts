@@ -169,6 +169,16 @@ export class RestService {
       );
   }
 
+
+  getCommentById(id): Observable<any> {
+    return this.http
+      .get(endpoint + "comment/listById/" +id)
+      .pipe(
+        map(this.extractData),
+        catchError(this.handleError<any>("list comment"))
+      );
+  }
+
   //----------------------------------------------------------------------------------------------------------
   //------------------------------------------------------------------------------------------------------------------
 
@@ -219,6 +229,15 @@ export class RestService {
       .pipe(
         tap((issue) => console.log("updated issue")),
         catchError(this.handleError<any>("updateIssue"))
+      );
+  }
+
+  getIssuesById(id): Observable<any> {
+    return this.http
+      .get(endpoint + "issue/listById/" +id)
+      .pipe(
+        map(this.extractData),
+        catchError(this.handleError<any>("list issue"))
       );
   }
 

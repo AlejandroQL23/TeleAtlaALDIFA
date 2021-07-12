@@ -3,6 +3,7 @@ package cr.ac.ucr.aldifa.apiclient.controller;
 
 
 import cr.ac.ucr.aldifa.apiclient.domain.Comment;
+import cr.ac.ucr.aldifa.apiclient.domain.Issue;
 import cr.ac.ucr.aldifa.apiclient.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,6 +62,19 @@ public class CommentController {
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Integer id) {
         service.delete(id);
+    }
+
+
+    @GetMapping("/listById/{id}")
+    public List<Comment> listById(@PathVariable int id) {
+        List<Comment> completeList = service.listAll();
+        List<Comment> filteredList = null;
+        for(int i=0; i<completeList.size(); i++) {
+            if(completeList.get(i).getIssue().getId()==id){
+                filteredList.add(completeList.get(i));
+            }
+        }
+        return filteredList;
     }
 
 }
