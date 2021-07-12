@@ -8731,23 +8731,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Usuario\\.nuget\\packages\\": {},
+    "C:\\Users\\Ale\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Progress\\ToolboxNuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Lenguajes-Segundo-Proyecto\\TeleAtlaALDIFA\\SupportAPI\\SupportAPI\\SupportAPI.csproj",
+      "projectUniqueName": "C:\\pro2len\\TeleAtlaALDIFA\\SupportAPI\\SupportAPI\\SupportAPI.csproj",
       "projectName": "SupportAPI",
-      "projectPath": "C:\\Lenguajes-Segundo-Proyecto\\TeleAtlaALDIFA\\SupportAPI\\SupportAPI\\SupportAPI.csproj",
-      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Lenguajes-Segundo-Proyecto\\TeleAtlaALDIFA\\SupportAPI\\SupportAPI\\obj\\",
+      "projectPath": "C:\\pro2len\\TeleAtlaALDIFA\\SupportAPI\\SupportAPI\\SupportAPI.csproj",
+      "packagesPath": "C:\\Users\\Ale\\.nuget\\packages\\",
+      "outputPath": "C:\\pro2len\\TeleAtlaALDIFA\\SupportAPI\\SupportAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Progress\\ToolboxNuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Ale\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Telerik UI for WPF.config"
       ],

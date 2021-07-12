@@ -24,7 +24,7 @@ export class MainclientpageComponent implements OnInit {
 
   getIssue() {
     this.issues = [];
-    this.rest.getIssues().subscribe((data: {}) => {
+    this.rest.getIssuesById(this.ID).subscribe((data: {}) => {
       this.issues = data;
     });
   }

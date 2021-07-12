@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 })
 export class RegisterrequestpageComponent implements OnInit, OnDestroy {
 
+  @Input()
+  ID = this.rest.ID; //PREVISTO PARA PERFIL
   issueReport: FormGroup;
 
   constructor(
@@ -23,19 +25,20 @@ export class RegisterrequestpageComponent implements OnInit, OnDestroy {
     )  { 
 
       this.issueReport = this.formBuilder.group({
-        email: ['', [Validators.required]],
+        contactemail: ['', [Validators.required]],
         contactphone: ['', [Validators.required]],
         address: ['', [Validators.required]],
-        description: ['', [Validators.required]]
+        description: ['', [Validators.required]],
+        idclient: [this.ID, [Validators.required]]
     })
 
      }
 
-     get email() { return this.issueReport.get('email'); }
+     get contactemail() { return this.issueReport.get('contactemail'); }
      get contactphone() { return this.issueReport.get('contactphone'); }
      get address() { return this.issueReport.get('address'); }
      get description() { return this.issueReport.get('description'); }
-
+     get idclient () { return this.issueReport.get('idclient'); }
 
     addIssue() {
 
@@ -45,6 +48,7 @@ export class RegisterrequestpageComponent implements OnInit, OnDestroy {
 
       this.rest.addIssue(this.issueReport.value).subscribe((result) => {
         console.log('Estoy tratandode hacer algo al menos');
+        console.log(this.issueReport.value);
         this.loading();
       }, (err) => {
         console.log(err);
@@ -159,6 +163,7 @@ export class RegisterrequestpageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    console.log(this.ID);
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("register-page");
 

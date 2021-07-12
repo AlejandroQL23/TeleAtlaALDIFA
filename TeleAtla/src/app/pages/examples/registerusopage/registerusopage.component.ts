@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener, Input}  from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, FormArray} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestService } from "src/app/rest.service";
 import Swal from 'sweetalert2';
@@ -14,6 +14,14 @@ import Swal from 'sweetalert2';
 export class RegisterusopageComponent implements OnInit, OnDestroy {
 
   addUso: FormGroup;
+  form: FormGroup;
+
+  MoviesData: Array<any> = [
+    { name: 'Cable', value: '1' },
+    { name: 'Telefonia fija', value: '2' },
+    { name: 'Telefonia movil', value: '3' },
+    { name: 'Wifi', value: '4' }
+  ];
 
 
   constructor(
@@ -37,7 +45,35 @@ export class RegisterusopageComponent implements OnInit, OnDestroy {
         // ])
     })
 
+    this.form = this.formBuilder.group({
+      isArray: this.formBuilder.array([], [Validators.required])
+    })
+
      }
+
+
+     onCbChange(e) {
+
+      const isArray: FormArray = this.form.get('isArray') as FormArray;
+  
+      if (e.target.checked) {
+        isArray.push(new FormControl(e.target.value));
+      } else {
+        let i: number = 0;
+        isArray.controls.forEach((item: FormControl) => {
+          if (item.value == e.target.value) {
+            isArray.removeAt(i);
+            return;
+          }
+          i++;
+        });
+      }
+    }
+  
+    onSubmit() {
+      console.log(this.form.value)
+    }
+  
 
      get name() { return this.addUso.get('name'); }
      get firstsurname() { return this.addUso.get('firstsurname'); }

@@ -1,6 +1,7 @@
 package cr.ac.ucr.aldifa.apiclient.controller;
 
 
+import cr.ac.ucr.aldifa.apiclient.domain.Client;
 import cr.ac.ucr.aldifa.apiclient.domain.Issue;
 import cr.ac.ucr.aldifa.apiclient.service.IssueService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -60,5 +62,17 @@ public class IssueController {
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Integer id) {
         service.delete(id);
+    }
+
+    @GetMapping("/listById/{id}")
+    public List<Issue> listById(@PathVariable int id) {
+        List<Issue> completeList = service.listAll();
+        List<Issue> filteredList = new ArrayList<Issue>();
+        for(int i=0; i<completeList.size(); i++) {
+            if(completeList.get(i).getIdclient()==id){
+                filteredList.add(completeList.get(i));
+            }
+        }
+        return filteredList;
     }
 }

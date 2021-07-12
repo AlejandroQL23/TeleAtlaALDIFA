@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from "src/app/service/Auth/authentication.service";
 import { FormGroup, FormControl,  FormBuilder, Validators } from '@angular/forms';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: "app-index",
@@ -87,10 +87,29 @@ export class IndexComponent implements OnInit, OnDestroy {
     body.classList.remove("index-page");
   }
 
+  errorSession() {
+    let timerInterval
+    Swal.fire({
+      title: 'Algo salió mal',
+      html: 'Confirma que los campos estan llenos y la información sea correcta',
+      timer: 3000,
+      willClose: () => {
+        clearInterval(timerInterval)
+
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
+  }
+
 //------------------------------------
   onSubmit() {  
 
     if (!this.supervisor.valid) {
+      this.errorSession();
       return;
     }
 
@@ -115,7 +134,7 @@ export class IndexComponent implements OnInit, OnDestroy {
             }); 
             },
             error => {
-              console.log("HOLA, ME CAI");
+              this.errorSession();
                 this.loading = false;
             });
 

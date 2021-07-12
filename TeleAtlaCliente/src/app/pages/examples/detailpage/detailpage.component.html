@@ -1,15 +1,33 @@
 <div *ngIf="issue" class="issueDetails">
 
-    <div><span># Solicitud: </span>{{issue.id}}</div>
-    <div><span>Descripción : </span>{{issue.description}}</div>
-    <div><span>Fecha/Hora: </span>{{issue.registertimestamp}}</div>
-    <div><span>Estado: </span>{{issue.status}}</div>
-    <div><span>Comentarios: </span>{{issue.address}}</div> <!--es por rrellenar-->
+  <div><span># Solicitud: </span>{{issue.id}}</div>
+  <div><span>Descripción : </span>{{issue.description}}</div>
+  <div><span>Fecha/Hora: </span>{{issue.registertimestamp}}</div>
+  <div><span>Estado: </span>{{issue.status}}</div>
+  <div><span>Comentarios: </span>{{issue.address}}</div> <!--es por rrellenar-->
 
-    <div>
-      <button routerLink="/student-update/{{student.id}}">
-        Edit
-      </button>
-      <button class="btn" (click)="cancel()"> Go Back </button>
+
+  <form [formGroup]="commentIssue" (ngSubmit)="addComment()" #formDir="ngForm">
+
+    <div class="form-group">
+      <label for="TextareaDescri">Añadir comentario:</label>
+      <textarea class="form-control"  rows="5" placeholder="Lo que pasa es ..." formControlName="comment"></textarea>
     </div>
+    <span class="text-danger" *ngIf="commentIssue.hasError('required', 'comment') && formDir.submitted">
+      El campo de comentario no puede estar vacio.
+    </span>
+
+    <div class="form-group">
+
+      <button class="btn btn-primary" >
+        <span class="spinner-border spinner-border-sm mr-1"></span>
+        Añadir comentario
+      </button>
+    </div>
+
+  </form>
+
+  <div>
+    <button class="btn" (click)="cancel()"> Regresar </button>
   </div>
+</div>
