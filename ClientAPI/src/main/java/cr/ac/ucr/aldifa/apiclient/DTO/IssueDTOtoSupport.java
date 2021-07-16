@@ -25,11 +25,13 @@ public class IssueDTOtoSupport {
     @Autowired
     private RestTemplate restTemplate;
 
+   // RestTemplate restTemplate = this.getRestTemplate();
+
 
     public void callPostIssueAPI(Issue issue){
         restTemplate = this.getRestTemplate();
         IssueDTO issueDTO = new IssueDTO(
-                issue.getId(),
+                0,
                 issue.getSupportuserassigned(),
                 "A",
                 issue.getStatus(),
@@ -37,7 +39,8 @@ public class IssueDTOtoSupport {
         );
 
         HttpHeaders headers = new HttpHeaders();
-        ResponseEntity<IssueDTO> issueResponse = restTemplate.postForEntity(endpoint, issueDTO, IssueDTO.class);
+        ResponseEntity<IssueDTO> issueResponse = restTemplate.postForEntity(endpoint, issueDTO, IssueDTO.class); // aqui cae
+        System.out.print(issueResponse.getBody());
     }
 
     public RestTemplate getRestTemplate(){

@@ -43,11 +43,15 @@ namespace SupportAPI.Models.Entities
                     .HasMaxLength(6)
                     .IsFixedLength();
 
-                entity.Property(e => e.CreationDate).HasColumnType("date");
+                entity.Property(e => e.CreationDate)
+                    .HasColumnType("date")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.CreationUser).HasMaxLength(20);
 
-                entity.Property(e => e.IssueTimeStamp).HasColumnType("datetime");
+                entity.Property(e => e.IssueTimeStamp)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Reference).HasMaxLength(20);
 
