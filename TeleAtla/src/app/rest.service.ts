@@ -39,7 +39,7 @@ export class RestService {
 
 
     /////////////////////////////////////////////////////////////////////
-    this.SuperSubject = new BehaviorSubject<Supporter>(
+    this.SuperSubject = new BehaviorSubject<Supervisor>( //AQUI HICE UN CAMBIO CUIDADO
       JSON.parse(localStorage.getItem("Supervisor"))
     );
     this.Super = this.SuperSubject.asObservable();

@@ -1,6 +1,6 @@
 package cr.ac.ucr.aldifa.apiclient.service;
-import cr.ac.ucr.aldifa.apiclient.domain.Issue;
-import cr.ac.ucr.aldifa.apiclient.repository.IssueRepository;
+import cr.ac.ucr.aldifa.apiclient.domain.IssueDTO;
+import cr.ac.ucr.aldifa.apiclient.repository.IssueDTORepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,20 +9,19 @@ import java.util.List;
 
 @Service
 @Transactional
-public class IssueService {
+public class IssueDTOService {
 
 
     @Autowired
-    private IssueRepository repository;
+    private IssueDTORepository repository;
 
-    public List<Issue> listAll() {return repository.findAll();
+    public List<IssueDTO> listAll() {return repository.findAll();
     }
 
-    public Issue save(Issue issue) { return repository.save(issue);
-
+    public void save(IssueDTO issue) { repository.save(issue);
     }
 
-    public Issue get(int id) {
+    public IssueDTO get(int id) {
         return repository.findById(id).get();
     }
 
@@ -30,3 +29,4 @@ public class IssueService {
         repository.deleteById(id);
     }
 }
+
