@@ -1,6 +1,7 @@
 package cr.ac.ucr.aldifa.apiclient.controller;
 
 
+import cr.ac.ucr.aldifa.apiclient.DTO.IssueDTOtoSupport;
 import cr.ac.ucr.aldifa.apiclient.domain.Client;
 import cr.ac.ucr.aldifa.apiclient.domain.Issue;
 import cr.ac.ucr.aldifa.apiclient.service.IssueService;
@@ -40,10 +41,44 @@ public class IssueController {
     }
 
     //---------------------------------
+ /*   private String _url = "https://localhost:44382/api/issue/add/";
     @PostMapping("/add")
     public void add(@RequestBody Issue issue) {
         //reglas de negocio??
+        issue.setSupportuserassigned("No asignado");
+        Issue newIssue = null;
+
+        try{
+            issue.setStatus("Ingresado");
+            //issue.setRegistertimestamp(new Date()); da error
+            //newIssue = converter.toDTO(service.save(convert.toEntity(dto))); dice que hay que crear convertidor
+
+            Issue i = new Issue();
+            i.setId(newIssue.getId());
+
+            ResponseEntity<Issue> response =
+                    template.postForEntity(this._url, i , i.class);
+        }catch (Exception ex){
+            if(newIssue != null) this.service.delete(newIssue.getId());
+           // throw new UnidentifiedException();
+        }
+
         service.save(issue);
+       // return newIssue;
+    }*/
+
+    @PostMapping("/add")
+    public ResponseEntity<Issue> add(@RequestBody Issue issue) {
+        //reglas de negocio??
+        Issue issueInserted = null;
+        service.save(issue);
+
+        issueInserted = service.save(issue);
+        IssueDTOtoSupport restClient = new IssueDTOtoSupport();
+        restClient.callPostIssueAPI(issueInserted);
+
+        return new ResponseEntity<Issue>(issueInserted, HttpStatus.OK);
+
     }
     //---------------------------------
 

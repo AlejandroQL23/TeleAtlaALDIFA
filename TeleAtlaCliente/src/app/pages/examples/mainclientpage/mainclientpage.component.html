@@ -1,50 +1,23 @@
-<nav
-  class="navbar navbar-expand-lg fixed-top navbar-transparent"
-  color-on-scroll="100"
-  id="navbar-top"
->
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent" color-on-scroll="100" id="navbar-top">
   <div class="container">
     <div class="navbar-translate">
-      <a
-        class="navbar-brand"
-        [routerLink]="['/home']"
-        placement="bottom"
-        tooltip="Designed and Coded by Creative Tim"
-      >
+      <a class="navbar-brand" [routerLink]="['/home']" placement="bottom" tooltip="Designed and Coded by Creative Tim">
         <span> T.A.• </span> Clientes Tele Atlántico
       </a>
-      <button
-        aria-controls="navigation-index"
-        aria-label="Toggle navigation"
-        class="navbar-toggler navbar-toggler"
-        [attr.aria-expanded]="!isCollapsed"
-        (click)="isCollapsed = !isCollapsed"
-        id="navigation"
-        type="button"
-      >
+      <button aria-controls="navigation-index" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler"
+        [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed" id="navigation" type="button">
         <span class="navbar-toggler-bar bar1"> </span>
         <span class="navbar-toggler-bar bar2"> </span>
         <span class="navbar-toggler-bar bar3"> </span>
       </button>
     </div>
-    <div
-      class="navbar-collapse justify-content-end"
-      [collapse]="isCollapsed"
-      id="navigation"
-    >
+    <div class="navbar-collapse justify-content-end" [collapse]="isCollapsed" id="navigation">
       <div class="navbar-collapse-header">
         <div class="row">
           <div class="col-6 collapse-brand"><a> T.A.• </a></div>
           <div class="col-6 collapse-close text-right">
-            <button
-              aria-controls="navigation-index"
-              aria-label="Toggle navigation"
-              class="navbar-toggler"
-              [attr.aria-expanded]="!isCollapsed"
-              (click)="isCollapsed = !isCollapsed"
-              id="navigation"
-              type="button"
-            >
+            <button aria-controls="navigation-index" aria-label="Toggle navigation" class="navbar-toggler"
+              [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed" id="navigation" type="button">
               <i class="tim-icons icon-simple-remove"> </i>
             </button>
           </div>
@@ -68,36 +41,40 @@
       <div class="container">
         <div class="row">
 
-            <h4>Registro de solicitudes enviadas</h4>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="text-center"># solicitud</th>
-                        <th>Servicio</th>
-                        <th>Fecha/Hora</th>
-                        <th>Estado</th>
-                        <th class="text-right">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
+          <h4>Registro de solicitudes enviadas</h4>
+          <table  sortable-table (sorted)="onSorted($event)">
+            <thead>
+              <tr>
+                <!-- <i class="fa fa-chevron-up" *ngIf="sortDirection === 'asc'"></i>
+                <i class="fa fa-chevron-down" *ngIf="sortDirection === 'desc'"></i>
+                <ng-content></ng-content> -->
+                <th sortable-column="id"># solicitud</th>
+                <th>Servicio</th>
+                <th>Fecha/Hora</th>
+                <th>Estado</th>
+                <th class="text-right">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
 
 
-                  <tr *ngFor="let s of issues; let i=index;">
-  
-                    <td>{{ s.id  }}</td>
-                    <td>{{ s.address  }}</td> <!--POR EL MOMENTO AUN NO PUEDO ASOCIAR SERVICIO-->
-                    <td>{{ s.registertimestamp }}</td>
-                    <td>{{ s.status }}</td>
-                
-                    <td>
-                    <button data-target="#landlineTelephony"
-                    [routerLink]="['/detail/', s.id]" type="button" rel="tooltip" class="btn btn-success btn-simple btn-icon btn-sm">
-                        <i class="tim-icons icon-zoom-split"></i>
-                    </button>                  
-                    </td>
-                    </tr>
+              <tr *ngFor="let s of issues; let i=index;">
 
-                    <!-- <tr>
+                <td>{{ s.id  }}</td>
+                <td>{{ s.address  }}</td>
+                <!--POR EL MOMENTO AUN NO PUEDO ASOCIAR SERVICIO-->
+                <td>{{ s.registertimestamp }}</td>
+                <td>{{ s.status }}</td>
+
+                <td>
+                  <button data-target="#landlineTelephony" [routerLink]="['/detail/', s.id]" type="button" rel="tooltip"
+                    class="btn btn-success btn-simple btn-icon btn-sm">
+                    <i class="tim-icons icon-zoom-split"></i>
+                  </button>
+                </td>
+              </tr>
+
+              <!-- <tr>
                         <td class="text-center">3</td>
                         <td>Alex Mike</td>
                         <td>Design</td>
@@ -112,13 +89,13 @@
                             </button>
                         </td>
                     </tr> -->
-                </tbody>
-            </table>
+            </tbody>
+          </table>
 
         </div>
 
 
-      <!---->
+        <!---->
 
         <div class="register-bg"></div>
         <div class="square square-1" id="square1"></div>
