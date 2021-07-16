@@ -71,6 +71,7 @@ public class IssueController {
     public ResponseEntity<Issue> add(@RequestBody Issue issue) {
         //reglas de negocio??
         Issue issueInserted = null;
+        try {
         service.save(issue);
 
         issueInserted = service.save(issue);
@@ -78,6 +79,13 @@ public class IssueController {
         restClient.callPostIssueAPI(issueInserted);
 
         return new ResponseEntity<Issue>(issueInserted, HttpStatus.OK);
+
+    } catch (Exception e) {
+        if(issueInserted!= null && issueInserted.getId()!=0){
+            service.delete(issueInserted.getId());
+        }
+        return new ResponseEntity<Issue>(HttpStatus.NOT_FOUND);
+    }
 
     }
     //---------------------------------

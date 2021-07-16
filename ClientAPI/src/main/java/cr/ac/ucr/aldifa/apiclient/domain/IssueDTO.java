@@ -4,6 +4,8 @@ import javax.persistence.*;
 @Entity
 public class IssueDTO {
 
+    @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String Reference;
     private String Classification;
@@ -20,7 +22,6 @@ public class IssueDTO {
         Status = status;
         ResolutionComment = resolutionComment;
     }
-    @Id
     public int getId() {
         return id;
     }
