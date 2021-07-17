@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Date;
 
 @CrossOrigin
 @RestController
@@ -72,6 +73,10 @@ public class IssueController {
         //reglas de negocio??
         Issue issueInserted = null;
         try {
+            Date now = new Date();
+        issue.setStatus("Ingresado");
+        issue.setSupportuserassigned("Sin asignar");
+        issue.setRegistertimestamp(now);
         service.save(issue);
 
         issueInserted = service.save(issue);
