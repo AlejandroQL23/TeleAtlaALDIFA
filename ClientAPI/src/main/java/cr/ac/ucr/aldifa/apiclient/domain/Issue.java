@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 public class Issue {
@@ -13,7 +14,7 @@ public class Issue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String description;
-    private String registertimestamp;
+    private Date registertimestamp;
     private String address;
     private String contactphone;
     private String contactemail;
@@ -25,7 +26,7 @@ public class Issue {
 
     public Issue(){}
 
-    public Issue(int id, String description, String registertimestamp, String address, String contactphone, String contactemail, String status, String supportuserassigned, String resolutioncomment, int idclient) {
+    public Issue(int id, String description, Date registertimestamp, String address, String contactphone, String contactemail, String status, String supportuserassigned, String resolutioncomment, int idclient) {
         this.setId(id);
         this.setDescription(description);
         this.setRegistertimestamp(registertimestamp);
@@ -54,11 +55,11 @@ public class Issue {
         this.description = description;
     }
 
-    public String getRegistertimestamp() {
+    public Date getRegistertimestamp() {
         return registertimestamp;
     }
 
-    public void setRegistertimestamp(String registertimestamp) {
+    public void setRegistertimestamp(Date registertimestamp) {
         this.registertimestamp = registertimestamp;
     }
 

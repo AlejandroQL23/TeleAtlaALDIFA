@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.TimeUnit;
 
 public class IssueDTOtoSupport {
 
@@ -28,17 +29,19 @@ public class IssueDTOtoSupport {
    // RestTemplate restTemplate = this.getRestTemplate();
 
 
-    public void callPostIssueAPI(Issue issue){
+    public void callPostIssueAPI(Issue issue) throws InterruptedException {
+
         restTemplate = this.getRestTemplate();
         IssueDTO issueDTO = new IssueDTO(
                 0,
-                issue.getSupportuserassigned(),
-                "A",
-                issue.getStatus(),
-                issue.getDescription()
+                issue.getDescription(),
+                "Media",
+                "Ingresado",
+                "Sin resolver"
         );
 
         HttpHeaders headers = new HttpHeaders();
+        TimeUnit.SECONDS.sleep(10);
         ResponseEntity<IssueDTO> issueResponse = restTemplate.postForEntity(endpoint, issueDTO, IssueDTO.class); // aqui cae
         System.out.print(issueResponse.getBody());
     }
