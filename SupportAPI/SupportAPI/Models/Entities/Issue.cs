@@ -15,6 +15,10 @@ namespace SupportAPI.Models.Entities
         public string Status { get; set; }
         public DateTime? IssueTimeStamp { get; set; }
         public string ResolutionComment { get; set; }
+        public string Description { get; set; }
+        public int? IdClient { get; set; }
+        public string EmailIssue { get; set; }
+        public string PhoneIssue { get; set; }
         public DateTime? CreationDate { get; set; }
         public string CreationUser { get; set; }
         public DateTime? UpdateDate { get; set; }

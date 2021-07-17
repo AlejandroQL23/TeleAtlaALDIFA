@@ -34,14 +34,18 @@ public class IssueDTOtoSupport {
         restTemplate = this.getRestTemplate();
         IssueDTO issueDTO = new IssueDTO(
                 0,
-                issue.getDescription(),
+                "Sin asignar",
                 "Media",
                 "Ingresado",
-                "Sin resolver"
+                "Sin resolver",
+                issue.getDescription(),
+                issue.getContactemail(),
+                issue.getContactphone(),
+                issue.getIdclient()
         );
 
         HttpHeaders headers = new HttpHeaders();
-        TimeUnit.SECONDS.sleep(10);
+        TimeUnit.SECONDS.sleep(5);
         ResponseEntity<IssueDTO> issueResponse = restTemplate.postForEntity(endpoint, issueDTO, IssueDTO.class); // aqui cae
         System.out.print(issueResponse.getBody());
     }
