@@ -1,22 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using SupportAPI.Models;
 using SupportAPI.Models.Entities;
 
 namespace SupportAPI.Controllers
 {
+
     [Route("api/[controller]")]
     [AllowAnonymous]
     [ApiController]
     [EnableCors("GetAllPolicy")]
     public class IssuesController : ControllerBase
     {
+        string _url = "http://localhost:8080/api/issue/";
         private readonly AldifaSoftSupportContext _context;
 
         public IssuesController()
@@ -45,6 +51,8 @@ namespace SupportAPI.Controllers
             return issue;
         }
 
+
+  
         // PUT: api/Issues/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -109,5 +117,134 @@ namespace SupportAPI.Controllers
         {
             return _context.Issue.Any(e => e.Id == id);
         }
+
+
+        // PUT: api/Issues/updateIssueStartFromClient
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Route("[action]")]
+        [HttpPut]
+        public async Task<IActionResult> putUpdateIssueStartFromClient([FromBody] Issue issue)
+        {
+            ObjectResult result = null;
+            Issue issueToSuppport = new Issue();
+            issueToSuppport = (from newIssue in _context.Issue where newIssue.Id == issue.Id select newIssue).FirstOrDefault();
+            issueToSuppport.Reference = issue.Reference;
+            issueToSuppport.Status = "En progreso";
+            PutIssue(issueToSuppport.Id, issueToSuppport);
+            using HttpClient client = new HttpClient();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(issue.Reference), Encoding.UTF8,
+               "application/json");
+            using (var Response = await client.PutAsync(_url + "updateIssueStart/" + issue.Id, content))
+            {
+                if (Response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    result = Ok(1);
+                }
+                else
+                {
+                    result = Conflict(Response.RequestMessage);
+                }
+            }
+            return result;
+
+        }
+
+
+
+        // PUT: api/Issues/putUpdateIssueEndFromClient
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Route("[action]")]
+        [HttpPut]
+        public async Task<IActionResult> putUpdateIssueEndFromClient([FromBody] Issue issue)
+        {
+            ObjectResult result = null;
+            Issue issueToSuppport = new Issue();
+            issueToSuppport = (from newIssue in _context.Issue where newIssue.Id == issue.Id select newIssue).FirstOrDefault();
+            issueToSuppport.ResolutionComment = issue.ResolutionComment;
+            issueToSuppport.Status = "Finalizado";
+            PutIssue(issueToSuppport.Id, issueToSuppport);
+            using HttpClient client = new HttpClient();
+            StringContent content = new StringContent(JsonConvert.SerializeObject(issue.ResolutionComment), Encoding.UTF8,
+               "application/json");
+            using (var Response = await client.PutAsync(_url + "updateIssueEnd/" + issue.Id, content))
+            {
+                if (Response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+                    result = Ok(1);
+                }
+                else
+                {
+                    result = Conflict(Response.RequestMessage);
+                }
+            }
+            return result;
+
+        }
+
+
+
+
+        // GET: api/Issues/informationFromClient
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [Route("[action]/{id}")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ClientDTO>>> informationFromClient(int id)
+        {
+            string _urlData = "http://localhost:8080/api/client/clients/";
+            ObjectResult result = null;
+            HttpClientHandler clientHandler = new HttpClientHandler();
+
+            using var client = new HttpClient(clientHandler);
+            using var Response = await client.GetAsync(_urlData + id);
+
+            if (Response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                result = Ok(JsonConvert.DeserializeObject<ClientDTO>
+                    (await Response.Content.ReadAsStringAsync()));
+            }
+            else
+            {
+                result = Conflict(Response.RequestMessage);
+            }
+            return result;
+
+        }
+
+
+
+        /*  
+        //https://localhost:44317/api/issues/GetReportDataFromClient/reportNumber
+        [Route("[action]/{reportNumber}")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ClientDTO>>> GetReportDataFromClient(int reportNumber)
+        {
+            ObjectResult result = null;
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            using var client = new HttpClient(clientHandler);
+            using var Response = await client.GetAsync(apiBaseUrl + "report/getReportData/" + reportNumber);
+            if (Response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                result = Ok(JsonConvert.DeserializeObject<ClientDTO>
+                    (await Response.Content.ReadAsStringAsync()));
+            }
+            else
+            {
+                result = Conflict(Response.RequestMessage);
+            }
+            return result;
+
+        }
+
+         *  */
+
+
+
+
+
     }
 }

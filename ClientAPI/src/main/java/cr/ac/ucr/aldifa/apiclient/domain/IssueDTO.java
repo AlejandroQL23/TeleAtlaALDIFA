@@ -11,17 +11,24 @@ public class IssueDTO {
     private String Classification;
     private String Status;
     private String ResolutionComment;
+    private String Description;
+    private String EmailIssue;
+    private String PhoneIssue;
+    private int idClient;
 
-    public IssueDTO() {
+    public IssueDTO(){}
+    public IssueDTO(int id, String reference, String classification, String status, String resolutionComment, String description, String emailIssue, String phoneIssue, int idClient) {
+        this.setId(id);
+        setReference(reference);
+        setClassification(classification);
+        setStatus(status);
+        setResolutionComment(resolutionComment);
+        setDescription(description);
+        setEmailIssue(emailIssue);
+        setPhoneIssue(phoneIssue);
+        this.setIdClient(idClient);
     }
 
-    public IssueDTO(int id, String reference, String classification, String status, String resolutionComment) {
-        this.id = id;
-        Reference = reference;
-        Classification = classification;
-        Status = status;
-        ResolutionComment = resolutionComment;
-    }
     public int getId() {
         return id;
     }
@@ -60,5 +67,37 @@ public class IssueDTO {
 
     public void setResolutionComment(String resolutionComment) {
         ResolutionComment = resolutionComment;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public String getEmailIssue() {
+        return EmailIssue;
+    }
+
+    public void setEmailIssue(String emailIssue) {
+        EmailIssue = emailIssue;
+    }
+
+    public String getPhoneIssue() {
+        return PhoneIssue;
+    }
+
+    public void setPhoneIssue(String phoneIssue) {
+        PhoneIssue = phoneIssue;
+    }
+
+    public int getIdClient() {
+        return idClient;
+    }
+
+    public void setIdClient(int idClient) {
+        this.idClient = idClient;
     }
 }

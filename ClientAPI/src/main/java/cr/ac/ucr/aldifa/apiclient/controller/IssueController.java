@@ -76,8 +76,9 @@ public class IssueController {
             Date now = new Date();
         issue.setStatus("Ingresado");
         issue.setSupportuserassigned("Sin asignar");
+        issue.setResolutioncomment("Sin resolver");
         issue.setRegistertimestamp(now);
-        service.save(issue);
+
 
         issueInserted = service.save(issue);
         IssueDTOtoSupport restClient = new IssueDTOtoSupport();
@@ -101,6 +102,31 @@ public class IssueController {
             issue.setId(id);
             service.save(issue);
             return new ResponseEntity<Issue>(issue, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<Issue>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+    @PutMapping("/updateIssueStart/{id}")
+    public ResponseEntity<Issue> updateIssueStart(@PathVariable int id, @RequestBody String supporterAssigned ) {
+        try {
+            Issue issue = service.get(id);
+            issue.setSupportuserassigned(supporterAssigned.substring(1,supporterAssigned.length()-1));
+            issue.setStatus("En progreso");
+            return update(issue, id);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<Issue>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/updateIssueEnd/{id}")
+    public ResponseEntity<Issue> updateIssueEnd(@PathVariable int id, @RequestBody String resolutionComment ) {
+        try {
+            Issue issue = service.get(id);
+            issue.setResolutioncomment(resolutionComment.substring(1,resolutionComment.length()-1));
+            issue.setStatus("Finalizado");
+            return update(issue, id);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<Issue>(HttpStatus.NOT_FOUND);
         }

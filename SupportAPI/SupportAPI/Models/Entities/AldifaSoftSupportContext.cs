@@ -49,9 +49,13 @@ namespace SupportAPI.Models.Entities
 
                 entity.Property(e => e.CreationUser).HasMaxLength(20);
 
+                entity.Property(e => e.EmailIssue).HasMaxLength(70);
+
                 entity.Property(e => e.IssueTimeStamp)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.PhoneIssue).HasMaxLength(20);
 
                 entity.Property(e => e.Reference).HasMaxLength(20);
 
