@@ -27,6 +27,8 @@ import { LandingpageComponent } from "./examples/landingpage/landingpage.compone
 import { MaterialModule } from "../material/material.module"; 
 import { SupporterpageComponent } from "./examples/supporterpage/supporterpage.component";
 import { SupporterprofileComponent } from "./examples/supporterprofile/supporterprofile.component";
+import { DetailpageComponent } from "./examples/detailpage/detailpage.component";
+import { DetailpagesupportComponent } from "./examples/detailpagesupport/detailpagesupport.component";
 
 @NgModule({
   imports: [
@@ -60,7 +62,9 @@ import { SupporterprofileComponent } from "./examples/supporterprofile/supporter
     LandingpageComponent,
     MainsuppageComponent,
     SupporterpageComponent,
-    SupporterprofileComponent
+    SupporterprofileComponent,
+    DetailpageComponent,
+    DetailpagesupportComponent
   ],
   exports: [
     IndexComponent,
@@ -69,7 +73,9 @@ import { SupporterprofileComponent } from "./examples/supporterprofile/supporter
     LandingpageComponent,
     MainsuppageComponent,
     SupporterpageComponent,
-    SupporterprofileComponent
+    SupporterprofileComponent,
+    DetailpageComponent,
+    DetailpagesupportComponent
   ],
   providers: []
 })

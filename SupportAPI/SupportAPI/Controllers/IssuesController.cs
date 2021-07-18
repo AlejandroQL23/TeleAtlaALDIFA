@@ -137,14 +137,9 @@ namespace SupportAPI.Controllers
                "application/json");
             using (var Response = await client.PutAsync(_url + "updateIssueStart/" + issue.Id, content))
             {
-                if (Response.StatusCode == System.Net.HttpStatusCode.NoContent)
-                {
+               
                     result = Ok(1);
-                }
-                else
-                {
-                    result = Conflict(Response.RequestMessage);
-                }
+                
             }
             return result;
 
@@ -170,14 +165,10 @@ namespace SupportAPI.Controllers
                "application/json");
             using (var Response = await client.PutAsync(_url + "updateIssueEnd/" + issue.Id, content))
             {
-                if (Response.StatusCode == System.Net.HttpStatusCode.NoContent)
-                {
+
                     result = Ok(1);
-                }
-                else
-                {
-                    result = Conflict(Response.RequestMessage);
-                }
+                
+
             }
             return result;
 
@@ -215,32 +206,7 @@ namespace SupportAPI.Controllers
 
 
 
-        /*  
-        //https://localhost:44317/api/issues/GetReportDataFromClient/reportNumber
-        [Route("[action]/{reportNumber}")]
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ClientDTO>>> GetReportDataFromClient(int reportNumber)
-        {
-            ObjectResult result = null;
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-
-            using var client = new HttpClient(clientHandler);
-            using var Response = await client.GetAsync(apiBaseUrl + "report/getReportData/" + reportNumber);
-            if (Response.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                result = Ok(JsonConvert.DeserializeObject<ClientDTO>
-                    (await Response.Content.ReadAsStringAsync()));
-            }
-            else
-            {
-                result = Conflict(Response.RequestMessage);
-            }
-            return result;
-
-        }
-
-         *  */
+        
 
 
 
