@@ -133,16 +133,17 @@ export class RestService {
       );
   }
 
-  addSupporter(supporter): Observable<any> {
+  addSupporter(supporter, array): Observable<any> {
     console.log(supporter);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'array': array.isArray,
+      })
+    };
     return this.http
-      .post<any>(
-        endpoint + "Supporter/",
-        JSON.stringify(supporter),
-        httpOptions
-      )
-      .pipe(
-        tap((supporter) => console.log("added supporter")),
+      .post<any>(endpoint + "Supporter/", JSON.stringify(supporter), httpOptions)
+      .pipe(tap((supporter) => console.log("added supporter")),
         catchError(this.handleError<any>("addSupporter"))
       );
   }
@@ -243,6 +244,15 @@ export class RestService {
       .pipe(
         map(this.extractData),
         catchError(this.handleError<any>("getIssue"))
+      );
+  }
+
+  getIssueBySupporter(id): Observable<any> {
+    return this.http
+      .get(endpoint + "Issues/GetIssueBySupport/" + id)
+      .pipe(
+        map(this.extractData),
+        catchError(this.handleError<any>("getIssueBySupporter"))
       );
   }
 

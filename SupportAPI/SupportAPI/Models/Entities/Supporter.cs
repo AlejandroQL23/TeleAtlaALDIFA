@@ -11,6 +11,7 @@ namespace SupportAPI.Models.Entities
     {
         public Supporter()
         {
+            Notes = new HashSet<Notes>();
             SupporterService = new HashSet<SupporterService>();
         }
 
@@ -25,6 +26,7 @@ namespace SupportAPI.Models.Entities
         public DateTime? UpdateDate { get; set; }
         public string UpdateUser { get; set; }
 
+        public virtual ICollection<Notes> Notes { get; set; }
         public virtual ICollection<SupporterService> SupporterService { get; set; }
     }
 }

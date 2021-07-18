@@ -540,4 +540,3 @@ C:\pro2len\TeleAtlaALDIFA\SupportAPI\SupportAPI\obj\Debug\netcoreapp3.1\SupportA
 C:\pro2len\TeleAtlaALDIFA\SupportAPI\SupportAPI\obj\Debug\netcoreapp3.1\SupportAPI.dll
 C:\pro2len\TeleAtlaALDIFA\SupportAPI\SupportAPI\obj\Debug\netcoreapp3.1\SupportAPI.pdb
 C:\pro2len\TeleAtlaALDIFA\SupportAPI\SupportAPI\obj\Debug\netcoreapp3.1\SupportAPI.genruntimeconfig.cache
-C:\pro2len\TeleAtlaALDIFA\SupportAPI\SupportAPI\obj\Debug\netcoreapp3.1\SupportAPI.csprojAssemblyReference.cache

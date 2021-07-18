@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener, Input } from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestService } from "src/app/rest.service";
 import Swal from 'sweetalert2';
@@ -11,6 +11,36 @@ import Swal from 'sweetalert2';
 export class RegisterpageComponent implements OnInit, OnDestroy {
 
   registerClient: FormGroup;
+  form: FormGroup;
+
+  MoviesData: Array<any> = [
+    { name: 'Telefonía móvil', value: '1' },
+    { name: 'Cable', value: '2' },
+    { name: 'Internet', value: '3' },
+    { name: 'Telefonía fija', value: '4' }
+  ];
+
+  onCbChange(e) {
+
+    const isArray: FormArray = this.form.get('isArray') as FormArray;
+
+    if (e.target.checked) {
+      isArray.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      isArray.controls.forEach((item: FormControl) => {
+        if (item.value == e.target.value) {
+          isArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+  }
+
+  onSubmit() {
+    console.log(this.form.value)
+  }
 
 
   isCollapsed = true;
@@ -38,6 +68,10 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
         password: ['', [Validators.required]]
     })
 
+    this.form = this.formBuilder.group({
+      isArray: this.formBuilder.array([], [Validators.required])
+    })
+
      }
 
      get name() { return this.registerClient.get('name'); }
@@ -55,7 +89,7 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
         return;
       }
 
-      this.rest.addClient(this.registerClient.value).subscribe((result) => {
+      this.rest.addClient(this.registerClient.value, this.form.value).subscribe((result) => {
         this.loading();
         console.log('Estoy tratandode hacer algo al menos');
       }, (err) => {

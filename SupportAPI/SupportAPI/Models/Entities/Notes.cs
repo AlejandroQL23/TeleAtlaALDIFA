@@ -16,5 +16,10 @@ namespace SupportAPI.Models.Entities
         public string CreationUser { get; set; }
         public DateTime? UpdateDate { get; set; }
         public string UpdateUser { get; set; }
+        public int? IdSupporter { get; set; }
+        public int? IdSupervisor { get; set; }
+
+        public virtual Supervisor IdSupervisorNavigation { get; set; }
+        public virtual Supporter IdSupporterNavigation { get; set; }
     }
 }

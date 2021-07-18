@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -205,8 +206,32 @@ namespace SupportAPI.Controllers
         }
 
 
+        // GET: api/Issues/GetIssueBySupport/id
+        [Route("[action]/{id}")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Issue>>> GetIssueBySupport(int id)
+        {
+            SupporterService[] IssueTypeQuantity = (from services in _context.SupporterService where services.IdSupporter == id select services).ToArray();
 
-        
+            ArrayList arlist = new ArrayList();
+            for (int i = 0; i < IssueTypeQuantity.Length; i++)
+            {
+                Issue[] issuesList = (from issues in _context.Issue where issues.IdService == IssueTypeQuantity[i].IdService select issues).ToArray();
+                Console.WriteLine(issuesList.Length);
+                for (int j = 0; j < issuesList.Length; j++)
+                {
+                    arlist.Add(issuesList[j]);
+                }
+            }
+            Issue[] issuesListtoReturn = new Issue[arlist.Count];
+            for (int i = 0; i < arlist.Count; i++)
+            {
+                issuesListtoReturn[i] = (Issue)arlist.ToArray()[i];
+            }
+            return issuesListtoReturn;
+        }
+
+
 
 
 

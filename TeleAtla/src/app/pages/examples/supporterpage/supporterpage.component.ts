@@ -23,7 +23,7 @@ export class SupporterpageComponent implements OnInit {
 
   getIssue() {
     this.issues = [];
-    this.rest.getIssues().subscribe((data: {}) => {
+    this.rest.getIssueBySupporter(this.ID).subscribe((data: {}) => {
       this.issues = data;
     });
   }

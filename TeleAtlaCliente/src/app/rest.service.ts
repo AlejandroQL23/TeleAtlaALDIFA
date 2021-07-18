@@ -84,15 +84,22 @@ export class RestService {
       );
   }
 
-  addClient(clients): Observable<any> {
+
+    addClient(clients, array): Observable<any> {
     console.log(clients);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'array': array.isArray,
+      })
+    };
     return this.http
-      .post<any>(endpoint + "client/add/", JSON.stringify(clients), httpOptions)
-      .pipe(
-        tap((clients) => console.log("added clients")),
+      .post<any>(endpoint +  "client/add/", JSON.stringify(clients), httpOptions)
+      .pipe(tap((clients) => console.log("added clients")),
         catchError(this.handleError<any>("addClient"))
       );
   }
+  
 
   deleteClient(id): Observable<any> {
     return this.http

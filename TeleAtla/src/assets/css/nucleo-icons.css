@@ -90,16 +90,19 @@ Created using IcoMoon - icomoon.io
 -------------------------*/
 
 table {
-  width: 800px;
-  display:block;
+  width: 900px;
+  display: inline-block;
 }
-thead{
-  width: 1000px;
+th{
+  width: 100px;
+  display: inline-block;
 }
 tbody {
   height: 500px;
   display: inline-block;
-  width: 800px;
+ /* display: flexbox; */ /* sirve pero no pone scroll*/
+  /*display: -webkit-inline-flex;*/
+  width: 900px;
   overflow: auto;
 }
 

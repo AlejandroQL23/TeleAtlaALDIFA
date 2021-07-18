@@ -11,6 +11,7 @@ namespace SupportAPI.Models.Entities
     {
         public Service()
         {
+            Issue = new HashSet<Issue>();
             SupporterService = new HashSet<SupporterService>();
         }
 
@@ -21,6 +22,7 @@ namespace SupportAPI.Models.Entities
         public DateTime? UpdateDate { get; set; }
         public string UpdateUser { get; set; }
 
+        public virtual ICollection<Issue> Issue { get; set; }
         public virtual ICollection<SupporterService> SupporterService { get; set; }
     }
 }

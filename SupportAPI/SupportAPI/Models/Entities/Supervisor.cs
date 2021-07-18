@@ -9,6 +9,11 @@ namespace SupportAPI.Models.Entities
 {
     public partial class Supervisor
     {
+        public Supervisor()
+        {
+            Notes = new HashSet<Notes>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string FirstSurName { get; set; }
@@ -19,5 +24,7 @@ namespace SupportAPI.Models.Entities
         public string CreationUser { get; set; }
         public DateTime? UpdateDate { get; set; }
         public string UpdateUser { get; set; }
+
+        public virtual ICollection<Notes> Notes { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
@@ -81,11 +83,21 @@ namespace SupportAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Supporter>> PostSupporter(Supporter supporter)
+        public async Task<ActionResult<Supporter>> PostSupporter(Supporter supporter, [FromHeader] int[] array)
         {
+            string suppo = Encrypt(supporter.Password);
+            supporter.Password = suppo;
             _context.Supporter.Add(supporter);
             await _context.SaveChangesAsync();
 
+            for (int i = 0; i < array.Length; i++)
+            {
+                SupporterService supporterService = new SupporterService();
+                supporterService.IdService = array[i];
+                supporterService.IdSupporter = supporter.Id;
+                _context.SupporterService.Add(supporterService);
+                await _context.SaveChangesAsync();
+            }
             return CreatedAtAction("GetSupporter", new { id = supporter.Id }, supporter);
         }
 
@@ -117,6 +129,7 @@ namespace SupportAPI.Controllers
         [HttpPost]
         public IActionResult PostAuthenticate(Supporter studente)
         {
+            studente.Password = Encrypt(studente.Password);
             ObjectResult result;
             var student = _context.Supporter.Any(e => e.Email == studente.Email && e.Password == studente.Password);
             var studenti = (from s in _context.Supporter where s.Email == studente.Email && s.Password == studente.Password select s);
@@ -133,6 +146,38 @@ namespace SupportAPI.Controllers
             }
 
             return result;
+        }
+
+
+        public string Encrypt(string textToEncrypt)
+        {
+            try
+            {
+                //string textToEncrypt = "WaterWorld";
+                string ToReturn = "";
+                string publickey = "12345678";
+                string secretkey = "87654321";
+                byte[] secretkeyByte = { };
+                secretkeyByte = System.Text.Encoding.UTF8.GetBytes(secretkey);
+                byte[] publickeybyte = { };
+                publickeybyte = System.Text.Encoding.UTF8.GetBytes(publickey);
+                MemoryStream ms = null;
+                CryptoStream cs = null;
+                byte[] inputbyteArray = System.Text.Encoding.UTF8.GetBytes(textToEncrypt);
+                using (DESCryptoServiceProvider des = new DESCryptoServiceProvider())
+                {
+                    ms = new MemoryStream();
+                    cs = new CryptoStream(ms, des.CreateEncryptor(publickeybyte, secretkeyByte), CryptoStreamMode.Write);
+                    cs.Write(inputbyteArray, 0, inputbyteArray.Length);
+                    cs.FlushFinalBlock();
+                    ToReturn = Convert.ToBase64String(ms.ToArray());
+                }
+                return ToReturn;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex.InnerException);
+            }
         }
 
     }

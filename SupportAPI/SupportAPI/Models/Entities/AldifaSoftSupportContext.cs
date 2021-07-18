@@ -64,6 +64,11 @@ namespace SupportAPI.Models.Entities
                 entity.Property(e => e.UpdateDate).HasColumnType("date");
 
                 entity.Property(e => e.UpdateUser).HasMaxLength(20);
+
+                entity.HasOne(d => d.IdServiceNavigation)
+                    .WithMany(p => p.Issue)
+                    .HasForeignKey(d => d.IdService)
+                    .HasConstraintName("FK_Issue_Service");
             });
 
             modelBuilder.Entity<Notes>(entity =>
@@ -77,6 +82,16 @@ namespace SupportAPI.Models.Entities
                 entity.Property(e => e.UpdateDate).HasColumnType("date");
 
                 entity.Property(e => e.UpdateUser).HasMaxLength(20);
+
+                entity.HasOne(d => d.IdSupervisorNavigation)
+                    .WithMany(p => p.Notes)
+                    .HasForeignKey(d => d.IdSupervisor)
+                    .HasConstraintName("FK_Notes_Supervisor");
+
+                entity.HasOne(d => d.IdSupporterNavigation)
+                    .WithMany(p => p.Notes)
+                    .HasForeignKey(d => d.IdSupporter)
+                    .HasConstraintName("FK_Notes_Supporter");
             });
 
             modelBuilder.Entity<Service>(entity =>
