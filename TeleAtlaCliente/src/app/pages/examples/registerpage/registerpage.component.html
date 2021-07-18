@@ -186,6 +186,23 @@
             </div>
 
                 </form>
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+                  <label>Seleccione el/los servicios suscritos</label>
+                  <div *ngFor="let item of MoviesData; let i=index">
+                    <label>
+                      <input type="checkbox" [value]="item.value" (change)="onCbChange($event)" />
+                      {{item.name}}
+                    </label>
+                  </div>
+                
+                  <p class="error" *ngIf="this.form.controls['isArray'].errors?.required">
+                    Checkbox value is required.
+                  </p>
+                
+                  <input type="submit" value="Submit">
+                </form>
+
               </div>
 
             </div>

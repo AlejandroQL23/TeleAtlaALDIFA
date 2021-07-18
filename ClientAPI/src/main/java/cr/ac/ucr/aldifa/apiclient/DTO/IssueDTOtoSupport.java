@@ -41,7 +41,8 @@ public class IssueDTOtoSupport {
                 issue.getDescription(),
                 issue.getContactemail(),
                 issue.getContactphone(),
-                issue.getIdclient()
+                issue.getIdclient(),
+                issue.getIdservice()
         );
 
         HttpHeaders headers = new HttpHeaders();

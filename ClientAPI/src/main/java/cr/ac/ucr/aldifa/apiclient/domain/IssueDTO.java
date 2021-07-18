@@ -15,9 +15,11 @@ public class IssueDTO {
     private String EmailIssue;
     private String PhoneIssue;
     private int idClient;
+    private int idService;
+
 
     public IssueDTO(){}
-    public IssueDTO(int id, String reference, String classification, String status, String resolutionComment, String description, String emailIssue, String phoneIssue, int idClient) {
+    public IssueDTO(int id, String reference, String classification, String status, String resolutionComment, String description, String emailIssue, String phoneIssue, int idClient, int idService) {
         this.setId(id);
         setReference(reference);
         setClassification(classification);
@@ -27,6 +29,7 @@ public class IssueDTO {
         setEmailIssue(emailIssue);
         setPhoneIssue(phoneIssue);
         this.setIdClient(idClient);
+        this.setIdService(idService);
     }
 
     public int getId() {
@@ -99,5 +102,13 @@ public class IssueDTO {
 
     public void setIdClient(int idClient) {
         this.idClient = idClient;
+    }
+
+    public int getIdService() {
+        return idService;
+    }
+
+    public void setIdService(int idService) {
+        this.idService = idService;
     }
 }

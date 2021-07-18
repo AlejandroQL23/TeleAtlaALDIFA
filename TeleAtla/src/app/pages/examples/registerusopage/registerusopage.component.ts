@@ -17,10 +17,10 @@ export class RegisterusopageComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   MoviesData: Array<any> = [
-    { name: 'Cable', value: '1' },
-    { name: 'Telefonia fija', value: '2' },
-    { name: 'Telefonia movil', value: '3' },
-    { name: 'Wifi', value: '4' }
+    { name: 'Telefonía móvil', value: '1' },
+    { name: 'Cable', value: '2' },
+    { name: 'Internet', value: '3' },
+    { name: 'Telefonía fija', value: '4' }
   ];
 
 
@@ -88,7 +88,7 @@ export class RegisterusopageComponent implements OnInit, OnDestroy {
         return;
       }
 
-      this.rest.addSupporter(this.addUso.value).subscribe((result) => {
+      this.rest.addSupporter(this.addUso.value, this.form.value).subscribe((result) => {
         console.log('Estoy tratandode hacer algo al menos');
         this.loading();
       }, (err) => {
@@ -116,7 +116,7 @@ export class RegisterusopageComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.rest.addSupporter(this.addUso.value).subscribe((result) => {
+        this.rest.addSupporter(this.addUso.value, this.form.value).subscribe((result) => {
           console.log('Estoy tratandode hacer algo al menos');
           this.loading();
         }, (err) => {

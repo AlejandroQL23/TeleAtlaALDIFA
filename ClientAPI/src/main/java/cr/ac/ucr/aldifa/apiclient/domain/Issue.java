@@ -21,12 +21,12 @@ public class Issue {
     private String status;
     private String supportuserassigned;
     private String resolutioncomment;
+    private int idservice;
     private int idclient;
-
 
     public Issue(){}
 
-    public Issue(int id, String description, Date registertimestamp, String address, String contactphone, String contactemail, String status, String supportuserassigned, String resolutioncomment, int idclient) {
+    public Issue(int id, String description, Date registertimestamp, String address, String contactphone, String contactemail, String status, String supportuserassigned, String resolutioncomment, int idservice, int idclient) {
         this.setId(id);
         this.setDescription(description);
         this.setRegistertimestamp(registertimestamp);
@@ -36,6 +36,7 @@ public class Issue {
         this.setStatus(status);
         this.setSupportuserassigned(supportuserassigned);
         this.setResolutioncomment(resolutioncomment);
+        this.setIdservice(idservice);
         this.setIdclient(idclient);
     }
 
@@ -109,6 +110,14 @@ public class Issue {
 
     public void setResolutioncomment(String resolutioncomment) {
         this.resolutioncomment = resolutioncomment;
+    }
+
+    public int getIdservice() {
+        return idservice;
+    }
+
+    public void setIdservice(int idservice) {
+        this.idservice = idservice;
     }
 
     public int getIdclient() {
