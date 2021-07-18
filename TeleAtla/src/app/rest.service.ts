@@ -26,6 +26,8 @@ export class RestService {
   private SupporterSubject: BehaviorSubject<any>;
   public Supporter: Observable<any>;
   public ID;
+  public myName;
+  public myNameSupervisor;
 
   private SuperSubject: BehaviorSubject<any>;
   public Super: Observable<any>;
@@ -70,7 +72,9 @@ export class RestService {
           this.SupporterSubject.next(sessionStorage.getItem(supportere.email));
           console.log(userData.name + " ANDO BISCANDO NOMBRE");
           this.ID = userData.id;
-          console.log(this.ID);
+          this.myName = userData.name;
+          console.log(this.ID + "mi id");
+          console.log(this.myName + "mi no");
           return userData;
         })
       );
@@ -98,7 +102,9 @@ export class RestService {
           this.SuperSubject.next(sessionStorage.getItem(supervisor.email));
           console.log(userData.name + " ANDO BISCANDO NOMBRE");
           this.IDsuper = userData.id;
+          this.myNameSupervisor= userData.name;
           console.log(this.IDsuper);
+          console.log(this.myNameSupervisor);
           return userData;
         })
       );
@@ -255,6 +261,36 @@ export class RestService {
       .pipe(
         tap((issue) => console.log("updated issue")),
         catchError(this.handleError<any>("updateIssue"))
+      );
+  }
+
+
+  getClientDataIssue(id): Observable<any> {
+    return this.http
+      .get(endpoint + "Issues/informationFromClient/" + id)
+      .pipe(
+        map(this.extractData),
+        catchError(this.handleError<any>("getClientDataIssue"))
+      );
+  }
+
+
+  updateIssueStart(issue): Observable<any> {
+    return this.http
+      .put(endpoint + "Issues/putUpdateIssueStartFromClient", JSON.stringify(issue), httpOptions)
+      .pipe(
+        tap((issue) => console.log("updated issue")),
+        catchError(this.handleError<any>("updateIssue"))
+      );
+  }
+
+
+  updateIssueEnd(issue): Observable<any> {
+    return this.http
+      .put(endpoint + "Issues/putUpdateIssueEndFromClient", JSON.stringify(issue), httpOptions)
+      .pipe(
+        tap((issue) => console.log("updated issue")),
+        catchError(this.handleError<any>("updateIssueEnd"))
       );
   }
 

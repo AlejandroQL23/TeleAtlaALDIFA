@@ -88,15 +88,18 @@ Created using IcoMoon - icomoon.io
 /*------------------------
   list icons
 -------------------------*/
+
 table {
-  width: 100%;
+  width: 800px;
   display:block;
 }
-
+thead{
+  width: 1000px;
+}
 tbody {
-  height: 300px;
+  height: 500px;
   display: inline-block;
-  width: 500%;
+  width: 800px;
   overflow: auto;
 }
 

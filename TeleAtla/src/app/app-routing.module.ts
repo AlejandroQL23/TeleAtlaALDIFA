@@ -14,6 +14,8 @@ import { MainsuppageComponent } from "./pages/examples/mainsuppage/mainsuppage.c
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
 import { SupporterpageComponent } from "./pages/examples/supporterpage/supporterpage.component";
 import { SupporterprofileComponent } from "./pages/examples/supporterprofile/supporterprofile.component";
+import { DetailpageComponent } from "./pages/examples/detailpage/detailpage.component";
+import { DetailpagesupportComponent } from "./pages/examples/detailpagesupport/detailpagesupport.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -25,6 +27,8 @@ const routes: Routes = [
   { path: "landing", component: LandingpageComponent },
   { path: "mainsupporter", component: SupporterpageComponent },
   { path: 'profileSupporter/:Id', component: SupporterprofileComponent },
+  { path: 'detailIssue/:Id', component: DetailpageComponent },
+  { path: 'detailSupportIssue/:Id', component: DetailpagesupportComponent },
   { path: '', redirectTo: 'supporter',pathMatch: 'full', canActivate: [AuthGuard] },
   { path: '', redirectTo: 'supervisor',pathMatch: 'full', canActivate: [AuthGuard] }
 ];
