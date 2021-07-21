@@ -61,7 +61,7 @@
               <tr *ngFor="let s of issues; let i=index;">
 
                 <td>{{ s.id  }}</td>
-                <td>{{ s.address  }}</td>
+                <a (click)="typeService(s.idservice)"> <td>{{ s.idservice  }}</td> </a>
                 <!--POR EL MOMENTO AUN NO PUEDO ASOCIAR SERVICIO-->
                 <td>{{ s.registertimestamp }}</td>
                 <td>{{ s.status }}</td>

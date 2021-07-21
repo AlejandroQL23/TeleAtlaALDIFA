@@ -125,12 +125,33 @@
                 Se requiere una contraseña.
               </span>
 
+
+              <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+                <label>Seleccione el servicio al cuál se va a asignar</label>
+                <div *ngFor="let item of MoviesData; let i=index">
+                  <label>
+                    <input type="checkbox" [value]="item.value" (change)="onCbChange($event)" />
+                    {{item.name}}
+                  </label>
+                </div>
+              
+                <p class="error" *ngIf="this.form.controls['isArray'].errors?.required">
+                  Al menos uno debe ser seleccionado.
+                </p>
+              
+    
+              </form>
+
               <div class="form-group">
                 <button  class="btn btn-primary" >
                     <span  class="spinner-border spinner-border-sm mr-1"></span>
                     Añadir colaborador
                 </button>
             </div>
+
+
+          </form>
+
 
             <div class="form-group">
               <button  class="btn btn-primary" (click)="addUSUandUSO()">
@@ -139,23 +160,7 @@
               </button>
           </div>
 
-                </form>
 
-                <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-
-                  <div *ngFor="let item of MoviesData; let i=index">
-                    <label>
-                      <input type="checkbox" [value]="item.value" (change)="onCbChange($event)" />
-                      {{item.name}}
-                    </label>
-                  </div>
-                
-                  <p class="error" *ngIf="this.form.controls['isArray'].errors?.required">
-                    Checkbox value is required.
-                  </p>
-                
-
-                </form>
 
               </div>
 

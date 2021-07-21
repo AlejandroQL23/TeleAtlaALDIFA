@@ -265,9 +265,23 @@ export class RestService {
       );
   }
 
-  updateIssue(issue): Observable<any> {
+  // updateIssue(issue): Observable<any> {
+  //   return this.http
+  //     .put(endpoint + "Issues/", JSON.stringify(issue), httpOptions)
+  //     .pipe(
+  //       tap((issue) => console.log("updated issue")),
+  //       catchError(this.handleError<any>("updateIssue"))
+  //     );
+  // }
+
+
+  updateIssue(issue, id): Observable<any> {
     return this.http
-      .put(endpoint + "Issues/PutIssue", JSON.stringify(issue), httpOptions)
+      .put(
+        endpoint + "Issues/" +id,
+        JSON.stringify(issue),
+        httpOptions
+      )
       .pipe(
         tap((issue) => console.log("updated issue")),
         catchError(this.handleError<any>("updateIssue"))

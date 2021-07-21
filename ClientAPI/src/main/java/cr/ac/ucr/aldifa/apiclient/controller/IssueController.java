@@ -78,7 +78,7 @@ public class IssueController {
         issue.setSupportuserassigned("Sin asignar");
         issue.setResolutioncomment("Sin resolver");
         issue.setRegistertimestamp(now);
-        issue.setIdservice(1);
+
 
 
         issueInserted = service.save(issue);

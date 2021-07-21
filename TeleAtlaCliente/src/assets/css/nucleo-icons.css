@@ -88,7 +88,9 @@ Created using IcoMoon - icomoon.io
 /*------------------------
   list icons
 -------------------------*/
-
+option {
+  color: rgb(105, 0, 150);
+}
 /*------------------------
   spinning icons
 -------------------------*/

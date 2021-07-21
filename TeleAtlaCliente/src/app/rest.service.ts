@@ -190,12 +190,14 @@ export class RestService {
   //------------------------------------------------------------------------------------------------------------------
 
   getIssues(): Observable<any> {
+ 
     return this.http
       .get(endpoint + "issue/issues")
       .pipe(
         map(this.extractData),
         catchError(this.handleError<any>("list issue"))
       );
+     
   }
 
   getIssue(id): Observable<any> {
@@ -302,6 +304,13 @@ export class RestService {
   }
 //--------------------------------------------------
 
+getClientServices(id): Observable<any> {
+  return this.http
+    .get(endpoint + "clientservice/listNum/" +id).pipe(map(this.extractData),
+      catchError(this.handleError<any>("getClientServices"))
+    );
+}
+//--------------------------------------------------
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
   
