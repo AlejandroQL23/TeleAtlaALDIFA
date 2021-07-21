@@ -5,6 +5,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import Swal from 'sweetalert2';
 
 
+
 @Component({
   selector: "app-profilepage",
   templateUrl: "profilepage.component.html"
@@ -13,6 +14,8 @@ export class ProfilepageComponent implements OnInit, OnDestroy {
 
   @Input()
   ID = this.rest.ID;
+
+
 
   @Input() clientData:any = {id: 0, name:'',firstsurname:'',secondsurname:'', email:'', phone:'', secondcontact:'',
    address:'', password:''};

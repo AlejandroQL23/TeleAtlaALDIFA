@@ -7,19 +7,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "/api/serviceclient")
+@RequestMapping(path = "/api/clientservice")
 public class ClientserviceController {
 
     @Autowired
     private ClientserviceService service;
 
-    @GetMapping("/serviceclient")
+    @GetMapping("/clientservice")
     public List<Clientservice> list() {
         //¿reglas de negocio?
         //if...es admin
@@ -27,7 +28,7 @@ public class ClientserviceController {
     }
 
     //--------------------------------
-    @GetMapping("/serviceclient/{id}")
+    @GetMapping("/clientservice/{id}")
     public ResponseEntity<Clientservice> get(@PathVariable Integer id) {
         try {
             Clientservice servicee = service.get(id);
@@ -60,6 +61,25 @@ public class ClientserviceController {
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Integer id) {
         service.delete(id);
+    }
+
+    //---------------------------------
+    @GetMapping("/listNum/{id}")
+    private int[] listNum(@PathVariable int id) {
+        List<Clientservice> completeList = service.listAll();
+        List<Clientservice>  filteredList = new ArrayList<Clientservice>();
+        for(int i=0; i<completeList.size(); i++) {
+            if(completeList.get(i).getIdclient()==id){
+                filteredList.add(completeList.get(i));
+            }
+        }
+        int [] arryaToReturn= new int[filteredList.size()];
+
+        for (int i=0; i<filteredList.size(); i++){
+            arryaToReturn[i] = filteredList.get(i).getIdservice();
+        }
+
+        return arryaToReturn;
     }
 
 }

@@ -10,12 +10,16 @@ import Swal from 'sweetalert2';
 })
 export class DetailpagesupportComponent implements OnInit {
 
+  lista:string[]=["Baja","Media","Alta"];
+
     @Input()
     MYNAME = this.rest.myName;
 
   notes: FormGroup;
 
-  @Input() issueDataEnd:any = {id:0, resolutionComment:'', idClient:0, status:'', emailIssue:'', phoneIssue:'', reference:'', description:''};
+  @Input() issueDataEnd:any = {id:0, resolutionComment:'', idClient:0, status:'',
+  emailIssue:'', phoneIssue:'', reference:'', description:'', classification:'',
+  issueTimeStamp:'', creationDate:'', creationUser:'', idService:''};
   resolution: FormGroup;
 
   issue:any;
@@ -35,7 +39,12 @@ export class DetailpagesupportComponent implements OnInit {
         emailIssue:['', [Validators.required]],
         phoneIssue:['', [Validators.required]],
         reference:[this.MYNAME, [Validators.required]],
-        description:['', [Validators.required]]
+        description:['', [Validators.required]],
+        classification: ['', [Validators.required]],
+        issueTimeStamp: ['', [Validators.required]],
+        creationDate: ['', [Validators.required]],
+        creationUser: ['', [Validators.required]],
+        idService: ['', [Validators.required]]
     })
     }
 
@@ -49,6 +58,11 @@ export class DetailpagesupportComponent implements OnInit {
     get phoneIssue() { return this.resolution.get('phoneIssue'); }
     get reference() { return this.resolution.get('reference'); }
     get description() { return this.resolution.get('description'); }
+    get classification() { return this.resolution.get('classification'); }
+    get issueTimeStamp() { return this.resolution.get('issueTimeStamp'); }
+    get creationDate() { return this.resolution.get('creationDate'); }
+    get creationUser() { return this.resolution.get('creationUser'); }
+    get idService() { return this.resolution.get('idService'); }
 
   ngOnInit() {
     this.rest.getIssue(this.route.snapshot.params['Id']).subscribe((data: {}) => {
@@ -96,6 +110,19 @@ export class DetailpagesupportComponent implements OnInit {
       return;
     }
     this.rest.updateIssueEnd( this.resolution.value).subscribe((result) => {
+      this.loading();
+    }, (err) => {
+      console.log(err);
+    });
+    setTimeout (() => {
+      this.cancel();
+      }, 3000);
+  }
+
+  updateClassification() {
+
+
+    this.rest.updateIssue( this.resolution.value, this.issueDataEnd.id).subscribe((result) => {
       this.loading();
     }, (err) => {
       console.log(err);

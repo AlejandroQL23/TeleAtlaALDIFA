@@ -159,10 +159,8 @@
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputService">Servicio</label>
-                      <select id="inputService" class="form-control">
-                        <option selected>Elija el servicio</option>
-                        <option>...</option>
-                        <!-- AUN NO SE LLENA, YA QYE NO HAY TABLA SERVICIOS Y NO HAY CAMPO EN LA TABLA ISSUE -->
+                        <select name="selectedQuantity" class="form-control" formControlName="idservice">
+                          <option *ngFor="let option of options" [value]="option" >{{option}}</option>
                       </select>
                     </div>
                   </div>
@@ -182,6 +180,8 @@
                   </div>
 
                 </form>
+
+                <button click="geinfhdsbkfd()"> Trae datos</button>
               </div>
             </div>
           </div>
