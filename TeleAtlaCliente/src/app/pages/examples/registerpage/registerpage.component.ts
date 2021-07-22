@@ -1,13 +1,10 @@
-import { Component, OnInit, OnDestroy, HostListener, Input } from "@angular/core";
+import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestService } from "src/app/rest.service";
 import Swal from 'sweetalert2';
 
-@Component({
-  selector: "app-registerpage",
-  templateUrl: "registerpage.component.html"
-})
+@Component({ selector: "app-registerpage", templateUrl: "registerpage.component.html" })
 export class RegisterpageComponent implements OnInit, OnDestroy {
 
   registerClient: FormGroup;
@@ -21,7 +18,6 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
   ];
 
   onCbChange(e) {
-
     const isArray: FormArray = this.form.get('isArray') as FormArray;
 
     if (e.target.checked) {
@@ -42,114 +38,90 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
     console.log(this.form.value)
   }
 
-
   isCollapsed = true;
   focus;
   focus1;
   focus2;
 
+  constructor(private formBuilder: FormBuilder, public rest: RestService, private route: ActivatedRoute, private router: Router,) {
 
-  constructor(
-    private formBuilder: FormBuilder,
-    public rest:RestService,
-    private route: ActivatedRoute,
-    private router: Router,
-
-    )  { 
-
-      this.registerClient = this.formBuilder.group({
-        name: ['', [Validators.required]],
-        firstsurname: ['', [Validators.required]],
-        secondsurname: ['', [Validators.required]],
-        address: ['', [Validators.required]],
-        phone: ['', [Validators.required]],
-        secondcontact: ['', [Validators.required]],
-        email: ['', [Validators.required]],
-        password: ['', [Validators.required]]
+    this.registerClient = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      firstsurname: ['', [Validators.required]],
+      secondsurname: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
+      secondcontact: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     })
-
     this.form = this.formBuilder.group({
       isArray: this.formBuilder.array([], [Validators.required])
     })
+  }
 
-     }
+  get name() { return this.registerClient.get('name'); }
+  get firstsurname() { return this.registerClient.get('firstsurname'); }
+  get secondsurname() { return this.registerClient.get('secondsurname'); }
+  get address() { return this.registerClient.get('address'); }
+  get phone() { return this.registerClient.get('phone'); }
+  get secondcontact() { return this.registerClient.get('secondcontact'); }
+  get email() { return this.registerClient.get('email'); }
+  get password() { return this.registerClient.get('password'); }
 
-     get name() { return this.registerClient.get('name'); }
-     get firstsurname() { return this.registerClient.get('firstsurname'); }
-     get secondsurname() { return this.registerClient.get('secondsurname'); }
-     get address() { return this.registerClient.get('address'); }
-     get phone() { return this.registerClient.get('phone'); }
-     get secondcontact() { return this.registerClient.get('secondcontact'); }
-     get email() { return this.registerClient.get('email'); }
-     get password() { return this.registerClient.get('password'); }
-
-    addClient() {
-
-      if (!this.registerClient.valid) {
-        return;
-      }
-
-      this.rest.addClient(this.registerClient.value, this.form.value).subscribe((result) => {
-        this.loading();
-        console.log('Estoy tratandode hacer algo al menos');
-      }, (err) => {
-        console.log(err);
-      });
-      this.clearForm();
-      setTimeout (() => {
-      this.back();
-      }, 3000);
+  addClient() {
+    if (!this.registerClient.valid) {
+      return;
     }
+    this.rest.addClient(this.registerClient.value, this.form.value).subscribe((result) => {
+      this.loading();
+    }, (err) => { console.log(err); });
+    this.clearForm();
+    setTimeout(() => { this.back(); }, 3000);
+  }
 
-    clearForm() {
+  clearForm() {
+    this.registerClient.reset({
+      'name': '',
+      'firstsurname': '',
+      'secondsurname': '',
+      'address': '',
+      'phone': '',
+      'secondcontact': '',
+      'email': '',
+      'password': ''
+    });
+  }
 
-      this.registerClient.reset({
-            'name': '',
-            'firstsurname': '',
-            'secondsurname': '',
-            'address': '',
-            'phone': '',
-            'secondcontact': '',
-            'email': '',
-             'password': ''
-           });
+  back() {
+    this.router.navigate(['/home']);
+  }
+
+  loading() {
+    let timerInterval
+    Swal.fire({
+      title: 'Registro',
+      html: 'Has sido registrado exitosamente',
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+        timerInterval = setInterval(() => {
+          const content = Swal.getHtmlContainer()
+          if (content) {
+            const b = content.querySelector('b')
+          }
+        }, 100)
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
       }
-
-      back() {
-        this.router.navigate(['/home']);
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
       }
-
-    loading() {
-      let timerInterval
-      Swal.fire({
-        title: 'Registro',
-        html: 'Has sido registrado exitosamente',
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: () => {
-          Swal.showLoading()
-          timerInterval = setInterval(() => {
-            const content = Swal.getHtmlContainer()
-            if (content) {
-              const b = content.querySelector('b')
-              // if (b) {
-              //   b.textContent = Swal.getTimerLeft()
-              // }
-            }
-          }, 100)
-        },
-        willClose: () => {
-          clearInterval(timerInterval)
-  
-        }
-      }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-          console.log('I was closed by the timer')
-        }
-      })
-    }
-    
+    })
+  }
 
   @HostListener("document:mousemove", ["$event"])
   onMouseMove(e) {

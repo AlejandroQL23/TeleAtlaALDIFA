@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SupportAPI.Models.Entities;
@@ -42,13 +41,10 @@ namespace SupportAPI.Controllers
             {
                 return NotFound();
             }
-
             return notes;
         }
 
         // PUT: api/Notes/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutNotes(int id, Notes notes)
         {
@@ -86,8 +82,6 @@ namespace SupportAPI.Controllers
         }
 
         // POST: api/Notes
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Notes>> PostNotes(Notes notes)
         {
@@ -133,25 +127,23 @@ namespace SupportAPI.Controllers
         {
             try
             {
-                ArrayList arlist = new ArrayList();
+                ArrayList arrayList = new ArrayList();
+                Notes[] notesList = (from note in _context.Notes where note.IdIssue == id select note).ToArray();
 
-                    Notes[] notesList = (from note in _context.Notes where note.IdIssue == id select note).ToArray();
-
-                    for (int j = 0; j < notesList.Length; j++)
-                    {
-                        arlist.Add(notesList[j]);
-                    }
-
-                Notes[] issuesListtoReturn = new Notes[arlist.Count];
-                int x = 0;
-                for (int j = arlist.Count - 1; j >= 0; j--)
+                for (int j = 0; j < notesList.Length; j++)
                 {
-                    issuesListtoReturn[x] = (Notes)arlist.ToArray()[j];
+                    arrayList.Add(notesList[j]);
+                }
+
+                Notes[] notesListtoReturn = new Notes[arrayList.Count];
+                int x = 0;
+                for (int j = arrayList.Count - 1; j >= 0; j--)
+                {
+                    notesListtoReturn[x] = (Notes)arrayList.ToArray()[j];
                     x++;
                 }
 
-
-                return issuesListtoReturn;
+                return notesListtoReturn;
             }
             catch (Exception e)
             {

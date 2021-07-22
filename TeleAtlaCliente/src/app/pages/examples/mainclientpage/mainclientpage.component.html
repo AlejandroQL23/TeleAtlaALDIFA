@@ -24,7 +24,6 @@
         </div>
       </div>
       <ul class="navbar-nav">
-
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/registerrequest']">Enviar solicitud</a>
           <a class="nav-link" [routerLink]="['/profile/', ID]"> Perfil </a>
@@ -40,12 +39,10 @@
     <div class="content">
       <div class="container">
         <div class="row">
-
           <h4>Registro de solicitudes enviadas</h4>
-          <table  class="table">
+          <table class="table">
             <thead>
               <tr>
-
                 <th sortable-column="id"># solicitud</th>
                 <th>Servicio</th>
                 <th>Fecha/Hora</th>
@@ -54,15 +51,13 @@
               </tr>
             </thead>
             <tbody>
-
-
               <tr *ngFor="let s of issues; let i=index;">
-
-                <td>{{ s.id  }}</td>
-                <a (click)="typeService(s.idservice)"> <td>{{ s.idservice  }}</td> </a>
+                <td>{{ s.id }}</td>
+                <a (click)="typeService(s.idservice)">
+                  <td>{{ s.idservice }}</td>
+                </a>
                 <td>{{ s.registertimestamp }}</td>
                 <td>{{ s.status }}</td>
-
                 <td>
                   <button data-target="#landlineTelephony" [routerLink]="['/detail/', s.id]" type="button" rel="tooltip"
                     class="btn btn-success btn-simple btn-icon btn-sm">
@@ -72,12 +67,7 @@
               </tr>
             </tbody>
           </table>
-
         </div>
-
-
-        <!---->
-
         <div class="register-bg"></div>
         <div class="square square-1" id="square1"></div>
         <div class="square square-2" id="square2"></div>
@@ -88,5 +78,4 @@
       </div>
     </div>
   </div>
-
 </div>

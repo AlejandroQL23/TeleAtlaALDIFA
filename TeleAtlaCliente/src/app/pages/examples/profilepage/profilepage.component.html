@@ -1,50 +1,23 @@
-<nav
-  class="navbar navbar-expand-lg fixed-top navbar-transparent"
-  color-on-scroll="100"
-  id="navbar-top"
->
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent" color-on-scroll="100" id="navbar-top">
   <div class="container">
     <div class="navbar-translate">
-      <a
-        class="navbar-brand"
-        [routerLink]="['/home']"
-        placement="bottom"
-        tooltip="Designed and Coded by Creative Tim"
-      >
-      <span> T.A.• </span> Clientes Tele Atlántico
+      <a class="navbar-brand" [routerLink]="['/home']" placement="bottom" tooltip="Designed and Coded by Creative Tim">
+        <span> T.A.• </span> Clientes Tele Atlántico
       </a>
-      <button
-        aria-controls="navigation-index"
-        aria-label="Toggle navigation"
-        class="navbar-toggler navbar-toggler"
-        [attr.aria-expanded]="!isCollapsed"
-        (click)="isCollapsed = !isCollapsed"
-        id="navigation"
-        type="button"
-      >
+      <button aria-controls="navigation-index" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler"
+        [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed" id="navigation" type="button">
         <span class="navbar-toggler-bar bar1"> </span>
         <span class="navbar-toggler-bar bar2"> </span>
         <span class="navbar-toggler-bar bar3"> </span>
       </button>
     </div>
-    <div
-      class="navbar-collapse justify-content-end"
-      [collapse]="isCollapsed"
-      id="navigation"
-    >
+    <div class="navbar-collapse justify-content-end" [collapse]="isCollapsed" id="navigation">
       <div class="navbar-collapse-header">
         <div class="row">
           <div class="col-6 collapse-brand"><a> T.A.• </a></div>
           <div class="col-6 collapse-close text-right">
-            <button
-              aria-controls="navigation-index"
-              aria-label="Toggle navigation"
-              class="navbar-toggler"
-              [attr.aria-expanded]="!isCollapsed"
-              (click)="isCollapsed = !isCollapsed"
-              id="navigation"
-              type="button"
-            >
+            <button aria-controls="navigation-index" aria-label="Toggle navigation" class="navbar-toggler"
+              [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed" id="navigation" type="button">
               <i class="tim-icons icon-simple-remove"> </i>
             </button>
           </div>
@@ -52,37 +25,22 @@
       </div>
       <ul class="navbar-nav">
         <li class="nav-item p-0">
-          <a
-            class="nav-link"
-            href="https://twitter.com/CreativeTim"
-            placement="bottom"
-            target="_blank"
-            tooltip="Follow us on Twitter"
-          >
+          <a class="nav-link" href="https://twitter.com/CreativeTim" placement="bottom" target="_blank"
+            tooltip="Follow us on Twitter">
             <i class="fab fa-twitter"> </i>
             <p class="d-lg-none d-xl-none">Twitter</p>
           </a>
         </li>
         <li class="nav-item p-0">
-          <a
-            class="nav-link"
-            href="https://www.facebook.com/CreativeTim"
-            placement="bottom"
-            target="_blank"
-            tooltip="Like us on Facebook"
-          >
+          <a class="nav-link" href="https://www.facebook.com/CreativeTim" placement="bottom" target="_blank"
+            tooltip="Like us on Facebook">
             <i class="fab fa-facebook-square"> </i>
             <p class="d-lg-none d-xl-none">Facebook</p>
           </a>
         </li>
         <li class="nav-item p-0">
-          <a
-            class="nav-link"
-            href="https://www.instagram.com/CreativeTimOfficial"
-            placement="bottom"
-            target="_blank"
-            tooltip="Follow us on Instagram"
-          >
+          <a class="nav-link" href="https://www.instagram.com/CreativeTimOfficial" placement="bottom" target="_blank"
+            tooltip="Follow us on Instagram">
             <i class="fab fa-instagram"> </i>
             <p class="d-lg-none d-xl-none">Instagram</p>
           </a>
@@ -95,8 +53,6 @@
   </div>
 </nav>
 <div class="wrapper">
-  
-
   <section class="section">
     <div class="container">
       <div class="row">
@@ -106,28 +62,22 @@
               <h5 class="text-on-back">Perfil</h5>
             </div>
             <div class="card-body">
-
               <form [formGroup]="clientFormUpdate" (ngSubmit)="updateClient()" #formDir="ngForm">
-
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label> Nombre </label>
-                      <input class="form-control" disabled type="text" [(ngModel)]="clientData.name" formControlName="name"/>
+                      <input class="form-control" disabled type="text" [(ngModel)]="clientData.name"
+                        formControlName="name" />
                     </div>
                   </div>
-
                   <div class="col-md-6">
                     <div class="form-group">
                       <label> Correo </label>
-                      <input
-                        class="form-control"
-                        [(ngModel)]="clientData.email"
-                        formControlName="email"
-                        type="email"
-                      />
+                      <input class="form-control" [(ngModel)]="clientData.email" formControlName="email" type="email" />
                     </div>
-                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'email') && formDir.submitted">
+                    <span class="text-danger"
+                      *ngIf="clientFormUpdate.hasError('required', 'email') && formDir.submitted">
                       Correo requerido.
                     </span>
                   </div>
@@ -136,28 +86,22 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label> Teléfono </label>
-                      <input
-                        class="form-control"
-                        [(ngModel)]="clientData.phone"
-                        formControlName="phone"
-                        type="number"
-                      />
+                      <input class="form-control" [(ngModel)]="clientData.phone" formControlName="phone"
+                        type="number" />
                     </div>
-                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'phone') && formDir.submitted">
+                    <span class="text-danger"
+                      *ngIf="clientFormUpdate.hasError('required', 'phone') && formDir.submitted">
                       Telefóno es requerido.
                     </span>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label> Segundo contacto </label>
-                      <input
-                        class="form-control"
-                        [(ngModel)]="clientData.secondcontact"
-                        formControlName="secondcontact"
-                        type="number"
-                      />
+                      <input class="form-control" [(ngModel)]="clientData.secondcontact" formControlName="secondcontact"
+                        type="number" />
                     </div>
-                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'secondcontact') && formDir.submitted">
+                    <span class="text-danger"
+                      *ngIf="clientFormUpdate.hasError('required', 'secondcontact') && formDir.submitted">
                       Segundo telefóno es requerido.
                     </span>
                   </div>
@@ -166,95 +110,65 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label> Dirección </label>
-                      <input
-                        class="form-control"
-                        [(ngModel)]="clientData.address"
-                        formControlName="address"
-                        type="text"
-                      />
+                      <input class="form-control" [(ngModel)]="clientData.address" formControlName="address"
+                        type="text" />
                     </div>
-                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'address') && formDir.submitted">
+                    <span class="text-danger"
+                      *ngIf="clientFormUpdate.hasError('required', 'address') && formDir.submitted">
                       Dirección es requerida.
                     </span>
-                    <!---->
                     <div class="form-group" hidden>
                       <label> Dirección </label>
-                      <input
-                        class="form-control"
-                        [(ngModel)]="clientData.id"
-                        formControlName="id"
-                        type="text"
-                      />
+                      <input class="form-control" [(ngModel)]="clientData.id" formControlName="id" type="text" />
                     </div>
                     <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'id') && formDir.submitted">
                       Dirección es requerida.
                     </span>
-
                     <div class="form-group" hidden>
                       <label> Dirección </label>
-                      <input
-                        class="form-control"
-                        [(ngModel)]="clientData.firstsurname"
-                        formControlName="firstsurname"
-                        type="text"
-                      />
+                      <input class="form-control" [(ngModel)]="clientData.firstsurname" formControlName="firstsurname"
+                        type="text" />
                     </div>
-                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'firstsurname') && formDir.submitted">
+                    <span class="text-danger"
+                      *ngIf="clientFormUpdate.hasError('required', 'firstsurname') && formDir.submitted">
                       Dirección es requerida.
                     </span>
-                    
                     <div class="form-group" hidden>
                       <label> Dirección </label>
-                      <input
-                        class="form-control"
-                        [(ngModel)]="clientData.secondsurname"
-                        formControlName="secondsurname"
-                        type="text"
-                      />
+                      <input class="form-control" [(ngModel)]="clientData.secondsurname" formControlName="secondsurname"
+                        type="text" />
                     </div>
-                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'secondsurname') && formDir.submitted">
+                    <span class="text-danger"
+                      *ngIf="clientFormUpdate.hasError('required', 'secondsurname') && formDir.submitted">
                       Dirección es requerida.
                     </span>
-
                     <div class="form-group" hidden>
                       <label> Dirección </label>
-                      <input
-                        class="form-control"
-                        [(ngModel)]="clientData.password"
-                        formControlName="password"
-                        type="text"
-                      />
+                      <input class="form-control" [(ngModel)]="clientData.password" formControlName="password"
+                        type="text" />
                     </div>
-                    <span class="text-danger" *ngIf="clientFormUpdate.hasError('required', 'password') && formDir.submitted">
+                    <span class="text-danger"
+                      *ngIf="clientFormUpdate.hasError('required', 'password') && formDir.submitted">
                       Dirección es requerida.
                     </span>
-                    <!---->
                   </div>
                 </div>
-
-                <button
-                  class="btn btn-danger btn-round float-right"
-                  placement="right"
-                  type="submit"
-                >
+                <button class="btn btn-danger btn-round float-right" placement="right" type="submit">
                   Editar
                 </button>
-
               </form>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
   <footer class="footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-3"><h1 class="title"> T.A.•</h1></div>
-
-
-
+        <div class="col-md-3">
+          <h1 class="title"> T.A.•</h1>
+        </div>
       </div>
     </div>
   </footer>

@@ -1,235 +1,214 @@
-      <form [formGroup]="resolution" (ngSubmit)="updateEnd()" #formDir="ngForm">
+<form [formGroup]="resolution" (ngSubmit)="updateEnd()" #formDir="ngForm">
 
-        <div class="col-md-6">
-            <div class="form-group">
-              <label> id </label>
-              <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.id" formControlName="id"/>
-            </div>
-            <span class="text-danger" *ngIf="resolution.hasError('required', 'id') && formDir.submitted">
-              id es requerido.
-            </span>
-          </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label> id </label>
+      <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.id" formControlName="id" />
+    </div>
+    <span class="text-danger" *ngIf="resolution.hasError('required', 'id') && formDir.submitted">
+      id es requerido.
+    </span>
+  </div>
 
-          <div class="col-md-6" hidden>
-            <div class="form-group">
-              <label> idClient </label>
-              <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.idClient" formControlName="idClient"/>
-            </div>
-            <span class="text-danger" *ngIf="resolution.hasError('required', 'idClient') && formDir.submitted">
-              id es requerido.
-            </span>
-          </div>
+  <div class="col-md-6" hidden>
+    <div class="form-group">
+      <label> idClient </label>
+      <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.idClient" formControlName="idClient" />
+    </div>
+    <span class="text-danger" *ngIf="resolution.hasError('required', 'idClient') && formDir.submitted">
+      id es requerido.
+    </span>
+  </div>
 
+  <div class="col-md-6" hidden>
+    <div class="form-group">
+      <label> idClient </label>
+      <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.issueTimeStamp"
+        formControlName="issueTimeStamp" />
+    </div>
+    <span class="text-danger" *ngIf="resolution.hasError('required', 'issueTimeStamp') && formDir.submitted">
+      id es requerido.
+    </span>
+  </div>
 
-          <div class="col-md-6" hidden>
-            <div class="form-group">
-              <label> idClient </label>
-              <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.issueTimeStamp" formControlName="issueTimeStamp"/>
-            </div>
-            <span class="text-danger" *ngIf="resolution.hasError('required', 'issueTimeStamp') && formDir.submitted">
-              id es requerido.
-            </span>
-          </div>
+  <div class="col-md-6" hidden>
+    <div class="form-group">
+      <label> idClient </label>
+      <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.creationDate"
+        formControlName="creationDate" />
+    </div>
+    <span class="text-danger" *ngIf="resolution.hasError('required', 'creationDate') && formDir.submitted">
+      id es requerido.
+    </span>
+  </div>
 
+  <div class="col-md-6" hidden>
+    <div class="form-group">
+      <label> idClient </label>
+      <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.creationUser"
+        formControlName="creationUser" />
+    </div>
+    <span class="text-danger" *ngIf="resolution.hasError('required', 'creationUser') && formDir.submitted">
+      id es requerido.
+    </span>
+  </div>
 
-          <div class="col-md-6" hidden>
-            <div class="form-group">
-              <label> idClient </label>
-              <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.creationDate" formControlName="creationDate"/>
-            </div>
-            <span class="text-danger" *ngIf="resolution.hasError('required', 'creationDate') && formDir.submitted">
-              id es requerido.
-            </span>
-          </div>
+  <div class="col-md-6" hidden>
+    <div class="form-group">
+      <label> idClient </label>
+      <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.idService"
+        formControlName="idService" />
+    </div>
+    <span class="text-danger" *ngIf="resolution.hasError('required', 'idService') && formDir.submitted">
+      id es requerido.
+    </span>
+  </div>
 
+  <div class="col-md-6">
+    <div class="form-group">
+      <label> reference </label>
+      <input class="form-control" disabled type="text" formControlName="reference" />
+    </div>
+    <span class="text-danger" *ngIf="resolution.hasError('required', 'reference') && formDir.submitted">
+      id es requerido.
+    </span>
+  </div>
 
-          <div class="col-md-6" hidden>
-            <div class="form-group">
-              <label> idClient </label>
-              <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.creationUser" formControlName="creationUser"/>
-            </div>
-            <span class="text-danger" *ngIf="resolution.hasError('required', 'creationUser') && formDir.submitted">
-              id es requerido.
-            </span>
-          </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label> Estado </label>
+      <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.status" formControlName="status" />
+    </div>
+    <span class="text-danger" *ngIf="resolution.hasError('required', 'status') && formDir.submitted">
+      id es requerido.
+    </span>
+  </div>
 
+  <div class="col-md-6">
+    <div class="form-group">
+      <label> Correo </label>
+      <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.emailIssue"
+        formControlName="emailIssue" />
+    </div>
+    <span class="text-danger" *ngIf="resolution.hasError('required', 'emailIssue') && formDir.submitted">
+      id es requerido.
+    </span>
+  </div>
 
+  <div class="col-md-6">
+    <div class="form-group">
+      <label> Teléfono </label>
+      <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.phoneIssue"
+        formControlName="phoneIssue" />
+    </div>
+    <span class="text-danger" *ngIf="resolution.hasError('required', 'phoneIssue') && formDir.submitted">
+      id es requerido.
+    </span>
+  </div>
 
-          <div class="col-md-6" hidden>
-            <div class="form-group">
-              <label> idClient </label>
-              <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.idService" formControlName="idService"/>
-            </div>
-            <span class="text-danger" *ngIf="resolution.hasError('required', 'idService') && formDir.submitted">
-              id es requerido.
-            </span>
-          </div>
-          
+  <div class="form-group">
+    <label for="TextareaDescri">Descripción del problema:</label>
+    <textarea class="form-control" disabled rows="5" placeholder="Lo que pasa es ..."
+      [(ngModel)]="issueDataEnd.description" formControlName="description"></textarea>
+  </div>
+  <span class="text-danger" *ngIf="resolution.hasError('required', 'description') && formDir.submitted">
+    No puede estar vacio.
+  </span>
 
-          <div class="col-md-6" >
-            <div class="form-group">
-              <label> reference </label>
-              <input class="form-control" disabled type="text"  formControlName="reference"/>
-            </div>
-            <span class="text-danger" *ngIf="resolution.hasError('required', 'reference') && formDir.submitted">
-              id es requerido.
-            </span>
-          </div>
+  <div class="form-group">
+    <label for="TextareaDescri">Añadir comentario de resolución:</label>
+    <textarea class="form-control" rows="5" placeholder="Lo que pasa es ..."
+      [(ngModel)]="issueDataEnd.resolutionComment" formControlName="resolutionComment"></textarea>
+  </div>
+  <span class="text-danger" *ngIf="resolution.hasError('required', 'resolutionComment') && formDir.submitted">
+    El campo de resolución no puede estar vacio.
+  </span>
 
-          <div class="col-md-6">
-            <div class="form-group">
-              <label> Estado </label>
-              <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.status" formControlName="status"/>
-            </div>
-            <span class="text-danger" *ngIf="resolution.hasError('required', 'status') && formDir.submitted">
-              id es requerido.
-            </span>
-          </div>
+  <div class="form-group">
+    <button class="btn btn-primary">
+      <span class="spinner-border spinner-border-sm mr-1"></span>
+      Enviar resolución.
+    </button>
+  </div>
 
+  <div class="form-group">
+    <label for="TextareaDescri">Seleccione la clasificación:</label>
+    <select name="miselect" [(ngModel)]="issueDataEnd.classification" formControlName="classification">
+      <option [value]="item" *ngFor="let item of lista">{{item}}</option>
+    </select>
+  </div>
 
-          <div class="col-md-6">
-            <div class="form-group">
-              <label> Correo </label>
-              <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.emailIssue" formControlName="emailIssue"/>
-            </div>
-            <span class="text-danger" *ngIf="resolution.hasError('required', 'emailIssue') && formDir.submitted">
-              id es requerido.
-            </span>
-          </div>
+</form>
+<br>
+<br>
 
+<div>
+  <button class="btn" (click)="x.show(); showInfoClient(issueDataEnd.idClient)"> Ver info del cliente </button>
+  <button class="btn" (click)="updateStart();"> Atender caso</button>
+  <button class="btn" (click)="updateClassification()"> Actualizar clasificación </button>
+  <button class="btn" (click)="cancel()"> Regresar </button>
+</div>
 
-          <div class="col-md-6">
-            <div class="form-group">
-              <label> Teléfono </label>
-              <input class="form-control" disabled type="text" [(ngModel)]="issueDataEnd.phoneIssue" formControlName="phoneIssue"/>
-            </div>
-            <span class="text-danger" *ngIf="resolution.hasError('required', 'phoneIssue') && formDir.submitted">
-              id es requerido.
-            </span>
-          </div>
+<br>
+<br>
 
+<form [formGroup]="notes" (ngSubmit)="addNote()" #formDir="ngForm">
+  <div class="form-group">
+    <label for="TextareaDescri">Añadir notas:</label>
+    <textarea class="form-control" rows="5" placeholder="Lo que pasa es ..."
+      formControlName="notesSupporter"></textarea>
+  </div>
+  <span class="text-danger" *ngIf="notes.hasError('required', 'notesSupporter') && formDir.submitted">
+    El campo de notas no puede estar vacio.
+  </span>
+  <div class="form-group">
 
-          <div class="form-group">
-            <label for="TextareaDescri">Descripción del problema:</label>
-            <textarea class="form-control" disabled rows="5" placeholder="Lo que pasa es ..." [(ngModel)]="issueDataEnd.description"
-            formControlName="description"></textarea>
-          </div>
-          <span class="text-danger" *ngIf="resolution.hasError('required', 'description') && formDir.submitted">
-            No puede estar vacio.
-          </span>
-  
-      <div class="form-group">
-        <label for="TextareaDescri">Añadir comentario de resolución:</label>
-        <textarea class="form-control"  rows="5" placeholder="Lo que pasa es ..." [(ngModel)]="issueDataEnd.resolutionComment"
-        formControlName="resolutionComment"></textarea>
-      </div>
-      <span class="text-danger" *ngIf="resolution.hasError('required', 'resolutionComment') && formDir.submitted">
-        El campo de resolución no puede estar vacio.
-      </span>
-  
-      <div class="form-group">
-  
-        <button class="btn btn-primary" >
-          <span class="spinner-border spinner-border-sm mr-1"></span>
-          Enviar resolución.
+    <button class="btn btn-primary">
+      <span class="spinner-border spinner-border-sm mr-1"></span>
+      Añadir nota.
+    </button>
+  </div>
+
+</form>
+<div bsModal class="modal fade modal-black" #x="bs-modal" id="x" role="dialog" tabindex="-1"
+  aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <button aria-hidden="true" class="close" data-dismiss="modal" (click)="x.hide()" type="button">
+          <i class="tim-icons icon-simple-remove text-white"> </i>
         </button>
+        <div class="text-muted text-center ml-auto mr-auto">
+          <h3 class="mb-0">Detalles del cliente</h3>
+        </div>
       </div>
+      <div class="modal-body">
 
-      <div class="form-group">
-        <label for="TextareaDescri">Seleccione la clasificación:</label>
-        <select name="miselect" [(ngModel)]="issueDataEnd.classification" formControlName="classification">
-        <option [value]="item" *ngFor="let item of lista">{{item}}</option>
-        </select>
-      </div>
-  
-     </form>
-     <br>
-     <br>
-
-     <div>
-      <button class="btn" (click)="x.show(); showInfoClient(issueDataEnd.idClient)"> Ver info del cliente </button>
-      <button class="btn" (click)="updateStart();"> Atender caso</button>
-      <button class="btn" (click)="updateClassification()"> Actualizar clasificación </button>
-      <button class="btn" (click)="cancel()"> Regresar </button>
-    </div> 
-
-    <br>
-    <br>
-
-       <form [formGroup]="notes" (ngSubmit)="addNote()" #formDir="ngForm">
-  
-        <div class="form-group">
-          <label for="TextareaDescri">Añadir notas:</label>
-          <textarea class="form-control"  rows="5" placeholder="Lo que pasa es ..." formControlName="notesSupporter"></textarea>
-        </div>
-        <span class="text-danger" *ngIf="notes.hasError('required', 'notesSupporter') && formDir.submitted">
-          El campo de notas no puede estar vacio.
-        </span>
-            <div class="form-group">
-    
-          <button class="btn btn-primary" >
-            <span class="spinner-border spinner-border-sm mr-1"></span>
-            Añadir nota.
-          </button>
-        </div>
-    
-      </form> 
-
-
-     <div
-    bsModal
-    class="modal fade modal-black"
-    #x="bs-modal"
-    id="x"
-    role="dialog"
-    tabindex="-1"
-    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"
-  >
-    <div class="modal-dialog  modal-dialog-scrollable modal-lg">
-      <div class="modal-content">
-        <div class="modal-header justify-content-center">
-          <button
-            aria-hidden="true"
-            class="close"
-            data-dismiss="modal"
-            (click)="x.hide()"
-            type="button"
-          >
-            <i class="tim-icons icon-simple-remove text-white"> </i>
-          </button>
-          <div class="text-muted text-center ml-auto mr-auto">
-            <h3 class="mb-0">Detalles del cliente</h3>
-          </div>
-        </div>
-        <div class="modal-body">
-
-            <div *ngIf="client" class="clientDetails">
-                <div><span>Nombre completo: </span>{{client.name +" "+ client.firstsurname +" "+ client.secondsurname}}</div>
-                <div><span>Correo: </span>{{client.email}}</div>
-                <div><span>Direccion: </span>{{client.address}}</div>
-                <div><span>Teléfono: </span>{{client.phone}}</div>
-                <div><span>Segundo teléfono: </span>{{client.secondcontact}}</div>
-              </div> 
-
+        <div *ngIf="client" class="clientDetails">
+          <div><span>Nombre completo: </span>{{client.name +" "+ client.firstsurname +" "+ client.secondsurname}}</div>
+          <div><span>Correo: </span>{{client.email}}</div>
+          <div><span>Dirección: </span>{{client.address}}</div>
+          <div><span>Teléfono: </span>{{client.phone}}</div>
+          <div><span>Segundo teléfono: </span>{{client.secondcontact}}</div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nota #</th>
+      <th>Nota</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of showNote; let i=index;">
 
-  <table class="table">
-    <thead>
-        <tr>
-            <th >Nota #</th>
-            <th >Nota</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let s of showNote; let i=index;">
+      <td>{{ s.id }}</td>
+      <td>{{ s.description }}</td>
 
-          <td>{{ s.id  }}</td>
-          <td>{{ s.description  }}</td>
-      
-          </tr>
-    </tbody>
+    </tr>
+  </tbody>
 </table>

@@ -1,6 +1,5 @@
 package cr.ac.ucr.aldifa.apiclient.controller;
 
-
 import com.sun.xml.internal.ws.handler.HandlerException;
 import cr.ac.ucr.aldifa.apiclient.domain.Client;
 import cr.ac.ucr.aldifa.apiclient.domain.Clientservice;
@@ -25,8 +24,6 @@ import java.util.Base64;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-
-
 @CrossOrigin
 @RestController
 @RequestMapping(path = "/api/client")
@@ -41,12 +38,9 @@ public class ClientController {
 
     @GetMapping("/clients")
     public List<Client> list() {
-        //¿reglas de negocio?
-        //if...es admin
         return service.listAll();
     }
 
-    //--------------------------------
     @GetMapping("/clients/{id}")
     public ResponseEntity<Client> get(@PathVariable Integer id) {
         try {
@@ -57,57 +51,39 @@ public class ClientController {
         }
     }
 
-    //---------------------------------
-
     @PostMapping("/add")
-    public void add(@RequestBody Client client,@RequestHeader int[]array) throws NoSuchPaddingException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeyException {
-
+    public void add(@RequestBody Client client, @RequestHeader int[] array) throws NoSuchPaddingException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeyException {
         try {
-            String cli = encriptar(client.getPassword());
-            client.setPassword(cli);
+            String clientString = encryptPassword(client.getPassword());
+            client.setPassword(clientString);
             service.save(client);
-
-
             for (int i = 0; i < array.length; i++) {
-
-
-                Clientservice servicioclient = new Clientservice();
-                // servicioclient.setId(0);
-                servicioclient.setIdclient(client.getId());
-                servicioclient.setIdservice(array[i]);
-                serviceclient.save(servicioclient);
+                Clientservice serviceclientinstance = new Clientservice();
+                serviceclientinstance.setIdclient(client.getId());
+                serviceclientinstance.setIdservice(array[i]);
+                serviceclient.save(serviceclientinstance);
             }
         } catch (Exception e) {
             throw new HandlerException(e);
         }
     }
 
-
-
-    //-------------------METODOS DE ENCRIPTAR Y DESENCRIPTAR----------------------
-
-    private SecretKeySpec crearClave(String clave) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-       try {
-           byte[] claveEncriptacion = clave.getBytes("UTF-8");
-
-           MessageDigest sha = MessageDigest.getInstance("SHA-1");
-
-           claveEncriptacion = sha.digest(claveEncriptacion);
-           claveEncriptacion = Arrays.copyOf(claveEncriptacion, 16);
-
-           SecretKeySpec secretKey = new SecretKeySpec(claveEncriptacion, "AES");
-
-           return secretKey;
-       }catch (Exception e) {
-           throw new HandlerException(e);
-       }
+    private SecretKeySpec createKey(String key) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+        try {
+            byte[] encryptKey = key.getBytes("UTF-8");
+            MessageDigest sha = MessageDigest.getInstance("SHA-1");
+            encryptKey = sha.digest(encryptKey);
+            encryptKey = Arrays.copyOf(encryptKey, 16);
+            SecretKeySpec secretKey = new SecretKeySpec(encryptKey, "AES");
+            return secretKey;
+        } catch (Exception e) {
+            throw new HandlerException(e);
+        }
     }
 
-
-    public String encriptar(String datos ) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, BadPaddingException, InvalidKeyException {
-        String claveSecreta = "0123456789";
-        SecretKeySpec secretKey = this.crearClave(claveSecreta);
-
+    public String encryptPassword(String data) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, BadPaddingException, InvalidKeyException {
+        String secretKeyPass = "0123456789";
+        SecretKeySpec secretKey = this.createKey(secretKeyPass);
         Cipher cipher = null;
         try {
             cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
@@ -115,14 +91,12 @@ public class ClientController {
             e.printStackTrace();
         }
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+        byte[] encryptData = data.getBytes("UTF-8");
+        byte[] bytesEncrypted = cipher.doFinal(encryptData);
+        String encrypted = Base64.getEncoder().encodeToString(bytesEncrypted);
 
-        byte[] datosEncriptar = datos.getBytes("UTF-8");
-        byte[] bytesEncriptados = cipher.doFinal(datosEncriptar);
-        String encriptado = Base64.getEncoder().encodeToString(bytesEncriptados);
-
-        return encriptado;
+        return encrypted;
     }
-    //---------------------------------
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Client> update(@RequestBody Client client, @PathVariable Integer id) {
@@ -135,33 +109,29 @@ public class ClientController {
         }
     }
 
-    //---------------------------------
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Integer id) {
         service.delete(id);
     }
 
-
     @PostMapping("/auth")
     public Client auth(@RequestBody Client client) throws NoSuchPaddingException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeyException {
-      try {
-          Client returnclient = null;
-          String cliente = client.getPassword();
-          String cliento = encriptar(cliente);
-          client.setPassword(cliento);
-          for (int i = 0; i < service.listAll().size(); i++) {
-              if (service.listAll().get(i).getEmail().equals(client.getEmail())) {
-                  if (service.listAll().get(i).getPassword().equals(client.getPassword())) {
-                      returnclient = service.listAll().get(i);
-                      return returnclient;
-                  }
-              }
-          }
-          return returnclient;
-      }catch (Exception e) {
-          throw new HandlerException(e);
-      }
+        try {
+            Client returnclient = null;
+            String clientPassword = client.getPassword();
+            String clientEncrypted = encryptPassword(clientPassword);
+            client.setPassword(clientEncrypted);
+            for (int i = 0; i < service.listAll().size(); i++) {
+                if (service.listAll().get(i).getEmail().equals(client.getEmail())) {
+                    if (service.listAll().get(i).getPassword().equals(client.getPassword())) {
+                        returnclient = service.listAll().get(i);
+                        return returnclient;
+                    }
+                }
+            }
+            return returnclient;
+        } catch (Exception e) {
+            throw new HandlerException(e);
+        }
     }
-
-
 }

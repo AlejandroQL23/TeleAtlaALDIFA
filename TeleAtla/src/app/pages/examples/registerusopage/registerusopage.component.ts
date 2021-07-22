@@ -1,11 +1,8 @@
-import { Component, OnInit, OnDestroy, HostListener, Input}  from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, Validators, FormArray} from '@angular/forms';
+import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
+import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestService } from "src/app/rest.service";
 import Swal from 'sweetalert2';
-
-// falta hacer el import de rest, como daba error lo quite, pero hay que ponerlo
-
 
 @Component({
   selector: "app-registerusopage",
@@ -23,157 +20,125 @@ export class RegisterusopageComponent implements OnInit, OnDestroy {
     { name: 'Telefonía fija', value: '4' }
   ];
 
-
   constructor(
     private formBuilder: FormBuilder,
-    public rest:RestService,
+    public rest: RestService,
     private route: ActivatedRoute,
     private router: Router
-    ) { 
+  ) {
 
-      this.addUso = this.formBuilder.group({
-
-        name: ['', [Validators.required]],
-        firstsurname: ['', [Validators.required]],
-        secondsurname: ['', [Validators.required]],
-        email: ['', [Validators.required]],
-        password: ['', [Validators.required]]
-
-        // password: new FormControl('', [
-        //   Validators.required,
-        //   Validators.pattern('^[0-9]{5,8}$')
-        // ])
+    this.addUso = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      firstsurname: ['', [Validators.required]],
+      secondsurname: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     })
-
     this.form = this.formBuilder.group({
       isArray: this.formBuilder.array([], [Validators.required])
     })
+  }
 
-     }
-
-
-     onCbChange(e) {
-
-      const isArray: FormArray = this.form.get('isArray') as FormArray;
-  
-      if (e.target.checked) {
-        isArray.push(new FormControl(e.target.value));
-      } else {
-        let i: number = 0;
-        isArray.controls.forEach((item: FormControl) => {
-          if (item.value == e.target.value) {
-            isArray.removeAt(i);
-            return;
-          }
-          i++;
-        });
-      }
-    }
-  
-    onSubmit() {
-      console.log(this.form.value)
-    }
-  
-
-     get name() { return this.addUso.get('name'); }
-     get firstsurname() { return this.addUso.get('firstsurname'); }
-     get secondsurname() { return this.addUso.get('secondsurname'); }
-     get email() { return this.addUso.get('email'); }
-     get password() { return this.addUso.get('password'); }
-
-     contentEditable = false;
-
-     addUSUandUSO() { 
-      if (!this.addUso.valid) {
-        return;
-      }
-
-      this.rest.addSupporter(this.addUso.value, this.form.value).subscribe((result) => {
-        console.log('Estoy tratandode hacer algo al menos');
-        this.loading();
-      }, (err) => {
-        console.log(err);
-      });
-
-
-      this.rest.addSupervisor(this.addUso.value).subscribe((result) => {
-        console.log('Estoy tratandode hacer algo al menos');
-        this.loading();
-      }, (err) => {
-        console.log(err);
-      });
-
-
-
-      this.clearForm();
-      setTimeout (() => {
-      this.back();
-      }, 3000);
-    }
-
-      addUSO() { 
-        if (!this.addUso.valid) {
+  onCbChange(e) {
+    const isArray: FormArray = this.form.get('isArray') as FormArray;
+    if (e.target.checked) {
+      isArray.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      isArray.controls.forEach((item: FormControl) => {
+        if (item.value == e.target.value) {
+          isArray.removeAt(i);
           return;
         }
+        i++;
+      });
+    }
+  }
 
-        this.rest.addSupporter(this.addUso.value, this.form.value).subscribe((result) => {
-          console.log('Estoy tratandode hacer algo al menos');
-          this.loading();
-        }, (err) => {
-          console.log(err);
-        });
-        this.clearForm();
-        setTimeout (() => {
-        this.back();
-        }, 3000);
-      }
+  onSubmit() {
+    console.log(this.form.value)
+  }
 
-      clearForm() {
+  get name() { return this.addUso.get('name'); }
+  get firstsurname() { return this.addUso.get('firstsurname'); }
+  get secondsurname() { return this.addUso.get('secondsurname'); }
+  get email() { return this.addUso.get('email'); }
+  get password() { return this.addUso.get('password'); }
 
-        this.addUso.reset({
-              'name': '',
-              'firstsurname': '',
-              'secondsurname': '',
-              'email': '',
-               'password': ''
-             });
-        }
-  
-        back() {
-          this.router.navigate(['/mainsup']);
-        }
-    
-      loading() {
-        let timerInterval
-        Swal.fire({
-          title: 'Registro',
-          html: 'El colaborador se ha registrado de manera correcta',
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: () => {
-            Swal.showLoading()
-            timerInterval = setInterval(() => {
-              const content = Swal.getHtmlContainer()
-              if (content) {
-                const b = content.querySelector('b')
-              }
-            }, 100)
-          },
-          willClose: () => {
-            clearInterval(timerInterval)
+  contentEditable = false;
 
+  addUSUandUSO() {
+    if (!this.addUso.valid) {
+      return;
+    }
+
+    this.rest.addSupporter(this.addUso.value, this.form.value).subscribe((result) => {
+      this.loading();
+    }, (err) => {
+      console.log(err);
+    });
+
+    this.rest.addSupervisor(this.addUso.value).subscribe((result) => {
+      this.loading();
+    }, (err) => {
+      console.log(err);
+    });
+
+    this.clearForm();
+    setTimeout(() => { this.back(); }, 3000);
+  }
+
+  addUSO() {
+    if (!this.addUso.valid) {
+      return;
+    }
+
+    this.rest.addSupporter(this.addUso.value, this.form.value).subscribe((result) => {
+      this.loading();
+    }, (err) => { console.log(err); });
+    this.clearForm();
+    setTimeout(() => { this.back(); }, 3000);
+  }
+
+  clearForm() {
+    this.addUso.reset({
+      'name': '',
+      'firstsurname': '',
+      'secondsurname': '',
+      'email': '',
+      'password': ''
+    });
+  }
+
+  back() {
+    this.router.navigate(['/mainsup']);
+  }
+
+  loading() {
+    let timerInterval
+    Swal.fire({
+      title: 'Registro',
+      html: 'El colaborador se ha registrado de manera correcta',
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+        timerInterval = setInterval(() => {
+          const content = Swal.getHtmlContainer()
+          if (content) {
+            const b = content.querySelector('b')
           }
-        }).then((result) => {
-          /* Read more about handling dismissals below */
-          if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('I was closed by the timer')
-          }
-        })
+        }, 100)
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
       }
-    
-
-
-
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
+  }
 
   isCollapsed = true;
   focus;
@@ -246,7 +211,6 @@ export class RegisterusopageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("register-page");
-
     this.onMouseMove(event);
   }
   ngOnDestroy() {

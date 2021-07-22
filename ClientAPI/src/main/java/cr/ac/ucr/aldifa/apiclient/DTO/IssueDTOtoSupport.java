@@ -8,7 +8,6 @@ import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
@@ -26,9 +25,6 @@ public class IssueDTOtoSupport {
     @Autowired
     private RestTemplate restTemplate;
 
-   // RestTemplate restTemplate = this.getRestTemplate();
-
-
     public void callPostIssueAPI(Issue issue) throws InterruptedException {
 
         restTemplate = this.getRestTemplate();
@@ -45,13 +41,11 @@ public class IssueDTOtoSupport {
                 issue.getIdservice()
         );
 
-        HttpHeaders headers = new HttpHeaders();
         TimeUnit.SECONDS.sleep(5);
-        ResponseEntity<IssueDTO> issueResponse = restTemplate.postForEntity(endpoint, issueDTO, IssueDTO.class); // aqui cae
-        System.out.print(issueResponse.getBody());
+        ResponseEntity<IssueDTO> issueResponse = restTemplate.postForEntity(endpoint, issueDTO, IssueDTO.class);
     }
 
-    public RestTemplate getRestTemplate(){
+    public RestTemplate getRestTemplate() {
         RestTemplate template = null;
         SSLConnectionSocketFactory socketFactory = null;
         try {
@@ -69,7 +63,6 @@ public class IssueDTOtoSupport {
         }
         return template;
     }
-
 
 
 }

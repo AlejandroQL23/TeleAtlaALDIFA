@@ -1,10 +1,6 @@
 package cr.ac.ucr.aldifa.apiclient.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+import javax.persistence.*;
 
 @Entity
 public class Service {
@@ -14,9 +10,9 @@ public class Service {
     private int id;
     private String name;
 
-    public Service(){
+    public Service() {
+    }
 
-}
     public Service(int id, String name) {
         this.setId(id);
         this.setName(name);

@@ -1,5 +1,5 @@
-import { Component, OnInit, Input} from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Input } from "@angular/core";
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestService } from "src/app/rest.service";
 
@@ -9,14 +9,12 @@ import { RestService } from "src/app/rest.service";
 })
 export class SupporterpageComponent implements OnInit {
   @Input()
-    ID = this.rest.ID;
+  ID = this.rest.ID;
 
-
-    issues:any = [];
+  issues: any = [];
   constructor(private fb: FormBuilder, private route: ActivatedRoute,
-    private rest:RestService, private router: Router) { }
+    private rest: RestService, private router: Router) { }
 
-    
   ngOnInit() {
     this.getIssue();
   }
@@ -27,24 +25,20 @@ export class SupporterpageComponent implements OnInit {
       this.issues = data;
     });
   }
-  
+
   public popoverTitle: string = '¿En verdad desea eliminar esta solicitud?';
   delete(id) {
-    this.rest.deleteIssue(id)
-      .subscribe(res => {
-          this.getIssue();
-        }, (err) => {
-          console.log(err);
-        }
-      );
+    this.rest.deleteIssue(id).subscribe(res => {
+      this.getIssue();
+    }, (err) => { console.log(err); }
+    );
   }
 
-  logOut(){
+  logOut() {
     this.rest.logOut();
     this.router.navigateByUrl('', { skipLocationChange: true }).then(() => {
       this.router.navigate(['']);
     });
   }
-
 
 }

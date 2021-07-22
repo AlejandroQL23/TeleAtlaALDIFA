@@ -1,4 +1,5 @@
 package cr.ac.ucr.aldifa.apiclient.service;
+
 import cr.ac.ucr.aldifa.apiclient.domain.Issue;
 import cr.ac.ucr.aldifa.apiclient.repository.IssueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +12,15 @@ import java.util.List;
 @Transactional
 public class IssueService {
 
-
     @Autowired
     private IssueRepository repository;
 
-    public List<Issue> listAll() {return repository.findAll();
+    public List<Issue> listAll() {
+        return repository.findAll();
     }
 
-    public Issue save(Issue issue) { return repository.save(issue);
+    public Issue save(Issue issue) {
+        return repository.save(issue);
 
     }
 

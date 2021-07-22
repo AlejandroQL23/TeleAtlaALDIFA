@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@SpringBootApplication(scanBasePackages = { "cr.ac.ucr.aldifa.apiclient.*" })
-@ComponentScan({ "cr.ac.ucr.aldifa.apiclient.controller","cr.ac.ucr.aldifa.apiclient.repository", "cr.ac.ucr.aldifa.apiclient.service" } )
+@SpringBootApplication(scanBasePackages = {"cr.ac.ucr.aldifa.apiclient.*"})
+@ComponentScan({"cr.ac.ucr.aldifa.apiclient.controller", "cr.ac.ucr.aldifa.apiclient.repository", "cr.ac.ucr.aldifa.apiclient.service"})
 @EntityScan("cr.ac.ucr.aldifa.apiclient.domain")
 @EnableJpaRepositories("cr.ac.ucr.aldifa.apiclient.repository")
 public class ApiClientApplication {

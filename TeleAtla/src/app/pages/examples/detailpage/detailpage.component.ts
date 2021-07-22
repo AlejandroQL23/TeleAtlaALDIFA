@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestService } from "src/app/rest.service";
 import Swal from 'sweetalert2';
@@ -8,74 +8,73 @@ import Swal from 'sweetalert2';
   selector: "app-detailpage",
   templateUrl: "detailpage.component.html"
 })
+
 export class DetailpageComponent implements OnInit {
 
-  lista:string[]=["Baja","Media","Alta"];
+  lista: string[] = ["Baja", "Media", "Alta"];
 
-    @Input()
-    MYNAME = this.rest.myNameSupervisor;
+  @Input()
+  MYNAME = this.rest.myNameSupervisor;
 
-    @Input() notesAdd:any = {idN:0, notesSupporter:''};
-    notes: FormGroup;
+  @Input() notesAdd: any = { idN: 0, notesSupporter: '' };
+  notes: FormGroup;
 
-  @Input() issueDataEnd:any = {id:0, resolutionComment:'', idClient:0, status:'',
-   emailIssue:'', phoneIssue:'', reference:'', description:'', classification:'',
-   issueTimeStamp:'', creationDate:'', creationUser:'', idService:''};
+  @Input() issueDataEnd: any = {
+    id: 0, resolutionComment: '', idClient: 0, status: '',
+    emailIssue: '', phoneIssue: '', reference: '', description: '', classification: '',
+    issueTimeStamp: '', creationDate: '', creationUser: '', idService: ''
+  };
   resolution: FormGroup;
 
-  issue:any;
-  client:any;
-  showNote:any = [];
+  issue: any;
+  client: any;
+  showNote: any = [];
   constructor(private fb: FormBuilder, private route: ActivatedRoute,
-    private rest:RestService, private router: Router) { 
+    private rest: RestService, private router: Router) {
 
-      this.notes = this.fb.group({
-        id: ['', [Validators.required]],
-        notesSupporter: ['', [Validators.required]],
-      })
-
-      this.resolution = this.fb.group({
-        id : ['', [Validators.required]],
-        resolutionComment: ['', [Validators.required]],
-        idClient:['', [Validators.required]],
-        status:['', [Validators.required]],
-        emailIssue:['', [Validators.required]],
-        phoneIssue:['', [Validators.required]],
-        reference:[this.MYNAME, [Validators.required]],
-        description:['', [Validators.required]],
-        classification: ['', [Validators.required]],
-        issueTimeStamp: ['', [Validators.required]],
-        creationDate: ['', [Validators.required]],
-        creationUser: ['', [Validators.required]],
-        idService: ['', [Validators.required]]
+    this.notes = this.fb.group({
+      id: ['', [Validators.required]],
+      notesSupporter: ['', [Validators.required]],
     })
-    }
 
-    get idN() { return this.notes.get('idN'); }
-    get notesSupporter() { return this.notes.get('notesSupporter'); }
+    this.resolution = this.fb.group({
+      id: ['', [Validators.required]],
+      resolutionComment: ['', [Validators.required]],
+      idClient: ['', [Validators.required]],
+      status: ['', [Validators.required]],
+      emailIssue: ['', [Validators.required]],
+      phoneIssue: ['', [Validators.required]],
+      reference: [this.MYNAME, [Validators.required]],
+      description: ['', [Validators.required]],
+      classification: ['', [Validators.required]],
+      issueTimeStamp: ['', [Validators.required]],
+      creationDate: ['', [Validators.required]],
+      creationUser: ['', [Validators.required]],
+      idService: ['', [Validators.required]]
+    })
+  }
 
-    get id() { return this.resolution.get('id'); }
-    get resolutionComment() { return this.resolution.get('resolutionComment'); }
-    get idClient() { return this.resolution.get('idClient'); }
-    get status() { return this.resolution.get('status'); }
-    get emailIssue() { return this.resolution.get('emailIssue'); }
-    get phoneIssue() { return this.resolution.get('phoneIssue'); }
-    get reference() { return this.resolution.get('reference'); }
-    get description() { return this.resolution.get('description'); }
-    get classification() { return this.resolution.get('classification'); }
-    get issueTimeStamp() { return this.resolution.get('issueTimeStamp'); }
-    get creationDate() { return this.resolution.get('creationDate'); }
-    get creationUser() { return this.resolution.get('creationUser'); }
-    get idService() { return this.resolution.get('idService'); }
+  get idN() { return this.notes.get('idN'); }
+  get notesSupporter() { return this.notes.get('notesSupporter'); }
+  get id() { return this.resolution.get('id'); }
+  get resolutionComment() { return this.resolution.get('resolutionComment'); }
+  get idClient() { return this.resolution.get('idClient'); }
+  get status() { return this.resolution.get('status'); }
+  get emailIssue() { return this.resolution.get('emailIssue'); }
+  get phoneIssue() { return this.resolution.get('phoneIssue'); }
+  get reference() { return this.resolution.get('reference'); }
+  get description() { return this.resolution.get('description'); }
+  get classification() { return this.resolution.get('classification'); }
+  get issueTimeStamp() { return this.resolution.get('issueTimeStamp'); }
+  get creationDate() { return this.resolution.get('creationDate'); }
+  get creationUser() { return this.resolution.get('creationUser'); }
+  get idService() { return this.resolution.get('idService'); }
 
 
   ngOnInit() {
     this.rest.getIssue(this.route.snapshot.params['Id']).subscribe((data: {}) => {
-      console.log(data);
       this.issueDataEnd = data;
     });
-    console.log(this.MYNAME + "Este es mi nombre");
-
     this.getNotes();
   }
 
@@ -87,70 +86,43 @@ export class DetailpageComponent implements OnInit {
   }
 
   addNote() {
-    console.log('Estoy tratandode hacer algo al menos1.0');
-
-     this.rest.addNote(this.notes.value, this.route.snapshot.params['Id']).subscribe((result) => {
-       console.log('Estoy tratandode hacer algo al menos');
-       console.log(this.notes.value);
-       this.loading();
-     }, (err) => {
-       console.log(err);
-     });
-     setTimeout (() => {
-       this.cancel();
-       }, 3000);
+    this.rest.addNote(this.notes.value, this.route.snapshot.params['Id']).subscribe((result) => {
+      this.loading();
+    }, (err) => { console.log(err); });
+    setTimeout(() => { this.cancel(); }, 3000);
   }
 
   updateStart() {
-
     if (!this.resolution.valid) {
       return;
     }
-    this.rest.updateIssueStart( this.resolution.value).subscribe((result) => {
+    this.rest.updateIssueStart(this.resolution.value).subscribe((result) => {
       this.loading();
-    }, (err) => {
-      console.log(err);
-    });
-    setTimeout (() => {
-      this.cancel();
-      }, 3000);
+    }, (err) => { console.log(err); });
+    setTimeout(() => { this.cancel(); }, 3000);
   }
 
   updateEnd() {
-
     if (!this.resolution.valid) {
       return;
     }
-    this.rest.updateIssueEnd( this.resolution.value).subscribe((result) => {
+    this.rest.updateIssueEnd(this.resolution.value).subscribe((result) => {
       this.loading();
-    }, (err) => {
-      console.log(err);
-    });
-    setTimeout (() => {
-      this.cancel();
-      }, 3000);
+    }, (err) => { console.log(err); });
+    setTimeout(() => { this.cancel(); }, 3000);
   }
-
 
   updateClassification() {
-
-
-    this.rest.updateIssue( this.resolution.value, this.issueDataEnd.id).subscribe((result) => {
+    this.rest.updateIssue(this.resolution.value, this.issueDataEnd.id).subscribe((result) => {
       this.loading();
-    }, (err) => {
-      console.log(err);
-    });
-    setTimeout (() => {
-      this.cancel();
-      }, 3000);
+    }, (err) => { console.log(err); });
+    setTimeout(() => { this.cancel(); }, 3000);
   }
 
-
-  showInfoClient(id){
-     this.rest.getClientDataIssue(id).subscribe((data: {}) => {
-        console.log(data);
-        this.client = data; 
-       });
+  showInfoClient(id) {
+    this.rest.getClientDataIssue(id).subscribe((data: {}) => {
+      this.client = data;
+    });
   }
 
   loading() {
@@ -166,26 +138,20 @@ export class DetailpageComponent implements OnInit {
           const content = Swal.getHtmlContainer()
           if (content) {
             const b = content.querySelector('b')
-
           }
         }, 100)
       },
       willClose: () => {
         clearInterval(timerInterval)
-
       }
     }).then((result) => {
-      /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
         console.log('I was closed by the timer')
       }
     })
   }
 
-
-
   cancel() {
-    this.router.navigate(['/mainsup']);  // ---->> CAMBIAR
+    this.router.navigate(['/mainsup']);
   }
-
 }
