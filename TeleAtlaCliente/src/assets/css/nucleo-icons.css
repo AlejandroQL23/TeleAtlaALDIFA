@@ -92,22 +92,7 @@ option {
   color: rgb(105, 0, 150);
 }
 
-table {
-  width: 900px;
-  display: inline-block;
-}
-th{
-  width: 100px;
-  display: inline-block;
-}
-tbody {
-  height: 500px;
-  display: inline-block;
- /* display: flexbox; */ /* sirve pero no pone scroll*/
-  /*display: -webkit-inline-flex;*/
-  width: 900px;
-  overflow: auto;
-}
+
 /*------------------------
   spinning icons
 -------------------------*/
