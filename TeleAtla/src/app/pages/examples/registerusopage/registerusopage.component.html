@@ -68,22 +68,6 @@
                 <h4 class="card-title">Crear USO</h4>
               </div>
               <div class="card-body">
-                <!--[formGroup]="USOForm"    Uncaught (in promise): Error: NG0301: Export of name 'ngForm' not found!-->
-                <!--formControlName="name"  Error: NG0201: No provider for NgControl found in NodeInjector
-                
-                 <form [formGroup]="supporter" (ngSubmit)="onSubmit()" #formDir="ngForm">
-                  
-                
-                      <div class="form-group">
-                          <label for="email">Email</label>
-                          <input type="text" formControlName="email" class="form-control" />
-                      </div>
-                      <span class="text-danger" *ngIf="supporter.hasError('required', 'email') && formDir.submitted">
-                        Debe ingresar un correo.
-                      </span>
-                
-                
-                -->
                 <form [formGroup]="addUso" (ngSubmit)="addUSO()" #formDir="ngForm">
 
                   <div class="form-group">

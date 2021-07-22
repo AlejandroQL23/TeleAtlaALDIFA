@@ -114,8 +114,6 @@
                 <h4 class="card-title">Solicitud</h4>
               </div>
               <div class="card-body">
-                <!--[formGroup]="USOForm"    Uncaught (in promise): Error: NG0301: Export of name 'ngForm' not found!-->
-                 <!--formControlName="name"  Error: NG0201: No provider for NgControl found in NodeInjector-->
                  <form [formGroup]="issueReport" (ngSubmit)="addIssue()" #formDir="ngForm">
 
                   <div class="form-row">

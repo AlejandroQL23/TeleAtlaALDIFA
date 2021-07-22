@@ -45,9 +45,7 @@
           <table  class="table">
             <thead>
               <tr>
-                <!-- <i class="fa fa-chevron-up" *ngIf="sortDirection === 'asc'"></i>
-                <i class="fa fa-chevron-down" *ngIf="sortDirection === 'desc'"></i>
-                <ng-content></ng-content> -->
+
                 <th sortable-column="id"># solicitud</th>
                 <th>Servicio</th>
                 <th>Fecha/Hora</th>
@@ -62,7 +60,6 @@
 
                 <td>{{ s.id  }}</td>
                 <a (click)="typeService(s.idservice)"> <td>{{ s.idservice  }}</td> </a>
-                <!--POR EL MOMENTO AUN NO PUEDO ASOCIAR SERVICIO-->
                 <td>{{ s.registertimestamp }}</td>
                 <td>{{ s.status }}</td>
 
@@ -73,22 +70,6 @@
                   </button>
                 </td>
               </tr>
-
-              <!-- <tr>
-                        <td class="text-center">3</td>
-                        <td>Alex Mike</td>
-                        <td>Design</td>
-                        <td>2010</td>
-                        <td class="td-actions text-right">
-                            <button data-target="#landlineTelephony"
-                            (click)="myModal2.show()" type="button" rel="tooltip" class="btn btn-success btn-simple btn-icon btn-sm">
-                                <i class="tim-icons icon-zoom-split"></i>
-                            </button>
-                            <button (click)="myModal3.show()" type="button" rel="tooltip" class="btn btn-danger btn-simple btn-icon btn-sm">
-                                <i class="tim-icons icon-attach-87"></i>
-                            </button>
-                        </td>
-                    </tr> -->
             </tbody>
           </table>
 
