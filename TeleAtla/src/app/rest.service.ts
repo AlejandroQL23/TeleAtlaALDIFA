@@ -323,12 +323,22 @@ export class RestService {
   //------------------------------------------------------------------------------------------------------------------
   getNotes(): Observable<any> {
     return this.http
-      .get(endpoint + "Notes/GetNotes")
+      .get(endpoint + "Notes")
       .pipe(
         map(this.extractData),
         catchError(this.handleError<any>("getNotes"))
       );
   }
+
+  getNotebyIssue(id): Observable<any> {
+    return this.http
+      .get(endpoint + "Notes/GetNotesByIssue/" + id)
+      .pipe(
+        map(this.extractData),
+        catchError(this.handleError<any>("getNote"))
+      );
+  }
+
 
   getNote(id): Observable<any> {
     return this.http
@@ -339,10 +349,17 @@ export class RestService {
       );
   }
 
-  addNote(note): Observable<any> {
+  addNote(note, idI): Observable<any> {
     console.log(note);
+      const sendNote = {
+        id : 0,
+        description: note.notesSupporter,
+        idSupporter: this.ID,
+        idSupervisor: this.IDsuper,
+        idIssue: idI
+      }
     return this.http
-      .post<any>(endpoint + "Notes/", JSON.stringify(note), httpOptions)
+      .post<any>(endpoint + "Notes/", JSON.stringify(sendNote), httpOptions)
       .pipe(
         tap((note) => console.log("added note")),
         catchError(this.handleError<any>("addNote"))

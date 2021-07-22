@@ -144,10 +144,14 @@ export class RestService {
       );
   }
 
-  addComment(comment): Observable<any> {
-    console.log(comment);
+  addComment(comment, idi): Observable<any> {
+    const comentt = {
+      Id: 0,
+      description: comment,
+      idissue: idi
+    }
     return this.http
-      .post<any>(endpoint + "comment/add/", JSON.stringify(comment), httpOptions)
+      .post<any>(endpoint + "comment/add", JSON.stringify(comentt), httpOptions)
       .pipe(
         tap((comment) => console.log("added comment")),
         catchError(this.handleError<any>("addComment"))

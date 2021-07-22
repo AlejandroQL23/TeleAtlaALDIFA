@@ -15,6 +15,7 @@ export class DetailpagesupportComponent implements OnInit {
     @Input()
     MYNAME = this.rest.myName;
 
+  @Input() notesAdd:any = {idN:0, notesSupporter:''};
   notes: FormGroup;
 
   @Input() issueDataEnd:any = {id:0, resolutionComment:'', idClient:0, status:'',
@@ -24,11 +25,13 @@ export class DetailpagesupportComponent implements OnInit {
 
   issue:any;
   client:any;
+  showNote:any = [];
   constructor(private fb: FormBuilder, private route: ActivatedRoute,
     private rest:RestService, private router: Router) { 
 
         this.notes = this.fb.group({
-            notesSup: ['', [Validators.required]]
+          id: ['', [Validators.required]],
+          notesSupporter: ['', [Validators.required]],
         })
 
       this.resolution = this.fb.group({
@@ -48,7 +51,8 @@ export class DetailpagesupportComponent implements OnInit {
     })
     }
 
-    get notesSup() { return this.notes.get('notesSup'); }
+    get idN() { return this.notes.get('idN'); }
+    get notesSupporter() { return this.notes.get('notesSupporter'); }
 
     get id() { return this.resolution.get('id'); }
     get resolutionComment() { return this.resolution.get('resolutionComment'); }
@@ -64,29 +68,42 @@ export class DetailpagesupportComponent implements OnInit {
     get creationUser() { return this.resolution.get('creationUser'); }
     get idService() { return this.resolution.get('idService'); }
 
+    
   ngOnInit() {
+
     this.rest.getIssue(this.route.snapshot.params['Id']).subscribe((data: {}) => {
       console.log(data);
       this.issueDataEnd = data;
     });
     console.log(this.MYNAME + "Este es mi nombre");
+
+    this.getNotes();
+
+  }
+
+
+  getNotes() {
+    this.showNote = [];
+    this.rest.getNotebyIssue(this.route.snapshot.params['Id']).subscribe((data: {}) => {
+      this.showNote = data;
+    });
   }
 
   addNote() {
 
-    // if (!this.commentIssue.valid) {
-    //   return;
-    // }
-    // this.rest.addComment(this.commentIssue.value).subscribe((result) => {
-    //   console.log('Estoy tratandode hacer algo al menos');
-    //   console.log(this.commentIssue.value);
-    //   this.loading();
-    // }, (err) => {
-    //   console.log(err);
-    // });
-    // setTimeout (() => {
-    //   this.cancel();
-    //   }, 3000);
+
+    console.log('Estoy tratandode hacer algo al menos1.0');
+
+     this.rest.addNote(this.notes.value, this.route.snapshot.params['Id']).subscribe((result) => {
+       console.log('Estoy tratandode hacer algo al menos');
+       console.log(this.notes.value);
+       this.loading();
+     }, (err) => {
+       console.log(err);
+     });
+     setTimeout (() => {
+       this.cancel();
+       }, 3000);
   }
 
   updateStart() {

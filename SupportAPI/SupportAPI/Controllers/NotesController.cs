@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -51,27 +52,34 @@ namespace SupportAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutNotes(int id, Notes notes)
         {
-            if (id != notes.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(notes).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                if (id != notes.Id)
+                {
+                    return BadRequest();
+                }
+
+                _context.Entry(notes).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!NotesExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
-                if (!NotesExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw new Exception(e.Message);
             }
 
             return NoContent();
@@ -83,10 +91,17 @@ namespace SupportAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Notes>> PostNotes(Notes notes)
         {
-            _context.Notes.Add(notes);
-            await _context.SaveChangesAsync();
-
+            try
+            {
+                _context.Notes.Add(notes);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             return CreatedAtAction("GetNotes", new { id = notes.Id }, notes);
+
         }
 
         // DELETE: api/Notes/5
@@ -108,6 +123,40 @@ namespace SupportAPI.Controllers
         private bool NotesExists(int id)
         {
             return _context.Notes.Any(e => e.Id == id);
+        }
+
+
+        // GET: api/Notes/GetNotesByIssue/id
+        [Route("[action]/{id}")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Notes>>> GetNotesByIssue(int id)
+        {
+            try
+            {
+                ArrayList arlist = new ArrayList();
+
+                    Notes[] notesList = (from note in _context.Notes where note.IdIssue == id select note).ToArray();
+
+                    for (int j = 0; j < notesList.Length; j++)
+                    {
+                        arlist.Add(notesList[j]);
+                    }
+
+                Notes[] issuesListtoReturn = new Notes[arlist.Count];
+                int x = 0;
+                for (int j = arlist.Count - 1; j >= 0; j--)
+                {
+                    issuesListtoReturn[x] = (Notes)arlist.ToArray()[j];
+                    x++;
+                }
+
+
+                return issuesListtoReturn;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

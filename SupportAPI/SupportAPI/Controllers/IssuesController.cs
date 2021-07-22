@@ -42,14 +42,21 @@ namespace SupportAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Issue>> GetIssue(int id)
         {
-            var issue = await _context.Issue.FindAsync(id);
-
-            if (issue == null)
+            try
             {
-                return NotFound();
-            }
+                var issue = await _context.Issue.FindAsync(id);
 
-            return issue;
+                if (issue == null)
+                {
+                    return NotFound();
+                }
+
+                return issue;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
 
@@ -60,29 +67,35 @@ namespace SupportAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutIssue(int id, Issue issue)
         {
-            if (id != issue.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(issue).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!IssueExists(id))
+                if (id != issue.Id)
                 {
-                    return NotFound();
+                    return BadRequest();
                 }
-                else
-                {
-                    throw;
-                }
-            }
 
+                _context.Entry(issue).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!IssueExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             return NoContent();
         }
 
@@ -92,9 +105,15 @@ namespace SupportAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Issue>> PostIssue(Issue issue)
         {
-            _context.Issue.Add(issue);
-            await _context.SaveChangesAsync();
-
+            try
+            {
+                _context.Issue.Add(issue);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             return CreatedAtAction("GetIssue", new { id = issue.Id }, issue);
         }
 
@@ -103,11 +122,18 @@ namespace SupportAPI.Controllers
         public async Task<ActionResult<Issue>> DeleteIssue(int id)
         {
             var issue = await _context.Issue.FindAsync(id);
-            if (issue == null)
+            try
             {
-                return NotFound();
-            }
 
+                if (issue == null)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             _context.Issue.Remove(issue);
             await _context.SaveChangesAsync();
 
@@ -128,19 +154,26 @@ namespace SupportAPI.Controllers
         public async Task<IActionResult> putUpdateIssueStartFromClient([FromBody] Issue issue)
         {
             ObjectResult result = null;
-            Issue issueToSuppport = new Issue();
-            issueToSuppport = (from newIssue in _context.Issue where newIssue.Id == issue.Id select newIssue).FirstOrDefault();
-            issueToSuppport.Reference = issue.Reference;
-            issueToSuppport.Status = "En progreso";
-            PutIssue(issueToSuppport.Id, issueToSuppport);
-            using HttpClient client = new HttpClient();
-            StringContent content = new StringContent(JsonConvert.SerializeObject(issue.Reference), Encoding.UTF8,
-               "application/json");
-            using (var Response = await client.PutAsync(_url + "updateIssueStart/" + issue.Id, content))
+            try
             {
-               
+                Issue issueToSuppport = new Issue();
+                issueToSuppport = (from newIssue in _context.Issue where newIssue.Id == issue.Id select newIssue).FirstOrDefault();
+                issueToSuppport.Reference = issue.Reference;
+                issueToSuppport.Status = "En progreso";
+                PutIssue(issueToSuppport.Id, issueToSuppport);
+                using HttpClient client = new HttpClient();
+                StringContent content = new StringContent(JsonConvert.SerializeObject(issue.Reference), Encoding.UTF8,
+                   "application/json");
+                using (var Response = await client.PutAsync(_url + "updateIssueStart/" + issue.Id, content))
+                {
+
                     result = Ok(1);
-                
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
             return result;
 
@@ -156,20 +189,27 @@ namespace SupportAPI.Controllers
         public async Task<IActionResult> putUpdateIssueEndFromClient([FromBody] Issue issue)
         {
             ObjectResult result = null;
-            Issue issueToSuppport = new Issue();
-            issueToSuppport = (from newIssue in _context.Issue where newIssue.Id == issue.Id select newIssue).FirstOrDefault();
-            issueToSuppport.ResolutionComment = issue.ResolutionComment;
-            issueToSuppport.Status = "Finalizado";
-            PutIssue(issueToSuppport.Id, issueToSuppport);
-            using HttpClient client = new HttpClient();
-            StringContent content = new StringContent(JsonConvert.SerializeObject(issue.ResolutionComment), Encoding.UTF8,
-               "application/json");
-            using (var Response = await client.PutAsync(_url + "updateIssueEnd/" + issue.Id, content))
+            try
             {
+                Issue issueToSuppport = new Issue();
+                issueToSuppport = (from newIssue in _context.Issue where newIssue.Id == issue.Id select newIssue).FirstOrDefault();
+                issueToSuppport.ResolutionComment = issue.ResolutionComment;
+                issueToSuppport.Status = "Finalizado";
+                PutIssue(issueToSuppport.Id, issueToSuppport);
+                using HttpClient client = new HttpClient();
+                StringContent content = new StringContent(JsonConvert.SerializeObject(issue.ResolutionComment), Encoding.UTF8,
+                   "application/json");
+                using (var Response = await client.PutAsync(_url + "updateIssueEnd/" + issue.Id, content))
+                {
 
                     result = Ok(1);
-                
 
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
             return result;
 
@@ -185,21 +225,29 @@ namespace SupportAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ClientDTO>>> informationFromClient(int id)
         {
-            string _urlData = "http://localhost:8080/api/client/clients/";
             ObjectResult result = null;
-            HttpClientHandler clientHandler = new HttpClientHandler();
-
-            using var client = new HttpClient(clientHandler);
-            using var Response = await client.GetAsync(_urlData + id);
-
-            if (Response.StatusCode == System.Net.HttpStatusCode.OK)
+            try
             {
-                result = Ok(JsonConvert.DeserializeObject<ClientDTO>
-                    (await Response.Content.ReadAsStringAsync()));
+                string _urlData = "http://localhost:8080/api/client/clients/";
+
+                HttpClientHandler clientHandler = new HttpClientHandler();
+
+                using var client = new HttpClient(clientHandler);
+                using var Response = await client.GetAsync(_urlData + id);
+
+                if (Response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    result = Ok(JsonConvert.DeserializeObject<ClientDTO>
+                        (await Response.Content.ReadAsStringAsync()));
+                }
+                else
+                {
+                    result = Conflict(Response.RequestMessage);
+                }
             }
-            else
+            catch (Exception e)
             {
-                result = Conflict(Response.RequestMessage);
+                throw new Exception(e.Message);
             }
             return result;
 
@@ -211,24 +259,33 @@ namespace SupportAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Issue>>> GetIssueBySupport(int id)
         {
-            SupporterService[] IssueTypeQuantity = (from services in _context.SupporterService where services.IdSupporter == id select services).ToArray();
-
-            ArrayList arlist = new ArrayList();
-            for (int i = 0; i < IssueTypeQuantity.Length; i++)
+            try
             {
-                Issue[] issuesList = (from issues in _context.Issue where issues.IdService == IssueTypeQuantity[i].IdService select issues).ToArray();
-                Console.WriteLine(issuesList.Length);
-                for (int j = 0; j < issuesList.Length; j++)
+                SupporterService[] IssueTypeQuantity = (from services in _context.SupporterService where services.IdSupporter == id select services).ToArray();
+                ArrayList arlist = new ArrayList();
+                for (int i = 0; i < IssueTypeQuantity.Length; i++)
                 {
-                    arlist.Add(issuesList[j]);
+                    Issue[] issuesList = (from issues in _context.Issue where (issues.Status != "Finalizado") && ( issues.IdService == IssueTypeQuantity[i].IdService) select issues).ToArray();
+                    Console.WriteLine(issuesList.Length);
+                    for (int j = 0; j < issuesList.Length; j++)
+                    {
+                        arlist.Add(issuesList[j]);
+                    }
                 }
+                Issue[] issuesListtoReturn = new Issue[arlist.Count];
+                int x = 0;
+                    for (int j = arlist.Count-1; j>= 0; j--) {
+                        issuesListtoReturn[x] = (Issue)arlist.ToArray()[j];
+                    x++;
+                    }
+                
+
+                return issuesListtoReturn;
             }
-            Issue[] issuesListtoReturn = new Issue[arlist.Count];
-            for (int i = 0; i < arlist.Count; i++)
+            catch (Exception e)
             {
-                issuesListtoReturn[i] = (Issue)arlist.ToArray()[i];
+                throw new Exception(e.Message);
             }
-            return issuesListtoReturn;
         }
 
 

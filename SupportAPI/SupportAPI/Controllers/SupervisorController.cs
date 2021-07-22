@@ -39,10 +39,18 @@ namespace SupportAPI.Controllers
         public async Task<ActionResult<Supervisor>> GetSupervisor(int id)
         {
             var supervisor = await _context.Supervisor.FindAsync(id);
-
-            if (supervisor == null)
+            try
             {
-                return NotFound();
+
+
+                if (supervisor == null)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
 
             return supervisor;
@@ -54,29 +62,35 @@ namespace SupportAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSupervisor(int id, Supervisor supervisor)
         {
-            if (id != supervisor.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(supervisor).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SupervisorExists(id))
+                if (id != supervisor.Id)
                 {
-                    return NotFound();
+                    return BadRequest();
                 }
-                else
-                {
-                    throw;
-                }
-            }
 
+                _context.Entry(supervisor).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!SupervisorExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw new Exception("Problemas al actualizar el Usuario supervisor, intente de nuevo"); ;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             return NoContent();
         }
 
@@ -87,13 +101,19 @@ namespace SupportAPI.Controllers
         public async Task<ActionResult<Supervisor>> PostSupervisor(Supervisor supervisor)
         {
 
-            string suppo = Encrypt(supervisor.Password);
-            supervisor.Password = suppo;
-            _context.Supervisor.Add(supervisor);
+            try
+            {
+                string suppo = Encrypt(supervisor.Password);
+                supervisor.Password = suppo;
+                _context.Supervisor.Add(supervisor);
 
-            await _context.SaveChangesAsync();
-            Thread.Sleep(4000);
-
+                await _context.SaveChangesAsync();
+                Thread.Sleep(4000);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             return CreatedAtAction("GetSupervisor", new { id = supervisor.Id }, supervisor);
         }
 
@@ -123,20 +143,31 @@ namespace SupportAPI.Controllers
         [HttpPost]
         public IActionResult PostAuthenticate(Supervisor supervisor)
         {
-            supervisor.Password = Encrypt(supervisor.Password);
             ObjectResult result;
-            var supervisorVar = _context.Supervisor.Any(e => e.Email == supervisor.Email && e.Password == supervisor.Password);
-            var supervisorVarSelect = (from s in _context.Supervisor where s.Email == supervisor.Email && s.Password == supervisor.Password select s);
-            var supervisorFoD = supervisorVarSelect.FirstOrDefault();
-            if (supervisorVar == false)
+            try
             {
-                result = NotFound(supervisorFoD);
-            }
-            else
-            {
-                result = Ok(supervisorFoD);
-            }
+                supervisor.Password = Encrypt(supervisor.Password);
 
+                var supervisorVar = _context.Supervisor.Any(e => e.Email == supervisor.Email && e.Password == supervisor.Password);
+                var supervisorVarSelect = (from s in _context.Supervisor where s.Email == supervisor.Email && s.Password == supervisor.Password select s);
+                var supervisorFoD = supervisorVarSelect.FirstOrDefault();
+                if (supervisorVar == false)
+                {
+                    // throw new Exception("No se ha encontrado el elemento solicitado");
+                    result = NotFound(supervisorFoD);
+
+
+                }
+                else
+                {
+                    result = Ok(supervisorFoD);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+
+            }
             return result;
         }
 

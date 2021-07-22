@@ -37,14 +37,21 @@ namespace SupportAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Supporter>> GetSupporter(int id)
         {
-            var supporter = await _context.Supporter.FindAsync(id);
-
-            if (supporter == null)
+            try
             {
-                return NotFound();
-            }
+                var supporter = await _context.Supporter.FindAsync(id);
 
-            return supporter;
+                if (supporter == null)
+                {
+                    return NotFound();
+                }
+
+                return supporter;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         // PUT: api/Supporter/5
@@ -64,7 +71,7 @@ namespace SupportAPI.Controllers
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
                 if (!SupporterExists(id))
                 {
@@ -72,7 +79,7 @@ namespace SupportAPI.Controllers
                 }
                 else
                 {
-                    throw;
+                    throw new Exception("Problemas al intentar actualizar un supporter" + e.Message);
                 }
             }
 
@@ -85,18 +92,25 @@ namespace SupportAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Supporter>> PostSupporter(Supporter supporter, [FromHeader] int[] array)
         {
-            string suppo = Encrypt(supporter.Password);
-            supporter.Password = suppo;
-            _context.Supporter.Add(supporter);
-            await _context.SaveChangesAsync();
-
-            for (int i = 0; i < array.Length; i++)
+            try
             {
-                SupporterService supporterService = new SupporterService();
-                supporterService.IdService = array[i];
-                supporterService.IdSupporter = supporter.Id;
-                _context.SupporterService.Add(supporterService);
+                string suppo = Encrypt(supporter.Password);
+                supporter.Password = suppo;
+                _context.Supporter.Add(supporter);
                 await _context.SaveChangesAsync();
+
+                for (int i = 0; i < array.Length; i++)
+                {
+                    SupporterService supporterService = new SupporterService();
+                    supporterService.IdService = array[i];
+                    supporterService.IdSupporter = supporter.Id;
+                    _context.SupporterService.Add(supporterService);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
             return CreatedAtAction("GetSupporter", new { id = supporter.Id }, supporter);
         }
@@ -129,22 +143,28 @@ namespace SupportAPI.Controllers
         [HttpPost]
         public IActionResult PostAuthenticate(Supporter studente)
         {
-            studente.Password = Encrypt(studente.Password);
             ObjectResult result;
-            var student = _context.Supporter.Any(e => e.Email == studente.Email && e.Password == studente.Password);
-            var studenti = (from s in _context.Supporter where s.Email == studente.Email && s.Password == studente.Password select s);
-            var studento = studenti.FirstOrDefault();
-            if (student == false)
+            try
             {
+                studente.Password = Encrypt(studente.Password);
+                var student = _context.Supporter.Any(e => e.Email == studente.Email && e.Password == studente.Password);
+                var studenti = (from s in _context.Supporter where s.Email == studente.Email && s.Password == studente.Password select s);
+                var studento = studenti.FirstOrDefault();
+                if (student == false)
+                {
 
 
-                result = NotFound(studento);
+                    result = NotFound(studento);
+                }
+                else
+                {
+                    result = Ok(studento);
+                }
             }
-            else
+            catch (Exception e)
             {
-                result = Ok(studento);
+                throw new Exception(e.Message);
             }
-
             return result;
         }
 

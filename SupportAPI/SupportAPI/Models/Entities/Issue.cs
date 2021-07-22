@@ -9,6 +9,11 @@ namespace SupportAPI.Models.Entities
 {
     public partial class Issue
     {
+        public Issue()
+        {
+            Notes = new HashSet<Notes>();
+        }
+
         public int Id { get; set; }
         public string Reference { get; set; }
         public string Classification { get; set; }
@@ -26,5 +31,6 @@ namespace SupportAPI.Models.Entities
         public int? IdService { get; set; }
 
         public virtual Service IdServiceNavigation { get; set; }
+        public virtual ICollection<Notes> Notes { get; set; }
     }
 }

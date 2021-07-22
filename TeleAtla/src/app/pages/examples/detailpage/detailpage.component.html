@@ -1,27 +1,3 @@
-
-
-  
-     <!-- <form [formGroup]="notes" (ngSubmit)="addNote()" #formDir="ngForm">
-  
-        <div class="form-group">
-          <label for="TextareaDescri">Añadir notas:</label>
-          <textarea class="form-control"  rows="5" placeholder="Lo que pasa es ..." formControlName="notesSup"></textarea>
-        </div>
-        <span class="text-danger" *ngIf="notes.hasError('required', 'notesSup') && formDir.submitted">
-          El campo de notas no puede estar vacio.
-        </span>
-    
-        <div class="form-group">
-    
-          <button class="btn btn-primary" >
-            <span class="spinner-border spinner-border-sm mr-1"></span>
-            Añadir nota.
-          </button>
-        </div>
-    
-      </form>  -->
-
-
      <form [formGroup]="resolution" (ngSubmit)="updateEnd()" #formDir="ngForm">
 
         <div class="col-md-6">
@@ -133,7 +109,7 @@
 
           <div class="form-group">
             <label for="TextareaDescri">Descripción del problema:</label>
-            <textarea class="form-control"  rows="5" placeholder="Lo que pasa es ..." [(ngModel)]="issueDataEnd.description"
+            <textarea class="form-control" disabled  rows="5" placeholder="Lo que pasa es ..." [(ngModel)]="issueDataEnd.description"
             formControlName="description"></textarea>
           </div>
           <span class="text-danger" *ngIf="resolution.hasError('required', 'description') && formDir.submitted">
@@ -149,12 +125,6 @@
         El campo de resolución no puede estar vacio.
       </span>
 
-      <div class="form-group">
-        <label for="TextareaDescri">Seleccione la clasificación:</label>
-        <select name="miselect" [(ngModel)]="issueDataEnd.classification" formControlName="classification">
-        <option [value]="item" *ngFor="let item of lista">{{item}}</option>
-        </select>
-      </div>
   
       <div class="form-group">
   
@@ -163,67 +133,104 @@
           Enviar resolución.
         </button>
       </div>
+
+      <div class="form-group">
+        <label for="TextareaDescri">Seleccione la clasificación:</label>
+        <select name="miselect" [(ngModel)]="issueDataEnd.classification" formControlName="classification">
+        <option [value]="item" *ngFor="let item of lista">{{item}}</option>
+        </select>
+      </div>
   
      </form>
   
+     <br>
+     <br>
 
      <div>
-      <button class="btn" (click)="myModal2.show(); showInfoClient(issueDataEnd.idClient)"> Ver info del cliente </button>
+      <button class="btn" (click)="x.show(); showInfoClient(issueDataEnd.idClient)"> Ver info del cliente </button>
+      <button class="btn" (click)="updateStart();"> Atender caso</button>
+      <button class="btn" (click)="updateClassification()"> Actualizar clasificación </button>
+      <button class="btn" (click)="cancel()"> Regresar </button>
     </div> 
 
-     <div>
-        <button class="btn" (click)="updateStart();"> Atender caso</button>
-      </div> 
+    <br>
+    <br>
+       <div
+       bsModal
+       class="modal fade modal-black"
+       #x="bs-modal"
+       id="x"
+       role="dialog"
+       tabindex="-1"
+       aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"
+     >
+       <div class="modal-dialog  modal-dialog-scrollable modal-lg">
+         <div class="modal-content">
+           <div class="modal-header justify-content-center">
+             <button
+               aria-hidden="true"
+               class="close"
+               data-dismiss="modal"
+               (click)="x.hide()"
+               type="button"
+             >
+               <i class="tim-icons icon-simple-remove text-white"> </i>
+             </button>
+             <div class="text-muted text-center ml-auto mr-auto">
+               <h3 class="mb-0">Detalles del cliente</h3>
+             </div>
+           </div>
+           <div class="modal-body">
+   
+               <div *ngIf="client" class="clientDetails">
+                   <div><span>Nombre completo: </span>{{client.name +" "+ client.firstsurname +" "+ client.secondsurname}}</div>
+                   <div><span>Correo: </span>{{client.email}}</div>
+                   <div><span>Direccion: </span>{{client.address}}</div>
+                   <div><span>Teléfono: </span>{{client.phone}}</div>
+                   <div><span>Segundo teléfono: </span>{{client.secondcontact}}</div>
+                 </div> 
+   
+           </div>
+         </div>
+       </div>
+     </div>
 
-      <div>
-        <button class="btn" (click)="updateClassification()"> Actualizar clasificación </button>
-       </div> 
 
-      <div>
-        <button class="btn" (click)="cancel()"> Regresar </button>
-       </div> 
-
-
-     <div
-    bsModal
-    class="modal fade modal-black"
-    #myModal2="bs-modal"
-    id="myModal2"
-    role="dialog"
-    tabindex="-1"
-    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"
-  >
-    <div class="modal-dialog  modal-dialog-scrollable modal-lg">
-      <div class="modal-content">
-        <div class="modal-header justify-content-center">
-          <button
-            aria-hidden="true"
-            class="close"
-            data-dismiss="modal"
-            (click)="myModal2.hide()"
-            type="button"
-          >
-            <i class="tim-icons icon-simple-remove text-white"> </i>
-          </button>
-          <div class="text-muted text-center ml-auto mr-auto">
-            <h3 class="mb-0">Detalles del cliente</h3>
-          </div>
-        </div>
-        <div class="modal-body">
-
-            <div *ngIf="client" class="clientDetails">
-                <div><span>Nombre completo: </span>{{client.name +" "+ client.firstsurname +" "+ client.secondsurname}}</div>
-                <div><span>Correo: </span>{{client.email}}</div>
-                <div><span>Direccion: </span>{{client.address}}</div>
-                <div><span>Teléfono: </span>{{client.phone}}</div>
-                <div><span>Segundo teléfono: </span>{{client.secondcontact}}</div>
-              </div> 
-
-        </div>
+     <form [formGroup]="notes" (ngSubmit)="addNote()" #formDir="ngForm">
+  
+      <div class="form-group">
+        <label for="TextareaDescri">Añadir notas:</label>
+        <textarea class="form-control"  rows="5" placeholder="Lo que pasa es ..." formControlName="notesSupporter"></textarea>
       </div>
-    </div>
-  </div>
+      <span class="text-danger" *ngIf="notes.hasError('required', 'notesSupporter') && formDir.submitted">
+        El campo de notas no puede estar vacio.
+      </span>
+          <div class="form-group">
+  
+        <button class="btn btn-primary" >
+          <span class="spinner-border spinner-border-sm mr-1"></span>
+          Añadir nota.
+        </button>
+      </div>
+  
+    </form>
 
 
-
+     <table class="table">
+      <thead>
+          <tr>
+              <th >Nota #</th>
+              <th >Nota</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let s of showNote; let i=index;">
+  
+            <td>{{ s.id  }}</td>
+            <td>{{ s.description  }}</td>
+        
+            </tr>
+      </tbody>
+  </table>
+  
 
