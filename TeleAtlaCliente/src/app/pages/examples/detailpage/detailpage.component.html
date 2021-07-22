@@ -3,6 +3,8 @@
   <div><span>Descripción : </span>{{issue.description}}</div>
   <div><span>Fecha/Hora: </span>{{issue.registertimestamp}}</div>
   <div><span>Estado: </span>{{issue.status}}</div>
+  <div><span>Técnico encargado: </span>{{issue.supportuserassigned}}</div>
+  <div><span>Comentario de resolución: </span>{{issue.resolutioncomment}}</div>
   <br>
   <br>
   <form [formGroup]="commentIssue" (ngSubmit)="addComment()" #formDir="ngForm">

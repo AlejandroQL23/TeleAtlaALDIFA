@@ -40,8 +40,8 @@ public class ServiceController {
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody Service service) {
-        service.save(service);
+    public void add(@RequestBody Service servicet) {
+        service.save(servicet);
     }
 
     @PutMapping("/update/{id}")
