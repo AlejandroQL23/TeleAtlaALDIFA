@@ -154,7 +154,12 @@ tbody {
 /*------------------------
   rotated/flipped icons
 -------------------------*/
-
+select {
+  background-color:#171941;
+}
+option{
+  color: white;
+}
 /*------------------------
 	icons
 -------------------------*/

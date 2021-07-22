@@ -83,6 +83,11 @@ namespace SupportAPI.Models.Entities
 
                 entity.Property(e => e.UpdateUser).HasMaxLength(20);
 
+                entity.HasOne(d => d.IdIssueNavigation)
+                    .WithMany(p => p.Notes)
+                    .HasForeignKey(d => d.IdIssue)
+                    .HasConstraintName("FK_Notes_Issue");
+
                 entity.HasOne(d => d.IdSupervisorNavigation)
                     .WithMany(p => p.Notes)
                     .HasForeignKey(d => d.IdSupervisor)

@@ -18,7 +18,9 @@ namespace SupportAPI.Models.Entities
         public string UpdateUser { get; set; }
         public int? IdSupporter { get; set; }
         public int? IdSupervisor { get; set; }
+        public int? IdIssue { get; set; }
 
+        public virtual Issue IdIssueNavigation { get; set; }
         public virtual Supervisor IdSupervisorNavigation { get; set; }
         public virtual Supporter IdSupporterNavigation { get; set; }
     }

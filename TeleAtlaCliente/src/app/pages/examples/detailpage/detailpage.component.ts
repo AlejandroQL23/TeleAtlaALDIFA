@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 export class DetailpageComponent implements OnInit {
   commentIssue: FormGroup;
   issue:any;
+  showCommen:any = [];
   constructor(private fb: FormBuilder, private route: ActivatedRoute,
     private rest:RestService, private router: Router) { 
 
@@ -27,6 +28,16 @@ export class DetailpageComponent implements OnInit {
       this.issue = data;
 
     });
+
+    this.getComments();
+  }
+
+
+  getComments() {
+    this.showCommen = [];
+    this.rest.getCommentById(this.route.snapshot.params['Id']).subscribe((data: {}) => {
+      this.showCommen = data;
+    });
   }
 
   addComment() {
@@ -34,9 +45,9 @@ export class DetailpageComponent implements OnInit {
     if (!this.commentIssue.valid) {
       return;
     }
-    this.rest.addComment(this.commentIssue.value).subscribe((result) => {
+    this.rest.addComment(this.comment.value, this.route.snapshot.params['Id']).subscribe((result) => {
       console.log('Estoy tratandode hacer algo al menos');
-      console.log(this.commentIssue.value);
+      console.log(this.comment.value);
       this.loading();
     }, (err) => {
       console.log(err);

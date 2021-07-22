@@ -4,8 +4,9 @@
   <div><span>Descripción : </span>{{issue.description}}</div>
   <div><span>Fecha/Hora: </span>{{issue.registertimestamp}}</div>
   <div><span>Estado: </span>{{issue.status}}</div>
-  <div><span>Comentarios: </span>{{issue.address}}</div> <!--es por rrellenar-->
 
+  <br>
+  <br>
 
   <form [formGroup]="commentIssue" (ngSubmit)="addComment()" #formDir="ngForm">
 
@@ -31,3 +32,23 @@
     <button class="btn" (click)="cancel()"> Regresar </button>
   </div>
 </div>
+
+<br>
+<br>
+
+<table class="table">
+  <thead>
+      <tr>
+          <th >Comentario #</th>
+          <th >Comentario</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let s of showCommen; let i=index;">
+
+        <td>{{ s.id  }}</td>
+        <td>{{ s.description  }}</td>
+    
+        </tr>
+  </tbody>
+</table>
