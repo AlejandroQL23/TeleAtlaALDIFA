@@ -1,23 +1,14 @@
 import { Component, OnInit, OnDestroy, HostListener, Input } from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestService } from "src/app/rest.service";
 import Swal from 'sweetalert2';
 
-
-
-
-// falta hacer el import de rest, como daba error lo quite, pero hay que ponerlo
-
-
-@Component({
-  selector: "app-registerrequestpage",
-  templateUrl: "registerrequest.component.html"
-})
+@Component({ selector: "app-registerrequestpage", templateUrl: "registerrequest.component.html" })
 export class RegisterrequestpageComponent implements OnInit, OnDestroy {
 
   @Input()
-  ID = this.rest.ID; //PREVISTO PARA PERFIL
+  ID = this.rest.ID;
   issueReport: FormGroup;
   newIssueReport: FormGroup;
   idServiceVar: any;
@@ -32,7 +23,6 @@ export class RegisterrequestpageComponent implements OnInit, OnDestroy {
       idclient: [this.ID, [Validators.required]],
       idservice: ['', [Validators.required]]
     })
-
   }
 
   private options: string[] = [];
@@ -46,14 +36,11 @@ export class RegisterrequestpageComponent implements OnInit, OnDestroy {
 
   addIssue() {
 
-
-
     if (!this.issueReport.valid) { return; }
     if (this.issueReport.value.idservice == "Telefonía móvil") { this.idServiceVar = 1; }
     else if (this.issueReport.value.idservice == "Cable") { this.idServiceVar = 2; }
     else if (this.issueReport.value.idservice == "Internet") { this.idServiceVar = 3; }
     else if (this.issueReport.value.idservice == "Telefonía fija") { this.idServiceVar = 4 }
-    else { console.log("Error al seleccionar servicio"); }
 
     this.newIssueReport = this.formBuilder.group({
       contactemail: this.issueReport.value.contactemail,
@@ -61,28 +48,18 @@ export class RegisterrequestpageComponent implements OnInit, OnDestroy {
       address: this.issueReport.value.address,
       description: this.issueReport.value.description,
       idclient: this.issueReport.value.idclient,
-
       idservice: this.idServiceVar
     })
 
-
-
     this.rest.addIssue(this.newIssueReport.value).subscribe((result) => {
-      console.log('Estoy tratandode hacer algo al menos');
-      console.log(this.newIssueReport.value);
       this.loading();
-    }, (err) => {
-      console.log(err);
-    });
-    setTimeout(() => {
-      this.back();
-    }, 3000);
+    }, (err) => { console.log(err); });
+    setTimeout(() => { this.back(); }, 3000);
   }
 
   back() {
     this.router.navigate(['/mainclient']);
   }
-
 
   loading() {
     let timerInterval
@@ -97,23 +74,18 @@ export class RegisterrequestpageComponent implements OnInit, OnDestroy {
           const content = Swal.getHtmlContainer()
           if (content) {
             const b = content.querySelector('b')
-
           }
         }, 100)
       },
       willClose: () => {
         clearInterval(timerInterval)
-
       }
     }).then((result) => {
-      /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
         console.log('I was closed by the timer')
       }
     })
   }
-
-
 
   isCollapsed = true;
   focus;
@@ -185,14 +157,10 @@ export class RegisterrequestpageComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    console.log(this.ID);
-    //console.log(this.rest.getClientServices(this.ID) + "Holaaa");
-
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("register-page");
-   // console.log(this.rest.getClientServices(this.ID));
     var num: number = 0;
-    var A: number[] = [1, 2, 3, 4]; //variable a cambiar por lo que devuelve rest (this.rest.getClientServices(this.ID))
+    var A: number[] = [1, 2, 3, 4];
     if (A.includes(1)) {
       this.options[num] = "Telefonía móvil";
       num++;
@@ -206,9 +174,7 @@ export class RegisterrequestpageComponent implements OnInit, OnDestroy {
       this.options[num] = "Telefonía fija";
       num++;
     }
-
     this.onMouseMove(event);
-
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];

@@ -1,10 +1,6 @@
 package cr.ac.ucr.aldifa.apiclient.domain;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -24,7 +20,8 @@ public class Issue {
     private int idservice;
     private int idclient;
 
-    public Issue(){}
+    public Issue() {
+    }
 
     public Issue(int id, String description, Date registertimestamp, String address, String contactphone, String contactemail, String status, String supportuserassigned, String resolutioncomment, int idservice, int idclient) {
         this.setId(id);

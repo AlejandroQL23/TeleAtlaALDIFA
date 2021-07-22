@@ -1,29 +1,25 @@
 package cr.ac.ucr.aldifa.apiclient.domain;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-private int id;
-private String name;
-private String firstsurname;
-private String secondsurname;
-private String address;
-private String phone;
-private String secondcontact;
-private String email;
-private String password;
+    private int id;
+    private String name;
+    private String firstsurname;
+    private String secondsurname;
+    private String address;
+    private String phone;
+    private String secondcontact;
+    private String email;
+    private String password;
 
-public Client(){
+    public Client() {
+    }
 
-}
     public Client(int id, String name, String firstsurname, String secondsurname, String address, String phone, String secondcontact, String email, String password) {
         this.setId(id);
         this.setName(name);

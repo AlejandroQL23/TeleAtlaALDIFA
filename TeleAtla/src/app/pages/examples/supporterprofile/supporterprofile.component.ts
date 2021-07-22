@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { RestService } from 'src/app/rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,12 +10,11 @@ import Swal from 'sweetalert2';
 })
 export class SupporterprofileComponent implements OnInit, OnDestroy {
 
-  @Input() supporterData:any = {id:0, name:'',firstSurName:'',secondSurName:'', email:'', password:''};
+  @Input() supporterData: any = { id: 0, name: '', firstSurName: '', secondSurName: '', email: '', password: '' };
   usoFormUpdate: FormGroup;
 
-
   isCollapsed = true;
-  constructor(private fb: FormBuilder, public rest:RestService, private route: ActivatedRoute, private router: Router) {
+  constructor(private fb: FormBuilder, public rest: RestService, private route: ActivatedRoute, private router: Router) {
 
     this.usoFormUpdate = this.fb.group({
       id: ['', [Validators.required]],
@@ -24,77 +23,61 @@ export class SupporterprofileComponent implements OnInit, OnDestroy {
       secondSurName: ['', [Validators.required]],
       email: ['', [Validators.required]],
       password: ['', [Validators.required]]
-  })
-   }
-
-   get id() { return this.usoFormUpdate.get('id'); }
-   get name() { return this.usoFormUpdate.get('name'); }
-   get firstSurName() { return this.usoFormUpdate.get('firstSurName'); }
-   get secondSurName() { return this.usoFormUpdate.get('secondSurName'); }
-   get email() { return this.usoFormUpdate.get('email'); }
-   get password() { return this.usoFormUpdate.get('password'); }
-
- updateUSO() {
-
-  if (!this.usoFormUpdate.valid) {
-    return;
+    })
   }
-  this.rest.updateSupporter( this.usoFormUpdate.value, this.supporterData.id).subscribe((result) => {
-    this.loading();
-  }, (err) => {
-    console.log(err);
-  });
-  setTimeout (() => {
-    this.back();
-    }, 3000);
-}
 
+  get id() { return this.usoFormUpdate.get('id'); }
+  get name() { return this.usoFormUpdate.get('name'); }
+  get firstSurName() { return this.usoFormUpdate.get('firstSurName'); }
+  get secondSurName() { return this.usoFormUpdate.get('secondSurName'); }
+  get email() { return this.usoFormUpdate.get('email'); }
+  get password() { return this.usoFormUpdate.get('password'); }
 
+  updateUSO() {
 
- back() {
-  this.router.navigate(['/mainsupporter']); 
-}
-
-loading() {
-  let timerInterval
-  Swal.fire({
-    title: 'Actualización',
-    html: 'Perfil actualizado de manera correcta',
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: () => {
-      Swal.showLoading()
-      timerInterval = setInterval(() => {
-        const content = Swal.getHtmlContainer()
-        if (content) {
-          const b = content.querySelector('b')
-
-        }
-      }, 100)
-    },
-    willClose: () => {
-      clearInterval(timerInterval)
-
+    if (!this.usoFormUpdate.valid) {
+      return;
     }
-  }).then((result) => {
-    /* Read more about handling dismissals below */
-    if (result.dismiss === Swal.DismissReason.timer) {
-      console.log('I was closed by the timer')
-    }
-  })
-}
- 
+    this.rest.updateSupporter(this.usoFormUpdate.value, this.supporterData.id).subscribe((result) => {
+      this.loading();
+    }, (err) => { console.log(err); });
+    setTimeout(() => { this.back(); }, 3000);
+  }
+
+  back() {
+    this.router.navigate(['/mainsupporter']);
+  }
+
+  loading() {
+    let timerInterval
+    Swal.fire({
+      title: 'Actualización',
+      html: 'Perfil actualizado de manera correcta',
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+        timerInterval = setInterval(() => {
+          const content = Swal.getHtmlContainer()
+          if (content) {
+            const b = content.querySelector('b')
+          }
+        }, 100)
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
+  }
+
   ngOnInit() {
-
-    this.rest.getSupporter(this.route.snapshot.params['Id']).subscribe((data: {}) => {
-      console.log(data);
-      this.supporterData = data;
-    });
-
+    this.rest.getSupporter(this.route.snapshot.params['Id']).subscribe((data: {}) => { this.supporterData = data; });
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("profile-page");
-
-    
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];

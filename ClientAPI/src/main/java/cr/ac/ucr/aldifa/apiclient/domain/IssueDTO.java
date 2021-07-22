@@ -1,11 +1,11 @@
 package cr.ac.ucr.aldifa.apiclient.domain;
+
 import javax.persistence.*;
 
 @Entity
 public class IssueDTO {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String Reference;
     private String Classification;
@@ -18,7 +18,9 @@ public class IssueDTO {
     private int idService;
 
 
-    public IssueDTO(){}
+    public IssueDTO() {
+    }
+
     public IssueDTO(int id, String reference, String classification, String status, String resolutionComment, String description, String emailIssue, String phoneIssue, int idClient, int idService) {
         this.setId(id);
         setReference(reference);

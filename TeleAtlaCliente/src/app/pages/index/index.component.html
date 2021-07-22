@@ -3,7 +3,6 @@
     <div class="navbar-translate">
       <a class="navbar-brand" placement="bottom" [routerLink]="['/home']">
         <span> T.A.• </span> Clientes Tele Atlántico
-
       </a>
       <button aria-controls="navigation-index" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler"
         [attr.aria-expanded]="!isCollapsed" (click)="isCollapsed = !isCollapsed" id="navigation" type="button">
@@ -51,13 +50,11 @@
             <i class="tim-icons icon-check-2"> </i> Crear cuenta
           </a>
         </li>
-
         <li class="dropdown nav-item" dropdown>
           <a class="dropdown-item" href="#init">
             <i class="tim-icons icon-single-02"> </i> Iniciar sesión
           </a>
         </li>
-
       </ul>
     </div>
   </div>
@@ -81,23 +78,9 @@
     </div>
   </div>
   <div class="main">
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="section section-javascript" id="javascriptComponents">
       <img class="path" src="assets/img/path5.png" />
-
       <img class="path path1" src="assets/img/path5.png" />
-
       <div class="container">
         <h3 class="title mb-5">Servicios que ofrecemos</h3>
         <h4 class="mb-5">Los mejores del país</h4>
@@ -107,34 +90,24 @@
               Telefonía móvil
             </button>
           </div>
-
           <div class="col-md-3">
             <button class="btn btn-primary" data-target="#Cable" (click)="Cable.show()">
               Cable
             </button>
           </div>
-
           <div class="col-md-3">
             <button class="btn btn-primary" data-target="#Internet" (click)="Internet.show()">
               Internet
             </button>
           </div>
-
-
           <div class="col-md-3">
             <button class="btn btn-primary" data-target="#fijaTel" (click)="fijaTel.show()">
               Telefonía fija
             </button>
           </div>
-
-
         </div>
         <br />
-
         <br />
-
-
-
       </div>
       <div class="section">
         <div class="container">
@@ -147,8 +120,6 @@
                 los mejores servicios y con la mejor cobertura a nivel nacional e internacional.
                 ¡No lo pienses más y contrata nuestros servicios!
               </p>
-
-
             </div>
             <div class="col-lg-6">
               <carousel [showIndicators]="false">
@@ -170,7 +141,6 @@
         </div>
       </div>
     </div>
-
     <div class="section section-signup" id="init">
       <div class="container">
         <div class="squares square-1"></div>
@@ -189,39 +159,31 @@
               y otros beneficios por los cuales podras optar al
               crear tu cuenta.
             </p>
-
           </div>
           <div class="col-lg-6 mb-lg-auto">
             <div class="card card-register">
               <div class="card-header">
                 <img alt="Card image" class="card-img" src="assets/img/square1-red.png" />
-
                 <h4 class="card-title">Iniciar</h4>
               </div>
-
               <div class="card">
                 <div class="card-body">
                   <form [formGroup]="client" (ngSubmit)="onSubmit()" #formDir="ngForm">
                     <div class="form-group">
                       <label for="email">Email</label>
                       <input type="text" formControlName="email" class="form-control" />
-
                     </div>
                     <span class="text-danger" *ngIf="client.hasError('required', 'email') && formDir.submitted">
                       Debe ingresar un correo.
                     </span>
-
                     <div class="form-group">
                       <label for="password">Password</label>
                       <input type="password" formControlName="password" class="form-control" />
-
                     </div>
                     <span class="text-danger" *ngIf="client.hasError('required', 'password') && formDir.submitted">
                       Debe ingresar un correo.
                     </span>
-
                     <div class="form-group">
-
                       <button [disabled]="loading" class="btn btn-primary" (click)="loadData()">
                         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                         Iniciar
@@ -235,16 +197,11 @@
                   </form>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
-
-
     <div aria-hidden="true" aria-labelledby="myModalLabel" bsModal class="modal fade" #mobileTelephony="bs-modal"
       id="myModal" role="dialog" tabindex="-1">
       <div class="modal-dialog">
@@ -272,10 +229,6 @@
         </div>
       </div>
     </div>
-
-
-    <!---->
-
     <div aria-hidden="true" aria-labelledby="myModalLabel" bsModal class="modal fade" #Cable="bs-modal" id="myModal"
       role="dialog" tabindex="-1">
       <div class="modal-dialog">
@@ -302,8 +255,6 @@
         </div>
       </div>
     </div>
-
-
     <div aria-hidden="true" aria-labelledby="myModalLabel" bsModal class="modal fade" #Internet="bs-modal" id="myModal"
       role="dialog" tabindex="-1">
       <div class="modal-dialog">
@@ -330,15 +281,12 @@
         </div>
       </div>
     </div>
-
-
-    <div aria-hidden="true" aria-labelledby="fijaTel" bsModal class="modal fade" #fijaTel="bs-modal"
-      id="fijaTel" role="dialog" tabindex="-1">
+    <div aria-hidden="true" aria-labelledby="fijaTel" bsModal class="modal fade" #fijaTel="bs-modal" id="fijaTel"
+      role="dialog" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header justify-content-center">
-            <button aria-hidden="true" class="close" data-dismiss="modal" type="button"
-              (click)="fijaTel.hide()">
+            <button aria-hidden="true" class="close" data-dismiss="modal" type="button" (click)="fijaTel.hide()">
               <i class="tim-icons icon-simple-remove"> </i>
             </button>
             <h4 class="title title-up">Telefonía fija</h4>
@@ -358,10 +306,6 @@
         </div>
       </div>
     </div>
-
-
-    <!---->
-
   </div>
   <footer class="footer">
     <div class="container">
@@ -369,8 +313,6 @@
         <div class="col-md-3">
           <h1 class="title">T.A.•</h1>
         </div>
-
-
         <div class="col-md-8">
           <mat-horizontal-stepper>
             <mat-step label="Primer paso">

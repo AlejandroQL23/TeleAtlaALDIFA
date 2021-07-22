@@ -64,7 +64,6 @@
             <div class="card card-register">
               <div class="card-header">
                 <img alt="Card image" class="card-img" src="assets/img/square1-red.png" />
-
                 <h4 class="card-title">Inicio</h4>
               </div>
               <div class="card-body">
@@ -76,8 +75,6 @@
                   <span class="text-danger" *ngIf="supporter.hasError('required', 'email') && fS.submitted">
                     Debe ingresar un correo.
                   </span>
-
-
                   <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" formControlName="password" class="form-control" />
@@ -85,21 +82,15 @@
                   <span class="text-danger" *ngIf="supporter.hasError('required', 'password') && fS.submitted">
                     Debe ingresar su contraseña.
                   </span>
-
-
                   <div class="form-group">
                     <button [disabled]="loadingSupporter" class="btn btn-primary" (click)="loadDataSupporter()">
                       <span *ngIf="loadingSupporter" class="spinner-border spinner-border-sm mr-1"></span>
                       Iniciar sesión
                     </button>
                     <mat-spinner [diameter]="20" *ngIf="showSpinnerSupporter" color="accent"></mat-spinner>
-
                   </div>
-
-
                 </form>
               </div>
-
             </div>
           </div>
         </div>
@@ -127,8 +118,6 @@
             </li>
           </ul>
         </div>
-
-
       </div>
     </div>
   </footer>

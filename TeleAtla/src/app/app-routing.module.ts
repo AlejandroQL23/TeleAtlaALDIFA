@@ -4,8 +4,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from './_helper/AuthGuard';
 
-
-
 import { IndexComponent } from "./pages/index/index.component";
 import { ProfilesuppageComponent } from "./pages/examples/profilesuppage/profilesuppage.component";
 import { RegisterpageComponent } from "./pages/examples/registerpage/registerpage.component";
@@ -29,8 +27,8 @@ const routes: Routes = [
   { path: 'profileSupporter/:Id', component: SupporterprofileComponent },
   { path: 'detailIssue/:Id', component: DetailpageComponent },
   { path: 'detailSupportIssue/:Id', component: DetailpagesupportComponent },
-  { path: '', redirectTo: 'supporter',pathMatch: 'full', canActivate: [AuthGuard] },
-  { path: '', redirectTo: 'supervisor',pathMatch: 'full', canActivate: [AuthGuard] }
+  { path: '', redirectTo: 'supporter', pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: '', redirectTo: 'supervisor', pathMatch: 'full', canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -43,4 +41,4 @@ const routes: Routes = [
   ],
   exports: []
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

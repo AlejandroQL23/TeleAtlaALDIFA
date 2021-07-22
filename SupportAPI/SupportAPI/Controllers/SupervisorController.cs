@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SupportAPI.Models.Entities;
@@ -41,8 +40,6 @@ namespace SupportAPI.Controllers
             var supervisor = await _context.Supervisor.FindAsync(id);
             try
             {
-
-
                 if (supervisor == null)
                 {
                     return NotFound();
@@ -57,8 +54,6 @@ namespace SupportAPI.Controllers
         }
 
         // PUT: api/Supervisor/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSupervisor(int id, Supervisor supervisor)
         {
@@ -95,16 +90,13 @@ namespace SupportAPI.Controllers
         }
 
         // POST: api/Supervisor
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Supervisor>> PostSupervisor(Supervisor supervisor)
         {
-
             try
             {
-                string suppo = Encrypt(supervisor.Password);
-                supervisor.Password = suppo;
+                string supervisorString = Encrypt(supervisor.Password);
+                supervisor.Password = supervisorString;
                 _context.Supervisor.Add(supervisor);
 
                 await _context.SaveChangesAsync();
@@ -153,10 +145,7 @@ namespace SupportAPI.Controllers
                 var supervisorFoD = supervisorVarSelect.FirstOrDefault();
                 if (supervisorVar == false)
                 {
-                    // throw new Exception("No se ha encontrado el elemento solicitado");
                     result = NotFound(supervisorFoD);
-
-
                 }
                 else
                 {
@@ -176,7 +165,6 @@ namespace SupportAPI.Controllers
         {
             try
             {
-                //string textToEncrypt = "WaterWorld";
                 string ToReturn = "";
                 string publickey = "12345678";
                 string secretkey = "87654321";
@@ -202,8 +190,6 @@ namespace SupportAPI.Controllers
                 throw new Exception(ex.Message, ex.InnerException);
             }
         }
-
-
 
     }
 }

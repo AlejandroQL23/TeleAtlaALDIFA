@@ -1,6 +1,5 @@
 package cr.ac.ucr.aldifa.apiclient.domain;
 
-
 import javax.persistence.*;
 
 @Entity
@@ -13,7 +12,9 @@ public class Comment {
     private String commenttimestamp;
     private int idissue;
 
-    public Comment(){}
+    public Comment() {
+    }
+
     public Comment(int id, String description, String commenttimestamp, int idissue) {
         this.setId(id);
         this.setDescription(description);

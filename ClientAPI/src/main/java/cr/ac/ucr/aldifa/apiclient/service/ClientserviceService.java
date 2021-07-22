@@ -15,11 +15,12 @@ public class ClientserviceService {
     @Autowired
     private ClientserviceRepository repository;
 
-    public List<Clientservice> listAll() {return repository.findAll();
+    public List<Clientservice> listAll() {
+        return repository.findAll();
     }
 
-    public void save(Clientservice sc) {  repository.save(sc);
-
+    public void save(Clientservice sc) {
+        repository.save(sc);
     }
 
     public Clientservice get(int id) {

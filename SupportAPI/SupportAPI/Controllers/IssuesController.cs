@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -62,8 +61,6 @@ namespace SupportAPI.Controllers
 
   
         // PUT: api/Issues/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutIssue(int id, Issue issue)
         {
@@ -100,8 +97,6 @@ namespace SupportAPI.Controllers
         }
 
         // POST: api/Issues
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Issue>> PostIssue(Issue issue)
         {
@@ -146,9 +141,7 @@ namespace SupportAPI.Controllers
         }
 
 
-        // PUT: api/Issues/updateIssueStartFromClient
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        // PUT: api/Issues/putUpdateIssueStartFromClient
         [Route("[action]")]
         [HttpPut]
         public async Task<IActionResult> putUpdateIssueStartFromClient([FromBody] Issue issue)
@@ -182,8 +175,6 @@ namespace SupportAPI.Controllers
 
 
         // PUT: api/Issues/putUpdateIssueEndFromClient
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [Route("[action]")]
         [HttpPut]
         public async Task<IActionResult> putUpdateIssueEndFromClient([FromBody] Issue issue)
@@ -201,10 +192,7 @@ namespace SupportAPI.Controllers
                    "application/json");
                 using (var Response = await client.PutAsync(_url + "updateIssueEnd/" + issue.Id, content))
                 {
-
                     result = Ok(1);
-
-
                 }
             }
             catch (Exception e)
@@ -215,12 +203,7 @@ namespace SupportAPI.Controllers
 
         }
 
-
-
-
         // GET: api/Issues/informationFromClient
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [Route("[action]/{id}")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ClientDTO>>> informationFromClient(int id)
@@ -262,24 +245,23 @@ namespace SupportAPI.Controllers
             try
             {
                 SupporterService[] IssueTypeQuantity = (from services in _context.SupporterService where services.IdSupporter == id select services).ToArray();
-                ArrayList arlist = new ArrayList();
+                ArrayList arrayList = new ArrayList();
                 for (int i = 0; i < IssueTypeQuantity.Length; i++)
                 {
-                    Issue[] issuesList = (from issues in _context.Issue where (issues.Status != "Finalizado") && ( issues.IdService == IssueTypeQuantity[i].IdService) select issues).ToArray();
+                    Issue[] issuesList = (from issues in _context.Issue where (issues.Status != "Finalizado") && (issues.IdService == IssueTypeQuantity[i].IdService) select issues).ToArray();
                     Console.WriteLine(issuesList.Length);
                     for (int j = 0; j < issuesList.Length; j++)
                     {
-                        arlist.Add(issuesList[j]);
+                        arrayList.Add(issuesList[j]);
                     }
                 }
-                Issue[] issuesListtoReturn = new Issue[arlist.Count];
+                Issue[] issuesListtoReturn = new Issue[arrayList.Count];
                 int x = 0;
-                    for (int j = arlist.Count-1; j>= 0; j--) {
-                        issuesListtoReturn[x] = (Issue)arlist.ToArray()[j];
+                for (int j = arrayList.Count - 1; j >= 0; j--)
+                {
+                    issuesListtoReturn[x] = (Issue)arrayList.ToArray()[j];
                     x++;
-                    }
-                
-
+                }
                 return issuesListtoReturn;
             }
             catch (Exception e)
@@ -287,12 +269,6 @@ namespace SupportAPI.Controllers
                 throw new Exception(e.Message);
             }
         }
-
-
-
-
-
-
 
     }
 }

@@ -1,11 +1,10 @@
-import { Component, OnInit, OnDestroy, HostListener} from "@angular/core";
+import { Component, OnInit, OnDestroy, HostListener } from "@angular/core";
 import { RestService } from "src/app/rest.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from "src/app/service/Auth/authentication.service";
-import { FormGroup, FormControl,  FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-
 
 @Component({
   selector: "app-registerpage",
@@ -81,8 +80,6 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
       "deg)";
   }
 
-  //------
-
   supporter: FormGroup;
   loadingSupporter = false;
   submittedSupporter = false;
@@ -90,112 +87,91 @@ export class RegisterpageComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    public rest:RestService,
+    public rest: RestService,
     private route: ActivatedRoute,
     private router: Router,
     private authentication: AuthenticationService
-    ) { 
+  ) {
 
-      this.supporter = this.formBuilder.group({
-        email: ['', [Validators.required]],
-        password:  new FormControl('', [
-          Validators.required,
-          Validators.pattern('^[0-9]{5,8}$')
-        ])
+    this.supporter = this.formBuilder.group({
+      email: ['', [Validators.required]],
+      password: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[0-9]{5,8}$')
+      ])
     })
 
-     }
-
-     get email() { return this.supporter.get('email'); }
-     get password() { return this.supporter.get('password'); }
-
-
-     showSpinnerSupporter = false;
-
-     loadDataSupporter(){
-       this.showSpinnerSupporter = true;
-       setTimeout( () => {
-         this.showSpinnerSupporter = false;
-       }, 5000);
-     }
-
-     ngOnInit() {
-
-      if (sessionStorage.getItem("email")) {
-        this.router.navigate(['']);
-      }
-      this.supporter = this.formBuilder.group({
-        email: ['', Validators.required],
-        password: ['', Validators.required]
-      });
-  
-      var body = document.getElementsByTagName("body")[0];
-      body.classList.add("register-page");
-  
-      this.onMouseMove(event);
-    }
-    ngOnDestroy() {
-      var body = document.getElementsByTagName("body")[0];
-      body.classList.remove("register-page");
-    }
-
-    errorSession() {
-      let timerInterval
-      Swal.fire({
-        title: 'Algo salió mal',
-        html: 'Confirma que los campos estan llenos y la información sea correcta',
-        timer: 3000,
-        willClose: () => {
-          clearInterval(timerInterval)
-  
-        }
-      }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-          console.log('I was closed by the timer')
-        }
-      })
-    }
-
-     onSubmitSupporter() {  
-      console.log("1");
-      if (!this.supporter.valid) {
-        this.errorSession();
-        return; 
-      }
-      console.log("2");
-      setTimeout (() => {
-  
-      this.submittedSupporter = true;
-      console.log("3");
-      if (this.supporter.invalid) {
-          return;
-      }
-      console.log("4");
-      this.loadingSupporter = true;
-      console.log("5");
-      console.log(this.supporter.value);
-      this.rest.login(this.supporter.value)
-          .pipe(first())
-          .subscribe(
-              data => {
-                  this.router.navigateByUrl('/mainsupporter', { skipLocationChange: true }).then(() => {
-                      this.router.navigate(['/mainsupporter']);
-                      
-                      console.log("6");  
-              }); 
-              },
-              error => {
-                this.errorSession();
-                  this.loadingSupporter = false;
-              });
-  
-            }, 2000);
-    
   }
- 
 
-  //-----
+  get email() { return this.supporter.get('email'); }
+  get password() { return this.supporter.get('password'); }
 
+  showSpinnerSupporter = false;
+
+  loadDataSupporter() {
+    this.showSpinnerSupporter = true;
+    setTimeout(() => {
+      this.showSpinnerSupporter = false;
+    }, 5000);
+  }
+
+  ngOnInit() {
+
+    if (sessionStorage.getItem("email")) {
+      this.router.navigate(['']);
+    }
+    this.supporter = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+    var body = document.getElementsByTagName("body")[0];
+    body.classList.add("register-page");
+    this.onMouseMove(event);
+  }
+  ngOnDestroy() {
+    var body = document.getElementsByTagName("body")[0];
+    body.classList.remove("register-page");
+  }
+
+  errorSession() {
+    let timerInterval
+    Swal.fire({
+      title: 'Algo salió mal',
+      html: 'Confirma que los campos estan llenos y la información sea correcta',
+      timer: 3000,
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      if (result.dismiss === Swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
+  }
+
+  onSubmitSupporter() {
+    if (!this.supporter.valid) {
+      this.errorSession();
+      return;
+    }
+    setTimeout(() => {
+      this.submittedSupporter = true;
+      if (this.supporter.invalid) {
+        return;
+      }
+      this.loadingSupporter = true;
+      this.rest.login(this.supporter.value).pipe(first()).subscribe(
+        data => {
+          this.router.navigateByUrl('/mainsupporter', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/mainsupporter']);
+          });
+        },
+        error => {
+          this.errorSession();
+          this.loadingSupporter = false;
+        });
+
+    }, 2000);
+  }
 
 }

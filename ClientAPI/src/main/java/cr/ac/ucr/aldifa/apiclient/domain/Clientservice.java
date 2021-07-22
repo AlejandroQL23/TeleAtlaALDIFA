@@ -11,7 +11,8 @@ public class Clientservice {
     private int idclient;
     private int idservice;
 
-    public Clientservice(){}
+    public Clientservice() {
+    }
 
     public Clientservice(int id, int idclient, int idservice) {
         this.setId(id);

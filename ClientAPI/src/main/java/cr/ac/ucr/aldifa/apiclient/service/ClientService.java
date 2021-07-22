@@ -1,6 +1,5 @@
 package cr.ac.ucr.aldifa.apiclient.service;
 
-
 import cr.ac.ucr.aldifa.apiclient.domain.Client;
 import cr.ac.ucr.aldifa.apiclient.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,11 @@ import java.util.List;
 
 public class ClientService {
 
-
     @Autowired
     private ClientRepository repository;
 
-    public List<Client> listAll() {return repository.findAll();
+    public List<Client> listAll() {
+        return repository.findAll();
     }
 
     public void save(Client client) {
@@ -32,6 +31,5 @@ public class ClientService {
     public void delete(int id) {
         repository.deleteById(id);
     }
-
 
 }

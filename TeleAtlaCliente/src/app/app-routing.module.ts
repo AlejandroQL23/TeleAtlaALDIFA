@@ -3,9 +3,6 @@ import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from './_helper/AuthGuard';
-
-
-
 import { IndexComponent } from "./pages/index/index.component";
 import { ProfilepageComponent } from "./pages/examples/profilepage/profilepage.component";
 import { RegisterpageComponent } from "./pages/examples/registerpage/registerpage.component";
@@ -14,7 +11,6 @@ import { MainclientpageComponent } from "./pages/examples/mainclientpage/maincli
 import { LandingpageComponent } from "./pages/examples/landingpage/landingpage.component";
 import { DetailpageComponent } from "./pages/examples/detailpage/detailpage.component";
 
-
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "home", component: IndexComponent },
@@ -22,9 +18,9 @@ const routes: Routes = [
   { path: "register", component: RegisterpageComponent },
   { path: "registerrequest", component: RegisterrequestpageComponent },
   { path: "mainclient", component: MainclientpageComponent },
-  { path: 'detail/:Id', component: DetailpageComponent},
+  { path: 'detail/:Id', component: DetailpageComponent },
   { path: "landing", component: LandingpageComponent },
-  { path: '', redirectTo: 'supporter',pathMatch: 'full', canActivate: [AuthGuard] }
+  { path: '', redirectTo: 'supporter', pathMatch: 'full', canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -37,4 +33,4 @@ const routes: Routes = [
   ],
   exports: []
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

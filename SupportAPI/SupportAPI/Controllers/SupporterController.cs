@@ -6,7 +6,6 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SupportAPI.Models.Entities;
@@ -55,8 +54,6 @@ namespace SupportAPI.Controllers
         }
 
         // PUT: api/Supporter/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSupporter(int id, Supporter supporter)
         {
@@ -86,16 +83,14 @@ namespace SupportAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Supporter
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+
         [HttpPost]
         public async Task<ActionResult<Supporter>> PostSupporter(Supporter supporter, [FromHeader] int[] array)
         {
             try
             {
-                string suppo = Encrypt(supporter.Password);
-                supporter.Password = suppo;
+                string supportString = Encrypt(supporter.Password);
+                supporter.Password = supportString;
                 _context.Supporter.Add(supporter);
                 await _context.SaveChangesAsync();
 
@@ -136,29 +131,27 @@ namespace SupportAPI.Controllers
             return _context.Supporter.Any(e => e.Id == id);
         }
 
-        //-------------------------------------------------------
-
         [EnableCors("GetAllPolicy")]
         [Route("[action]")]
         [HttpPost]
-        public IActionResult PostAuthenticate(Supporter studente)
+        public IActionResult PostAuthenticate(Supporter supporterParameter)
         {
             ObjectResult result;
             try
             {
-                studente.Password = Encrypt(studente.Password);
-                var student = _context.Supporter.Any(e => e.Email == studente.Email && e.Password == studente.Password);
-                var studenti = (from s in _context.Supporter where s.Email == studente.Email && s.Password == studente.Password select s);
-                var studento = studenti.FirstOrDefault();
-                if (student == false)
+                supporterParameter.Password = Encrypt(supporterParameter.Password);
+                var supporterContext = _context.Supporter.Any(e => e.Email == supporterParameter.Email && e.Password == supporterParameter.Password);
+                var supporterFind = (from s in _context.Supporter where s.Email == supporterParameter.Email && s.Password == supporterParameter.Password select s);
+                var finalSupporter = supporterFind.FirstOrDefault();
+                if (supporterContext == false)
                 {
 
 
-                    result = NotFound(studento);
+                    result = NotFound(finalSupporter);
                 }
                 else
                 {
-                    result = Ok(studento);
+                    result = Ok(finalSupporter);
                 }
             }
             catch (Exception e)
@@ -168,12 +161,10 @@ namespace SupportAPI.Controllers
             return result;
         }
 
-
         public string Encrypt(string textToEncrypt)
         {
             try
             {
-                //string textToEncrypt = "WaterWorld";
                 string ToReturn = "";
                 string publickey = "12345678";
                 string secretkey = "87654321";
